@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf_header" th:if="${tp != null}" th:content="${tp.headerName}"/>
+	<meta name="csrf" th:if="${tp != null}" th:content="${tp.token}"/>
+    
+    <link rel="stylesheet" th:href="@{/assets/resources/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/menu.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/common.css}"/>
+    
+    <title>EAinformation</title>
+</head> 
+<body>
+	<div th:fragment="scripts">
+		<div th:replace="resources/messages :: modal"></div>
+	
+	    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	    <script type="text/javascript" th:src="@{/assets/resources/bootstrap/js/bootstrap.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/assets/resources/fontawesome/all.min.js}"></script>
+	    <script type="text/javascript">
+			$(document).ready(function () {
+				$('.leftmenutrigger').on('click', function (e) {
+			    	$('.side-nav').toggleClass("open");
+			    	$('#wrapper').toggleClass("open");
+			   	 	e.preventDefault();
+			  	});
+				
+				function lenguaje(lang) {
+					$.ajax({
+			    		type: "GET",
+			    		contentType: "application/json",
+			    		url: "/eai/"+lang,
+			    		data : JSON.stringify(),
+			    		dataType: 'json',
+			    		success: function(response) {
+			    			location.reload();
+			    		},
+			    		error: function(response) {
+			    			location.reload();
+			    	    }
+			    	});
+				} 
+				
+				$('#en').click(function () {
+					lenguaje('langEN?lang=en')
+			    });
+				
+				$('#es').click(function () {
+					lenguaje('langES?lang=es')
+			    });
+			}); 
+	</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="resources/resources :: head"></head>
+	<link rel="stylesheet" th:href="@{/assets/css/singin.css}"/>
+</head>
+<body>
+	<div class="container-fluid eai">
+		<div class="row">
+			<div class="col eai-menu" style="border-bottom: 4px double #1C6EA4;">
+				<div th:replace="resources/menu :: lang"></div>
+			</div>
+			<div class="eai-body">
+				<div class="eai-main1 flexcroll">
+					<div class="container">
+					 	<div class="row justify-content-center">
+							<div class="col-5 formContent">
+								<div class="fadeIn first">
+									<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+								</div>
+						
+								<div class="row justify-content-center">
+									<form th:action="@{/signin}" method="post">
+										<input  type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+										
+						    			<input type="text" class="form-control form-control-sm" name="username" th:placeholder="#{userName1}"/>
+							      		<input type="password" class="form-control form-control-sm" name="password" th:placeholder="#{password1}"/>
+							      		
+							      		
+										<div class="row justify-content-center">
+											<div class="col-6">
+										  		<input type="submit" class="btn btn-primary btn-sm btn-block" th:value="#{userName1}"/>
+										  	</div>
+										</div>
+								   	</form>
+								</div>
+								
+								<div class="formFooter">
+									<label th:text="#{DonNotHaveAccount}"> </label> <a href="/eai/signup" th:text="#{SignUpHere}"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+   	
+   	<div th:replace="resources/resources :: scripts"></div>
+   	<script th:inline="javascript">
+	    $( document ).ready(function() {
+			/*<![CDATA[*/
+	    		var messagesResponse = /*[[${messagesResponse}]]*/ 'messagesResponse';
+	    	/*]]>*/
+			if(messagesResponse != null){
+				$('#error').modal();
+			}
+	    });
+	</script>
+</body>
+</html>

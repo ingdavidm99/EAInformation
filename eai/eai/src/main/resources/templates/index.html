@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="resources/resources :: head"></head>
+</head>
+<body>
+	<div class="container-fluid eai">
+		<div class="row">
+			<div class="col eai-menu">
+				<div th:replace="resources/menu :: menu"></div>
+			</div>
+			<div class="col eai-body">
+				<div class="col eai-head flexcroll">
+					<div class="row">
+						
+					</div>
+				</div>
+				<div class="col eai-main flexcroll">
+					<div class="row">
+						<div class="col">
+							<h1 th:text="#{incorrectSignin}"></h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="resources/resources :: scripts"></div>
+</body>
+</html>
