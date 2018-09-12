@@ -16,25 +16,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
-import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.model.UserDetail;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
 import com.eai.service.UserDetailService;
+import com.eai.service.UserService;
 import com.eai.validator.UserDetailValidator;
 
 @Controller
 @Scope("prototype")
 public class SignUpController {
 	
-	MessageResponse message;
+	MessageResponse message = new MessageResponse();
 	
 	@Autowired
 	LogErrorService logErrorService;
 	
 	@Autowired
 	UserDetailService userDetailService;
+	
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	private SystemParametersService systemParametersService;
@@ -44,7 +47,7 @@ public class SignUpController {
 	
 	@InitBinder("UserDetail")
 	protected void setupBinder(WebDataBinder binder) {
-	    binder.addValidators(new UserDetailValidator(systemParametersService));
+	    binder.addValidators(new UserDetailValidator(userService, systemParametersService));
 	}
 		
 	@RequestMapping(path = PATTH_SIGNUP, method = RequestMethod.GET)
@@ -68,16 +71,12 @@ public class SignUpController {
 		
 		try {
 			if (bindingResult.hasErrors()) {
-				TransactionPage transactionPage = new TransactionPage(systemParametersService);
-				
 				for(FieldError error : bindingResult.getFieldErrors()){
 					model.addAttribute(error.getField(), error.getDefaultMessage());
 				}
 				
-				message.setMessage(transactionPage.get("errorMessage"));
-				message.setStatus(Constants.ERROR.val());
+				message.setStatus(Constants.FAILURE.val());
 			 }else {
-				 message.setMessage("success");
 				 message.setStatus(Constants.SUCCESS.val());
 				 userDetailService.saveUserDetail(userDetail);
 			 }

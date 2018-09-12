@@ -1,7 +1,6 @@
 package com.eai.serviceimpl;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

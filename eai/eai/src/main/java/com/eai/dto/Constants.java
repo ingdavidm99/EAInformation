@@ -3,6 +3,7 @@ package com.eai.dto;
 public enum Constants {
 	
 	//STATUS
+	SINGINFAILURE("LF"),
 	FAILURE("F"),
 	ERROR("E"),
 	SUCCESS("S"),

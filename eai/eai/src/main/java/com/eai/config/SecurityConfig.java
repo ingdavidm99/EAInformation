@@ -20,8 +20,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
-import com.eai.dto.TransactionPage;
-import com.eai.service.SystemParametersService;
 import com.eai.service.UserService;
 
 @Configuration
@@ -33,10 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     private UserService userService;
-	
-	@Autowired
-	private SystemParametersService systemParametersService;
-	
+		
 	@Value("${server.session-timeout}")
     private Integer maxInactiveIntervalInSeconds;
     
@@ -97,10 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationFailureHandler loginFailureHandler() {
         return (request, response, exception) -> {
         	MessageResponse message =  new MessageResponse();
-        	TransactionPage transactionPage = new TransactionPage(systemParametersService);
-        	
-        	message.setMessage(transactionPage.get("incorrectSignin"));
-        	message.setStatus(Constants.FAILURE.val());
+        	message.setStatus(Constants.SINGINFAILURE.val());
         	
             request.getSession().setAttribute(Constants.MESSAGESRESPONSE.val(), message);
             response.sendRedirect("./signin");

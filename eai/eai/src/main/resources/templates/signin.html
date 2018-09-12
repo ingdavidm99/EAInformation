@@ -8,7 +8,7 @@
 	<div class="container-fluid eai">
 		<div class="row">
 			<div class="col eai-menu" style="border-bottom: 4px double #1C6EA4;">
-				<div th:replace="resources/menu :: lang"></div>
+				<div th:replace="resources/menu :: message"></div>
 			</div>
 			<div class="eai-body">
 				<div class="eai-main1 flexcroll">
@@ -47,15 +47,5 @@
 	</div>
    	
    	<div th:replace="resources/resources :: scripts"></div>
-   	<script th:inline="javascript">
-	    $( document ).ready(function() {
-			/*<![CDATA[*/
-	    		var messagesResponse = /*[[${messagesResponse}]]*/ 'messagesResponse';
-	    	/*]]>*/
-			if(messagesResponse != null){
-				$('#error').modal();
-			}
-	    });
-	</script>
 </body>
 </html>

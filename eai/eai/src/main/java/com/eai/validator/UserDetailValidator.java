@@ -10,16 +10,23 @@ import org.springframework.validation.Validator;
 
 import com.eai.dto.Constants;
 import com.eai.dto.TransactionPage;
+import com.eai.model.User;
 import com.eai.model.UserDetail;
 import com.eai.service.SystemParametersService;
+import com.eai.service.UserService;
 
 public class UserDetailValidator implements Validator{
+	
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	SystemParametersService systemParametersService;
 	
 	private enum Name {
 		FULLNAME("fullName"),
+		USERNAME("userName"),
+		BIRTH("birth"),
 		EMAIL("email"),
 		PASSWORD("password"),
 		REPEATPASSWORD("repeatPassword");
@@ -29,7 +36,8 @@ public class UserDetailValidator implements Validator{
 	    public String val() { return val;}
 	}
 	
-	public UserDetailValidator(SystemParametersService systemParametersService) {
+	public UserDetailValidator(UserService userService, SystemParametersService systemParametersService) {
+		this.userService = userService;
 		this.systemParametersService = systemParametersService;
 	}
 	
@@ -48,6 +56,7 @@ public class UserDetailValidator implements Validator{
 		String yourEmailIncorrect = transactionPage.get("emailIncorrect");
 		String passwordsMatch = transactionPage.get("passwordsNotMatch");
 		String privacyPolicy = transactionPage.get("privacyPolicy");
+		String userAlreadyExists = transactionPage.get("userAlreadyExists");
 			
 		//fullName
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.FULLNAME.val(), requiredField, requiredField);
@@ -61,10 +70,15 @@ public class UserDetailValidator implements Validator{
 		}
 		
 		//userName
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", requiredField, requiredField);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.USERNAME.val(), requiredField, requiredField);
+		if (!errors.hasFieldErrors(Name.USERNAME.val())) {
+			User user = userService.findByUserName(userDetail.getUserName());
+			if(user != null)
+				errors.rejectValue(Name.USERNAME.val(), userAlreadyExists, userAlreadyExists); 
+		}
 			
 		//birth
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birth", requiredField, requiredField);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.BIRTH.val(), requiredField, requiredField);
 		
 		//email
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.EMAIL.val(), requiredField, requiredField);

@@ -7,7 +7,7 @@
 	<div class="container-fluid eai">
 		<div class="row">
 			<div class="col eai-menu" style="border-bottom: 4px double #1C6EA4;">
-				<div th:replace="resources/menu :: lang"></div>
+				<div th:replace="resources/menu :: message"></div>
 			</div>
 			<div class="eai-body">
 				<div class="eai-main1 flexcroll">
@@ -18,14 +18,25 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-3">
-											<label class="col-form-label" th:text="#{fullName}"></label>
+											<label 
+												class="col-form-label" 
+												th:text="#{fullName}"
+												th:title="#{tooltipFullName}" 
+												data-toggle="popover" 
+												th:data-content="#{tooltipFullName}"></label>
 										</div>
 										<div class="col-5">
-											<input 
-												type="text" 
-												class="form-control form-control-sm"
-												name="fullName" 
-												th:placeholder="#{fullName}"/>
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													name="fullName" 
+													th:placeholder="#{fullName}"
+													th:value="${UserDetail.fullName}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -38,14 +49,25 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-3">
-											<label class="col-form-label" th:text="#{userName}"></label>
+											<label 
+												class="col-form-label" 
+												th:text="#{userName}"
+												th:title="#{tooltipUserName}" 
+												data-toggle="popover" 
+												th:data-content="#{tooltipUserName}"></label>
 										</div>
 										<div class="col-5">
-											<input 
-												type="text" 
-												class="form-control form-control-sm"
-												name="userName" 
-												th:placeholder="#{userName}"/>
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													name="userName" 
+													th:placeholder="#{userName}"
+													th:value="${UserDetail.userName}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -58,14 +80,25 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-3">
-											<label class="col-form-label" th:text="#{dateOfBirth}"></label>
+											<label 
+												class="col-form-label" 
+												th:text="#{birth}"
+												th:title="#{tooltipBirth}" 
+												data-toggle="popover" 
+												th:data-content="#{tooltipBirth}"></label>
 										</div>
 										<div class="col-5">
-											<input 
-												type="text" 
-												class="form-control form-control-sm"
-												name="birth" 
-												th:placeholder="#{dateOfBirth}"/>
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													name="birth" 
+													th:placeholder="#{birth}"
+													th:value="${birth}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -78,14 +111,25 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-3">
-											<label class="col-form-label" th:text="#{emailAddress}"></label>
+											<label 
+												class="col-form-label" 
+												th:text="#{emailAddress}"
+												th:title="#{tooltipEmailAddress}" 
+												data-toggle="popover" 
+												th:data-content="#{tooltipEmailAddress}"></label>
 										</div>
 										<div class="col-5">
-											<input 
-												type="text" 
-												class="form-control form-control-sm"
-												name="email" 
-												th:placeholder="#{emailAddress}"/>
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													name="email" 
+													th:placeholder="#{emailAddress}"
+													th:value="${UserDetail.email}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -98,14 +142,24 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-3">
-											<label class="col-form-label" th:text="#{password}"></label>
+											<label 
+												class="col-form-label" 
+												th:text="#{password}"
+												th:title="#{tooltipPassword}" 
+												data-toggle="popover" 
+												th:data-content="#{tooltipPassword}"></label>
 										</div>
 										<div class="col-5">
-											<input 
-												type="password" 
-												class="form-control form-control-sm"
-												name="password" 
-												th:placeholder="#{password}"/>
+											<div class="required-field-block">
+												<input 
+													type="password" 
+													class="form-control form-control-sm"
+													name="password" 
+													th:placeholder="#{password}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -118,14 +172,24 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-3">
-											<label class="col-form-label" th:text="#{repeatPassword}"></label>
+											<label 
+												class="col-form-label" 
+												th:text="#{repeatPassword}"
+												th:title="#{tooltipRepeatPassword}" 
+												data-toggle="popover" 
+												th:data-content="#{tooltipRepeatPassword}"></label>
 										</div>
 										<div class="col-5">
-											<input 
-												type="password" 
-												class="form-control form-control-sm"
-												name="repeatPassword" 
-												th:placeholder="#{repeatPassword}"/>
+											<div class="required-field-block">
+												<input 
+													type="password" 
+													class="form-control form-control-sm"
+													name="repeatPassword" 
+													th:placeholder="#{repeatPassword}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -135,15 +199,19 @@
 										</div>
 									</div>
 									
-									<br/>
+									<br/> 
 									<div class="row justify-content-center">
 										<div class="col-8">
 											<div class="custom-control custom-checkbox mr-sm-2">
 									        	<input 
 									        		type="checkbox" 
-									        		class="custom-control-input"
+									        		class="custom-control-input" 
+									        		id="customControlAutosizing"
 									        		name="privacyPolicy"/>
-									        	<label class="custom-control-label" th:text="#{privacy}"></label>
+									        	<label 
+									        		class="custom-control-label" 
+									        		for="customControlAutosizing" 
+									        		th:text="#{privacy}"></label>
 									      	</div>
 										</div>
 									</div>
@@ -156,10 +224,8 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-8">
-											<button class="btn btn-primary btn-sm" type="submit">Create an account</button>
-											<a class="btn btn-primary btn-sm" href="/eai/signin"> 
-												<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Take me sign in
-											</a>
+											<button class="btn btn-primary btn-sm" type="submit" th:text="#{createAccount}"></button>
+											<a class="btn btn-primary btn-sm" href="/eai/signin" th:text="#{goToLogin}"></a>
 										</div>
 									</div>
 									<br/>

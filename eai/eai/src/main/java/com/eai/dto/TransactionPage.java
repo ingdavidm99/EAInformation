@@ -35,13 +35,13 @@ public class TransactionPage implements Serializable{
 	
 	private String local;
 	
-	private SystemParametersService systemParametersService;
-	
 	public TransactionPage() {
+	
 	}
 	
 	public TransactionPage(SystemParametersService systemParametersService) {
-		this.systemParametersService = systemParametersService;
+		if(this.local == null)
+			this.local = systemParametersService.findById(7).getValue();
 	}
 
 	public String getUserName() {
@@ -161,13 +161,10 @@ public class TransactionPage implements Serializable{
 		StringBuilder message = new StringBuilder();
 		message.append("messages_en");
 		
-		
 		return ResourceBundle.getBundle(message.toString()).getString(key);
 	}
 	
 	public String get(String key) {
-		if(local == null)local = systemParametersService.findById(7).getValue();
-		
 		StringBuilder message = new StringBuilder();
 		message.append("messages_");
 		

@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
-import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.repository.LogErrorRepository;
 import com.eai.service.LogErrorService;
@@ -33,7 +32,6 @@ public class LogErrorServiceImpl implements LogErrorService {
 		Integer idLogError = logErrorRepository.save(logError).getIdLogError();
 		
 		MessageResponse message = new MessageResponse();
-		message.setMessage(TransactionPage.getDefault("internalError"));
 		message.setStatus(Constants.ERROR.val());
 		message.setCode(idLogError);
 		
