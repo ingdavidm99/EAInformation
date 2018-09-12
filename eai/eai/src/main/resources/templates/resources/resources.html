@@ -6,6 +6,7 @@
 	<meta name="csrf" th:if="${tp != null}" th:content="${tp.token}"/>
     
     <link rel="stylesheet" th:href="@{/assets/resources/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/resources/datetimepicker/css/bootstrap-datetimepicker.min.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/menu.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/common.css}"/>
     
@@ -19,6 +20,10 @@
 	    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/bootstrap/js/bootstrap.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/fontawesome/all.min.js}"></script>
+	    
+	    <script type="text/javascript" th:src="@{/assets/resources/datetimepicker/js/moment.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/assets/resources/datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+	    
 	    <script type="text/javascript">
 			$(document).ready(function () {
 				$('.leftmenutrigger').on('click', function (e) {
@@ -63,6 +68,15 @@
 				$('.required-icon').popover({
 					placement: 'bottom',
 					trigger: 'hover'
+				});
+				
+				$('.datepicker').datepicker({
+					weekStart: 0,
+				    daysOfWeekHighlighted: "6,0",
+				    autoclose: true,
+				    todayHighlight: true,
+				    format: "yyyy-mm-dd",
+				    language: "es"
 				});
 			}); 
 	</script>

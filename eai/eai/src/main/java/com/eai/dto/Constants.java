@@ -14,6 +14,7 @@ public enum Constants {
 	MOBILE_PATTERN("[0-9]{10}"),
 	NUMBER_PATTERN("[0-9]+"),
 	NAME_PATTERN("^[A-Za-zÁáÉéÍíÓóÚúÑñüÜ_\\s]+$"),
+	DATE_PATTERN("^\\d{4}-\\d{2}-\\d{2}$"),
 	
 	//GENERAL
 	TRANSACTIONPAGE("tp"),

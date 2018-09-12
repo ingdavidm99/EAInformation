@@ -57,6 +57,7 @@ public class UserDetailValidator implements Validator{
 		String passwordsMatch = transactionPage.get("passwordsNotMatch");
 		String privacyPolicy = transactionPage.get("privacyPolicy");
 		String userAlreadyExists = transactionPage.get("userAlreadyExists");
+		String incorrectDateFormat = transactionPage.get("incorrectDateFormat");
 			
 		//fullName
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.FULLNAME.val(), requiredField, requiredField);
@@ -79,6 +80,14 @@ public class UserDetailValidator implements Validator{
 			
 		//birth
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.BIRTH.val(), requiredField, requiredField);
+		if (!errors.hasFieldErrors(Name.BIRTH.val())) {
+			Pattern pattern = Pattern.compile(Constants.DATE_PATTERN.val());  
+			Matcher matcher = pattern.matcher(userDetail.getBirth());
+			
+			if (!matcher.matches()) {  
+				errors.rejectValue(Name.BIRTH.val(), incorrectDateFormat, incorrectDateFormat);  
+			} 
+		}
 		
 		//email
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.EMAIL.val(), requiredField, requiredField);
