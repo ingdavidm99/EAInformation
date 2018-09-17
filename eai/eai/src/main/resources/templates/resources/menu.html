@@ -39,16 +39,22 @@
 				   </li>
 				 </ul>
 		        <ul class="navbar-nav ml-md-auto d-md-flex">
-	         		<li class="nav-item">
-	           			<a class="nav-link" href="#">
-	           				<i class="far fa-user"></i>
-	           				<span th:text="${tp.userName}"></span>
+	         		<li 
+	         			class="nav-item"
+						id="lang">
+	         			<a class="nav-link" href="#">
+	           				<i class="fas fa-language"></i>
 	           			</a>
 	         		</li>
 	         		<li class="nav-item">
 	           			<a class="nav-link" href="/eai/logout">
-	           				<i class="fas fa-key"></i> 
-	           				Logout
+	           				<i class="fas fa-power-off"></i>
+	           			</a>
+	         		</li>
+	         		<li class="nav-item">
+	           			<a class="nav-link" href="#">
+	           				<i class="far fa-user"></i>
+	           				<span th:text="${tp.userName}"></span>
 	           			</a>
 	         		</li>
 	       		</ul>
@@ -56,25 +62,10 @@
 		</nav>
 	</div>
 	
-	<div th:fragment="message">
-		<br/>
-		<div class="row justify-content-end">
-			<div class="col-11">
-				<div th:if="${messagesResponse != null}">			
-					<span th:if="${messagesResponse.status == 'LF'}" class="badge badge-danger" th:text="#{incorrectSignin}"></span>
-					
-					<span th:if="${messagesResponse.status == 'F'}" class="badge badge-danger"  th:text="#{errorMessage}"></span>
-					<span th:if="${messagesResponse.status == 'E'}" class="badge badge-danger">
-						<i th:text="#{internalError}"></i><i th:text="${messagesResponse.code}"></i>
-					</span>
-					<span th:if="${messagesResponse.status == 'S'}" class="badge badge-success" th:text="#{successful}"></span>
-				</div>
-			</div>
-			<div class="col-1">
-				<img class="flag-en flag-en" id="en"/>
-				<img class="flag-co flag-co" id="es"/>
-			</div>
-		</div>
+	<div th:fragment="language" id="language">
+		<div class="flag-en flag-en" id="en"></div>
+		<div class="flag-co flag-co" id="es"></div>
 	</div>
+	
 </body>
 </html>

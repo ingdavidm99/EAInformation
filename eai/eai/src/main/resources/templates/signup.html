@@ -7,7 +7,15 @@
 	<div class="container-fluid eai">
 		<div class="row">
 			<div class="col eai-menu" style="border-bottom: 4px double #1C6EA4;">
-				<div th:replace="resources/menu :: message"></div>
+				<br/>
+				<div class="row justify-content-end">
+					<div class="col-11">
+						<div th:replace="resources/messages :: message"></div>
+					</div>
+					<div class="col-1">
+						<div th:replace="resources/menu :: language"></div>
+					</div>
+				</div>
 			</div>
 			<div class="eai-body">
 				<div class="eai-main1 flexcroll">
@@ -20,10 +28,10 @@
 										<div class="col-3">
 											<label 
 												class="col-form-label" 
-												th:text="#{fullName}"
-												th:title="#{tooltipFullName}" 
+												th:text="#{2_fullName}"
+												th:title="#{2_fullName}" 
 												data-toggle="popover" 
-												th:data-content="#{tooltipFullName}"></label>
+												th:data-content="#{2_tooltipFullName}"></label>
 										</div>
 										<div class="col-5">
 											<div class="required-field-block">
@@ -31,7 +39,7 @@
 													type="text" 
 													class="form-control form-control-sm"
 													name="fullName" 
-													th:placeholder="#{fullName}"
+													th:placeholder="#{2_fullName}"
 													th:value="${UserDetail.fullName}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -51,10 +59,10 @@
 										<div class="col-3">
 											<label 
 												class="col-form-label" 
-												th:text="#{userName}"
-												th:title="#{tooltipUserName}" 
+												th:text="#{2_userName}"
+												th:title="#{2_userName}" 
 												data-toggle="popover" 
-												th:data-content="#{tooltipUserName}"></label>
+												th:data-content="#{2_tooltipUserName}"></label>
 										</div>
 										<div class="col-5">
 											<div class="required-field-block">
@@ -62,7 +70,7 @@
 													type="text" 
 													class="form-control form-control-sm"
 													name="userName" 
-													th:placeholder="#{userName}"
+													th:placeholder="#{2_userName}"
 													th:value="${UserDetail.userName}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -82,10 +90,10 @@
 										<div class="col-3">
 											<label 
 												class="col-form-label" 
-												th:text="#{birth}"
-												th:title="#{tooltipBirth}" 
+												th:text="#{2_birth}"
+												th:title="#{2_birth}" 
 												data-toggle="popover" 
-												th:data-content="#{tooltipBirth}"></label>
+												th:data-content="#{2_tooltipBirth}"></label>
 										</div>
 										<div class="col-5">
 											<div class="required-field-block">
@@ -93,7 +101,7 @@
 													type="text" 
 													class="form-control form-control-sm datepicker"
 													name="birth" 
-													th:placeholder="#{birth}"
+													th:placeholder="#{2_birth}"
 													th:value="${UserDetail.birth}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -113,10 +121,10 @@
 										<div class="col-3">
 											<label 
 												class="col-form-label" 
-												th:text="#{emailAddress}"
-												th:title="#{tooltipEmailAddress}" 
+												th:text="#{2_emailAddress}"
+												th:title="#{2_emailAddress}" 
 												data-toggle="popover" 
-												th:data-content="#{tooltipEmailAddress}"></label>
+												th:data-content="#{2_tooltipEmailAddress}"></label>
 										</div>
 										<div class="col-5">
 											<div class="required-field-block">
@@ -124,7 +132,7 @@
 													type="text" 
 													class="form-control form-control-sm"
 													name="email" 
-													th:placeholder="#{emailAddress}"
+													th:placeholder="#{2_emailAddress}"
 													th:value="${UserDetail.email}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -144,10 +152,10 @@
 										<div class="col-3">
 											<label 
 												class="col-form-label" 
-												th:text="#{password}"
-												th:title="#{tooltipPassword}" 
+												th:text="#{2_password}"
+												th:title="#{2_password}" 
 												data-toggle="popover" 
-												th:data-content="#{tooltipPassword}"></label>
+												th:data-content="#{2_tooltipPassword}"></label>
 										</div>
 										<div class="col-5">
 											<div class="required-field-block">
@@ -155,7 +163,7 @@
 													type="password" 
 													class="form-control form-control-sm"
 													name="password" 
-													th:placeholder="#{password}"/>
+													th:placeholder="#{2_password}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
 									            </div>
@@ -174,10 +182,10 @@
 										<div class="col-3">
 											<label 
 												class="col-form-label" 
-												th:text="#{repeatPassword}"
-												th:title="#{tooltipRepeatPassword}" 
+												th:text="#{2_repeatPassword}"
+												th:title="#{2_repeatPassword}" 
 												data-toggle="popover" 
-												th:data-content="#{tooltipRepeatPassword}"></label>
+												th:data-content="#{2_tooltipRepeatPassword}"></label>
 										</div>
 										<div class="col-5">
 											<div class="required-field-block">
@@ -185,7 +193,7 @@
 													type="password" 
 													class="form-control form-control-sm"
 													name="repeatPassword" 
-													th:placeholder="#{repeatPassword}"/>
+													th:placeholder="#{2_repeatPassword}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
 									            </div>
@@ -211,7 +219,7 @@
 									        	<label 
 									        		class="custom-control-label" 
 									        		for="customControlAutosizing" 
-									        		th:text="#{privacy}"></label>
+									        		th:text="#{2_privacy}"></label>
 									      	</div>
 										</div>
 									</div>
@@ -224,8 +232,8 @@
 									<br/>
 									<div class="row justify-content-center">
 										<div class="col-8">
-											<button class="btn btn-primary btn-sm" type="submit" th:text="#{createAccount}"></button>
-											<a class="btn btn-primary btn-sm" href="/eai/signin" th:text="#{goToLogin}"></a>
+											<button class="btn btn-primary btn-sm" type="submit" th:text="#{2_createAccount}"></button>
+											<a class="btn btn-primary btn-sm" href="/eai/signin" th:text="#{2_goToLogin}"></a>
 										</div>
 									</div>
 									<br/>

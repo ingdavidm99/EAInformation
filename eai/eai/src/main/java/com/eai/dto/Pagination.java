@@ -1,12 +1,11 @@
 package com.eai.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.eai.model.SystemParameters;
 
 public class Pagination {
-	
-	private String search;
 	
 	private long size;
 	
@@ -16,14 +15,22 @@ public class Pagination {
 	
 	private long paginaton;
 	
-	private List<SystemParameters> result;
-
-	public String getSearch() {
-		return search;
+	private SystemParameters systemParameters;
+	
+	private List<SystemParameters> systemParametersList;
+	
+	public Pagination() {
+		systemParameters = new SystemParameters();
+		systemParametersList = new ArrayList<>();
 	}
-
-	public void setSearch(String search) {
-		this.search = search;
+	
+	public void getPage(long querySize, Long pageSize) {
+		this.size = (long) Math.ceil((double)querySize/pageSize);
+    	
+    	page = (page == 0 || page > size) ? 1 : page;
+    	
+    	this.page = (size == 0) ? 0 : page;
+    	this.length = querySize;
 	}
 
 	public long getSize() {
@@ -57,12 +64,21 @@ public class Pagination {
 	public void setPaginaton(long paginaton) {
 		this.paginaton = paginaton;
 	}
-
-	public List<SystemParameters> getResult() {
-		return result;
+	
+	public SystemParameters getSystemParameters() {
+		return systemParameters;
 	}
 
-	public void setResult(List<SystemParameters> result) {
-		this.result = result;
+	public void setSystemParameters(SystemParameters systemParameters) {
+		this.systemParameters = systemParameters;
+	}
+
+
+	public List<SystemParameters> getSystemParametersList() {
+		return systemParametersList;
+	}
+
+	public void setSystemParametersList(List<SystemParameters> systemParametersList) {
+		this.systemParametersList = systemParametersList;
 	}
 }

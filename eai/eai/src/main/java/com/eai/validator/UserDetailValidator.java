@@ -53,11 +53,11 @@ public class UserDetailValidator implements Validator{
 		
 		String requiredField = transactionPage.get("requiredField");
 		String onlyContainLetters = transactionPage.get("onlyContainLetters");
-		String yourEmailIncorrect = transactionPage.get("emailIncorrect");
-		String passwordsMatch = transactionPage.get("passwordsNotMatch");
-		String privacyPolicy = transactionPage.get("privacyPolicy");
-		String userAlreadyExists = transactionPage.get("userAlreadyExists");
-		String incorrectDateFormat = transactionPage.get("incorrectDateFormat");
+		String yourEmailIncorrect = transactionPage.get("2_emailIncorrect");
+		String passwordsMatch = transactionPage.get("2_passwordsNotMatch");
+		String privacyPolicy = transactionPage.get("2_privacyPolicy");
+		String userAlreadyExists = transactionPage.get("2_userAlreadyExists");
+		String incorrectDateFormat = transactionPage.get("2_incorrectDateFormat");
 			
 		//fullName
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.FULLNAME.val(), requiredField, requiredField);
