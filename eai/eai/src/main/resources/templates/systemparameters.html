@@ -10,7 +10,7 @@
 				<div th:replace="resources/menu :: menu"></div>
 			</div>
 			<div class="col eai-body">
-				<div class="col eai-head flexcroll">
+				<div class="col eai-head-1 flexcroll">
 					<div class="row">
 						<div class="col">
 							<form th:action="@{/searchsystemparameters}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
@@ -127,7 +127,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col eai-main flexcroll">
+				<div class="col eai-main-1 flexcroll">
 					<div class="row">
 						<div class="col">
 							<table class="table table-sm">
@@ -155,9 +155,9 @@
 											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.date}">
 										</td>
 										<td width="8%" style="cursor: pointer; color: #337ab7;" class="text-center">
-											<button type="button" class="btn btn-primary btn-sm edit" th:title="${s.idSystemParameters}">
+											<a class="btn btn-primary btn-sm edit"  th:href="'/eai/findbyidsystemparameters/__${s.idSystemParameters}__'">
 										   		<i class="fas fa-pencil-alt"></i>
-											</button>
+											</a>
 										</td>
 									</tr>
 									<tr th:if="${pagination.length == 0}">
@@ -176,196 +176,7 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- Modal systemparameters -->
-	<div class="modal fade bd-example-modal-lg" data-backdrop="static" id="systemparametersModal">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" th:text="${tp.title}"></h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-				</div>
-				<div class="modal-body">
-					<br/>
-					<div class="row justify-content-end">
-						<div class="col-12">
-							<div th:replace="resources/messages :: message1"></div>
-							<div th:replace="resources/messages :: message"></div>
-						</div>
-					</div>
-				
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_n}"
-								th:title="#{3_n}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipN}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<input 
-									type="text" 
-									class="form-control form-control-sm"
-									id="idSystemParameters"
-									readonly="readonly"/>
-							</div>
-						</div>
-					</div>
-					
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_name}"
-								th:title="#{3_name}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipName}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<input 
-									type="text" 
-									class="form-control form-control-sm"
-									id="name"
-									readonly="readonly"/>
-							</div>
-						</div>
-					</div>
-					
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_value}"
-								th:title="#{3_value}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipValue}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<input 
-									type="text" 
-									class="form-control form-control-sm"
-									id="value"/>
-								<div class="required-icon" th:data-content="#{requiredField}">
-					                <div class="text">*</div>
-					            </div>
-							</div>
-						</div>
-					</div>
-					<div class="row justify-content-center">
-						<div class="col-3"></div>
-						<div class="col-6">
-							<span class="badge badge-danger" id="valueError"></span>
-						</div>
-					</div>
-					
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_description}"
-								th:title="#{3_description}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipDescription}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<textarea id="description" style="resize: none; min-width: 100%; min-height: 70px;"></textarea>
-								<div class="required-icon" th:data-content="#{requiredField}">
-					                <div class="text">*</div>
-					            </div>
-							</div>
-						</div>
-					</div>
-					<div class="row justify-content-center">
-						<div class="col-3"></div>
-						<div class="col-6">
-							<span class="badge badge-danger" id="descriptionError"></span>
-						</div>
-					</div>
-					
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_type}"
-								th:title="#{3_type}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipType}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<input 
-									type="text" 
-									class="form-control form-control-sm"
-									id="type"
-									readonly="readonly"/>
-							</div>
-						</div>
-					</div>
-					
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_userName}"
-								th:title="#{3_userName}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipUserName}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<input 
-									type="text" 
-									class="form-control form-control-sm"
-									id="userName"
-									readonly="readonly"/>
-							</div>
-						</div>
-					</div>
-									
-					<br/>
-					<div class="row justify-content-center">
-						<div class="col-3">
-							<label 
-								class="col-form-label" 
-								th:text="#{3_date}"
-								th:title="#{3_date}" 
-								data-toggle="popover" 
-								th:data-content="#{3_tooltipDate}"></label>
-						</div>
-						<div class="col-6">
-							<div class="required-field-block">
-								<input 
-									type="text" 
-									class="form-control form-control-sm"
-									id="date"
-									readonly="readonly"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button  class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-					<button id="update" type="button" class="btn btn-primary btn-sm">Update</button>
-				</div>
-			</div>
-		</div>
-	</div>	
-	<!-- End modal systemparameters -->
 
 	<div th:replace="resources/commons :: scripts"></div>
-	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/systemparameters.js}"></script>
 </body>
 </html>

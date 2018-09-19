@@ -65,6 +65,12 @@ public class SystemParametersServiceImpl implements SystemParametersService {
     		   .append("' ");
     	}
     	
+    	if(systemParameters.getType() != null) {
+    		sql.append("and s.TYPE = '")
+    		   .append(systemParameters.getType())
+    		   .append("' ");
+    	}
+    	
     	if(!systemParameters.getUserName().equals("")) {
     		sql.append("and s.USER_NAME = '")
     		   .append(systemParameters.getUserName())

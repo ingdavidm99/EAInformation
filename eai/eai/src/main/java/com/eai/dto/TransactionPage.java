@@ -145,14 +145,9 @@ public class TransactionPage implements Serializable{
 		return transactionPage;
 	}
 	
-	public static TransactionPage getTransactionPage(HttpServletRequest request, String path) {
+	public static TransactionPage getTransactionPage(HttpServletRequest request, String key) {
 		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute("TransactionPage");
-		transactionPage.getParentMenuList().forEach(parentMenu -> 
-			parentMenu.getMenuList().forEach(menu -> {
-				if(menu.getUrlName().equals(path))
-					transactionPage.setTitle(menu.getMenuName());
-			})
-		);
+		transactionPage.setTitle(transactionPage.get(key));
 		
 		return transactionPage;
 	}

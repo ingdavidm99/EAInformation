@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="resources/commons :: head"></head>
+</head>
+<body>
+	<div class="container-fluid eai">
+		<div class="row">
+			<div class="col eai-menu">
+				<div th:replace="resources/menu :: menu"></div>
+			</div>
+			<div class="col eai-body">
+				<form th:action="@{/savesystemparameters}" method="post" modelAttribute="SystemParameters" autocomplete="off">
+				<div class="col eai-head-2 flexcroll">
+					<br/>
+					<div class="row justify-content-end">
+						<div class="col-10">
+							<div th:replace="resources/messages :: message"></div>
+						</div>
+						<div class="col-2">
+							<a class="btn btn-primary btn-sm" href="/eai/systemparameters">Close</a>
+							<button class="btn btn-primary btn-sm" type="submit">Update</button>
+						</div>
+					</div>
+				</div>
+				<div class="col eai-main-2 flexcroll">
+					<div class="row">
+						<div class="col">
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_n}"
+										th:title="#{3_n}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipN}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<input 
+											type="text" 
+											class="form-control form-control-sm"
+											th:value="${SystemParameters.idSystemParameters}"
+											name="idSystemParameters"
+											readonly="readonly"/>
+									</div>
+								</div>
+							</div>
+							
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_name}"
+										th:title="#{3_name}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipName}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<input 
+											type="text" 
+											class="form-control form-control-sm"
+											th:value="${SystemParameters.name}"
+											name="name"
+											readonly="readonly"/>
+									</div>
+								</div>
+							</div>
+							
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_value}"
+										th:title="#{3_value}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipValue}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<input 
+											type="text" 
+											class="form-control form-control-sm"
+											th:value="${SystemParameters.value}"
+											name="value"/>
+										<div class="required-icon" th:data-content="#{requiredField}">
+							                <div class="text">*</div>
+							            </div>
+									</div>
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col-3"></div>
+								<div class="col-6">
+									<span class="badge badge-danger" th:if="${value != null}" th:text="${value}"></span>
+								</div>
+							</div>
+							
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_description}"
+										th:title="#{3_description}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipDescription}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<textarea name="description" th:text="${SystemParameters.description}" style="resize: none; min-width: 100%; min-height: 70px;"></textarea>
+										<div class="required-icon" th:data-content="#{requiredField}">
+							                <div class="text">*</div>
+							            </div>
+									</div>
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col-3"></div>
+								<div class="col-6">
+									<span class="badge badge-danger" th:if="${description != null}" th:text="${description}"></span>
+								</div>
+							</div>
+							
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_type}"
+										th:title="#{3_type}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipType}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<input 
+											type="text" 
+											class="form-control form-control-sm"
+											th:value="${SystemParameters.type}"
+											name="type"
+											readonly="readonly"/>
+									</div>
+								</div>
+							</div>
+							
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_userName}"
+										th:title="#{3_userName}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipUserName}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<input 
+											type="text" 
+											class="form-control form-control-sm"
+											th:value="${SystemParameters.userName}"
+											name="userName"
+											readonly="readonly"/>
+									</div>
+								</div>
+							</div>
+											
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-3">
+									<label 
+										class="col-form-label" 
+										th:text="#{3_date}"
+										th:title="#{3_date}" 
+										data-toggle="popover" 
+										th:data-content="#{3_tooltipDate}"></label>
+								</div>
+								<div class="col-6">
+									<div class="required-field-block">
+										<input 
+											type="text" 
+											class="form-control form-control-sm"
+											th:value="${SystemParameters.date}"
+											name="date"
+											readonly="readonly"/>
+									</div>
+								</div>
+							</div>
+							<br/>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="resources/commons :: scripts"></div>
+</body>
+</html>

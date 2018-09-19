@@ -1,4 +1,4 @@
-	.eai{
+.eai{
 	position: absolute;
 	width: 100%;
 	height: 100%
@@ -18,7 +18,15 @@
 	left: 0%
 }
 
-.eai-head{
+.eai-main{
+	position: absolute;
+	width: 100%; 
+	height: 100%; 
+	overflow-x: auto;
+	overflow-y: scroll;
+}
+
+.eai-head-1{
 	position: absolute;
 	width: 95%; 
 	height: 22%; 
@@ -27,7 +35,7 @@
 	border-bottom: 4px double #1C6EA4;
 }
 
-.eai-main{
+.eai-main-1{
 	position: absolute;
 	width: 95%; 
 	height: 78%; 
@@ -37,10 +45,21 @@
 	overflow-y: scroll;
 }
 
-.eai-main1{
+.eai-head-2{
 	position: absolute;
-	width: 100%; 
-	height: 100%; 
+	width: 95%; 
+	height: 12%; 
+	left: 5%;
+	overflow-y: scroll;
+	border-bottom: 4px double #1C6EA4;
+}
+
+.eai-main-2{
+	position: absolute;
+	width: 95%; 
+	height: 88%; 
+	left: 5%; 
+	top: 12%;
 	overflow-x: auto;
 	overflow-y: scroll;
 }
