@@ -17,13 +17,23 @@
 		<div th:replace="resources/messages :: modal"></div>
 	
 	    <script type="text/javascript" th:src="@{/assets/resources/popper/popper.min.js}"></script>
-	    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	    <script type="text/javascript" th:src="@{/assets/resources/jquery/jquery.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/bootstrap/js/bootstrap.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/fontawesome/all.min.js}"></script>
 	    
 	    <script type="text/javascript" th:src="@{/assets/resources/datetimepicker/js/moment.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/js/commons.js}"></script>
+	    <script th:inline="javascript">
+	    	/*<![CDATA[*/
+	    		var header = $("meta[name='csrf_header']").attr("content");
+				var token = $("meta[name='csrf']").attr("content");
+	
+	    		var errorMessage = /*[[#{errorMessage}]]*/ 'default';
+	    		var internalError = /*[[#{internalError}]]*/ 'default';
+	    		var successful = /*[[#{successful}]]*/ 'default';
+			/*]]>*/
+	    </script>
 	</div>
 </body>
 </html>

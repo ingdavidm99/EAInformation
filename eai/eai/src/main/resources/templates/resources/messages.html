@@ -3,16 +3,21 @@
 <head>
 </head> 
 <body>
-	<div th:fragment="message">
+	<div th:fragment="message">123
 		<div th:if="${messagesResponse != null}">			
 			<span th:if="${messagesResponse.status == 'LF'}" class="badge badge-danger" th:text="#{1_incorrectSignin}"></span>
 			
 			<span th:if="${messagesResponse.status == 'F'}" class="badge badge-danger" th:text="#{errorMessage}"></span>
-			<span th:if="${messagesResponse.status == 'E'}" class="badge badge-danger" th:text="#{internalError(${messagesResponse.code})}">
-			</span>
+			<span th:if="${messagesResponse.status == 'E'}" class="badge badge-danger" th:text="#{internalError(${messagesResponse.code})}"></span>
 			<span th:if="${messagesResponse.status == 'S'}" class="badge badge-success" th:text="#{successful}"></span>
 		</div>
 	</div>
+	
+	<div th:fragment="message1">aaa
+		<span style="display: none" class="badge badge-danger" th:text="#{errorMessage}"></span>
+		<span style="display: none" class="badge badge-danger" th:text="#{internalError}"></span>
+		<span style="display: none" class="badge badge-success" th:text="#{successful}"></span>
+	</div>	
 
 	<!-- Modal -->
 	<div th:fragment="modal">

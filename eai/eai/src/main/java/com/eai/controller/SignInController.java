@@ -25,7 +25,7 @@ import com.eai.service.SystemParametersService;
 @Scope("prototype")
 public class SignInController {
 	
-	MessageResponse messageResponse;
+	MessageResponse message = new MessageResponse();
 	
 	@Autowired
 	LogErrorService logErrorService;
@@ -42,14 +42,14 @@ public class SignInController {
 	        model.addAttribute("user", new User());
 	        
 	        Object messageRequest = request.getSession().getAttribute(Constants.MESSAGESRESPONSE.val());
-	        messageResponse = (MessageResponse) messageRequest;
+	        message = (MessageResponse) messageRequest;
 	        
 	        request.getSession().removeAttribute(Constants.MESSAGESRESPONSE.val());
 	     } catch (Exception exception) {
-	    	messageResponse = logErrorService.save(new LogError(exception, null, PATTH_SIGNIN));
+	    	 message = logErrorService.save(new LogError(exception, null, PATTH_SIGNIN));
 	    }
 		
-		model.addAttribute(Constants.MESSAGESRESPONSE.val(), messageResponse);
+		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
         return PATTH_SIGNIN;
     }

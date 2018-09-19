@@ -32,6 +32,9 @@ public class SystemParameters implements Serializable {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
     
+    @Column(name = "TYPE", nullable = false)
+    private Integer type;
+    
     @Column(name = "USER_NAME", nullable = false)
     private String userName;
     
@@ -71,6 +74,14 @@ public class SystemParameters implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+	
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	public String getDescription() {

@@ -11,8 +11,9 @@ public enum Constants {
 	//VALIDATE
 	EMAIL_PATTERN("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"),
 	STRING_PATTERN("[a-zA-Z]+"),  
-	MOBILE_PATTERN("[0-9]{10}"),
 	NUMBER_PATTERN("[0-9]+"),
+	STRING_NUMBER_PATTERN("[0-9a-zA-Z]+"),
+	MOBILE_PATTERN("[0-9]{10}"),
 	NAME_PATTERN("^[A-Za-zÁáÉéÍíÓóÚúÑñüÜ_\\s]+$"),
 	DATE_PATTERN("^\\d{4}-\\d{2}-\\d{2}$"),
 	

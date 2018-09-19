@@ -57,28 +57,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             	.antMatchers("/detail/{\\d+}").hasAnyRole(admin, user)
             	.antMatchers("/profile").hasAnyRole(admin, user)
             	.antMatchers("/logerror", "/searchlogerror").hasAnyRole(admin)
-        		.antMatchers("/systemparameters", "/searchsystemparameters").hasAnyRole(admin);
+        		.antMatchers("/systemparameters", "/searchsystemparameters").hasAnyRole(admin)
+        		.antMatchers("/index").hasAnyRole(admin, user);
         
         http
         	.authorizeRequests()
 				.antMatchers("/signup", "/registration", "/langEN", "/langES").permitAll()
-				.antMatchers("/index").hasAnyRole(admin, user)
-				.anyRequest().authenticated()
+        		.anyRequest().authenticated()
 				.and()
             .formLogin()
-                .loginPage("/signin")
-                .permitAll()
+                .loginPage("/signin").permitAll()
                 .successHandler(loginSuccessHandler())
                 .failureHandler(loginFailureHandler())
-                .and()
+                .and();
+        
+        http
             .logout()
                 .permitAll()
                 .logoutSuccessUrl("/signin")
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/access_denied")
-                .and()
-            .csrf();
+                .accessDeniedPage("/404");
+        
+        http
+            .sessionManagement()
+            	.invalidSessionUrl("/invalid")
+            	.maximumSessions(1)
+            	.expiredUrl("/expired");
+        
+        http
+        	.csrf();
+           
     }
 
     public AuthenticationSuccessHandler loginSuccessHandler() {
