@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="resources/commons :: head"></head>
+</head>
+<body>
+	<div class="container-fluid eai">
+		<div class="row">
+			<div class="col eai-menu">
+				<div th:replace="resources/menu :: menu"></div>
+			</div>
+			<div class="col eai-body">
+				<div class="col eai-head-2 flexcroll">
+					<div class="row">
+						<div class="col">
+							<br/>
+							<div class="row justify-content-end">
+								<div class="col-11">
+									<div th:replace="resources/messages :: message"></div>
+								</div>
+								<div class="col-1">
+									<div th:replace="resources/menu :: language"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col eai-main-2 flexcroll">
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-3">
+								<br/>
+								<div class="row justify-content-start">
+									<div class="col-12">
+										<img src="../eai/assets/images/user.jpg" id="profile-image1" width="50%"/>
+									</div>
+								</div>
+								
+								<br/>
+								<div class="row justify-content-start">
+									<div class="col-12">
+										asdasd
+									</div>
+								</div>
+							</div>
+							<div class="col-9">
+								<form th:action="@{/updateProfile}" method="post" modelAttribute="UserDetail" autocomplete="off">
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{2_userName}"
+												th:title="#{2_userName}" 
+												data-toggle="popover" 
+												th:data-content="#{2_tooltipUserName}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													name="userName" 
+													th:placeholder="#{2_userName}"
+													th:value="${UserDetail.userName}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${userName != null}" th:text="${userName}"></span>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{2_fullName}"
+												th:title="#{2_fullName}" 
+												data-toggle="popover" 
+												th:data-content="#{2_tooltipFullName}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm ellipsis"
+													name="fullName" 
+													th:placeholder="#{2_fullName}"
+													th:value="${UserDetail.fullName}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${fullName != null}" th:text="${fullName}"></span>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{2_birth}"
+												th:title="#{2_birth}" 
+												data-toggle="popover" 
+												th:data-content="#{2_tooltipBirth}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm datepicker ellipsis"
+													name="birth" 
+													th:placeholder="#{2_birth}"
+													th:value="${UserDetail.birth}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${birth != null}" th:text="${birth}"></span>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{2_emailAddress}"
+												th:title="#{2_emailAddress}" 
+												data-toggle="popover" 
+												th:data-content="#{2_tooltipEmailAddress}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm ellipsis"
+													name="email" 
+													th:placeholder="#{2_emailAddress}"
+													th:value="${UserDetail.email}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${email != null}" th:text="${email}"></span>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{2_password}"
+												th:title="#{2_password}" 
+												data-toggle="popover" 
+												th:data-content="#{2_tooltipPassword}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="password" 
+													class="form-control form-control-sm"
+													name="password" 
+													th:placeholder="#{2_password}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${password != null}" th:text="${password}"></span>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{2_repeatPassword}"
+												th:title="#{2_repeatPassword}" 
+												data-toggle="popover" 
+												th:data-content="#{2_tooltipRepeatPassword}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="password" 
+													class="form-control form-control-sm"
+													name="repeatPassword" 
+													th:placeholder="#{2_repeatPassword}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${repeatPassword != null}" th:text="${repeatPassword}"></span>
+										</div>
+									</div>
+									
+									<br/> 
+									<div class="row justify-content-center">
+										<div class="col-12">
+											<div class="custom-control custom-checkbox mr-sm-2">
+									        	<input 
+									        		type="checkbox" 
+									        		class="custom-control-input" 
+									        		id="customControlAutosizing"
+									        		name="privacyPolicy"/>
+									        	<label 
+									        		class="custom-control-label" 
+									        		for="customControlAutosizing" 
+									        		th:text="#{2_privacy}"></label>
+									      	</div>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-12">
+											<input id="option" name="option" type="hidden"/>
+											<button id="update" class="btn btn-primary btn-sm" type="submit" disabled="disabled">Update</button>
+											<button id="changePassword" class="btn btn-primary btn-sm" type="button">Change password</button>
+											<button id="changeInformation" class="btn btn-primary btn-sm" type="button">Change information</button>
+										</div>
+									</div>
+									<br/>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="resources/commons :: scripts"></div>
+	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/profile.js}"></script>
+</body>
+</html>
