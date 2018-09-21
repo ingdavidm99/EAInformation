@@ -53,7 +53,7 @@
 											<td colspan="3" class="text-right">
 												<span th:if="${pagination.length > 0}"
 													class="badge badge-primary"
-													th:text="#{3items(${pagination.size}, ${pagination.page})}">
+													th:text="#{3_items(${pagination.size}, ${pagination.page})}">
 												</span>
 											</td>
 										</tr>
@@ -155,16 +155,16 @@
 											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.date}">
 										</td>
 										<td width="8%" style="cursor: pointer; color: #337ab7;" class="text-center">
-											<a class="btn btn-primary btn-sm edit"  th:href="'/eai/findbyidsystemparameters/__${s.idSystemParameters}__'">
+											<button type="button" class="btn btn-primary btn-sm edit" th:title="${s.idSystemParameters}">
 										   		<i class="fas fa-pencil-alt"></i>
-											</a>
+											</button>
 										</td>
 									</tr>
 									<tr th:if="${pagination.length == 0}">
 										<td colspan="7" class="text-center">
 											<span 
 												class="badge badge-primary"
-												th:text="#{3noSearchResultFound}">
+												th:text="#{3_noSearchResultFound}">
 											</span>
 										</td>
 									</tr>
@@ -176,7 +176,10 @@
 			</div>
 		</div>
 	</div>
+	
+	<div th:replace="findbyidsystemparameters :: modal"></div>
 
 	<div th:replace="resources/commons :: scripts"></div>
+	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/systemparameters.js}"></script>
 </body>
 </html>

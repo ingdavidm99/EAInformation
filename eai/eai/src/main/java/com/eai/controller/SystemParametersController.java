@@ -1,18 +1,16 @@
 package com.eai.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,11 +42,6 @@ public class SystemParametersController {
 	public static final String PATTH_SEARCH = "/searchsystemparameters";
 	public static final String FINDBYSEARCHSYSTEMPARAMETERS = "/findbyidsystemparameters";
 	public static final String SAVESYSTEMPARAMETERS = "/savesystemparameters";
-	
-	@InitBinder("SystemParameters")
-	protected void setupBinder(WebDataBinder binder) {
-	    binder.addValidators(new SystemParametersValidator());
-	}
 		
 	@RequestMapping(path = PATTH_SYSTEMPARAMETERS, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request, @ModelAttribute("Pagination") Pagination pagination) {
@@ -85,56 +78,48 @@ public class SystemParametersController {
         return  PATTH_SYSTEMPARAMETERS;
 	}
 	
-	@RequestMapping(path = FINDBYSEARCHSYSTEMPARAMETERS+"/{id}", method = RequestMethod.GET)
-    public String findByIdsystemParameters(
+	@RequestMapping(path = FINDBYSEARCHSYSTEMPARAMETERS, method = RequestMethod.POST)
+    public ResponseEntity<Object> findByIdsystemParameters(
     		Model model, 
     		HttpServletRequest request,
-    		@PathVariable("id") int id) {
+    		@RequestBody SystemParameters idSystemParameters) {
 		
         SystemParameters systemParameters = null;
        
         try {
         	transactionPage = TransactionPage.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
-        	systemParameters = systemParametersService.findById(id);
+        	systemParameters = systemParametersService.findById(idSystemParameters.getIdSystemParameters());
+        	message.setData(systemParameters);
         } catch (Exception exception) {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
         }
         
-        model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
-        model.addAttribute("SystemParameters", systemParameters);
-        model.addAttribute(Constants.MESSAGESRESPONSE.val() ,message);
-        
-        return  FINDBYSEARCHSYSTEMPARAMETERS;
+        return ResponseEntity.ok(message);
 	}
 	
 	@RequestMapping(path = SAVESYSTEMPARAMETERS, method = RequestMethod.POST)
-    public String save(
+    public ResponseEntity<Object> save(
     		Model model,
     		HttpServletRequest request,
-    		@ModelAttribute("SystemParameters") @Valid SystemParameters systemParameters,
-    		BindingResult bindingResult) { 
+    		@RequestBody SystemParameters systemParameters,
+    		Errors errors) { 
 		
 		try {
+			ValidationUtils.invokeValidator(new SystemParametersValidator(), systemParameters, errors);
 			transactionPage = TransactionPage.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
 			
-			if (bindingResult.hasErrors()) {
-				for(FieldError error : bindingResult.getFieldErrors()){
-					model.addAttribute(error.getField(), error.getDefaultMessage());
-				}
-				
+			if(errors.hasErrors()) {
+				message.setErrors(errors.getAllErrors());
 				message.setStatus(Constants.FAILURE.val());
 			 }else {
 				 systemParametersService.saveOrUpdate(systemParameters);
 				 message.setStatus(Constants.SUCCESS.val());
+				 message.setData(systemParameters);
 			 }
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), SAVESYSTEMPARAMETERS));
 		}
 		
-		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
-		model.addAttribute("SystemParameters", systemParameters);
-		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
-		
-		return FINDBYSEARCHSYSTEMPARAMETERS;
+		return ResponseEntity.ok(message);
 	}
 }

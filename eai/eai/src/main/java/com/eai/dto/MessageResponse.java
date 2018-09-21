@@ -13,6 +13,8 @@ public class MessageResponse implements Serializable{
     
     private Integer code;
     
+    private Object data;
+    
     private List<ObjectError> errors;
         
     public String getStatus() {
@@ -29,6 +31,14 @@ public class MessageResponse implements Serializable{
 
 	public void setCode(Integer code) {
 		this.code = code;
+	}
+	
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 	public List<ObjectError> getErrors() {

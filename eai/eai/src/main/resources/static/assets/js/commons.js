@@ -1,5 +1,6 @@
 $(function() {
-
+	$('.eai').fadeIn('fade');
+	
 	$('.leftmenutrigger').on('click', function (e) {
     	$('.side-nav').toggleClass("open");
     	$('#wrapper').toggleClass("open");
@@ -102,4 +103,16 @@ $(function() {
 			$('#formSearch').submit();
 		}
     });
+	
+	$('.closeButton').click(function () {
+		$('#formSearch').submit();	
+	});
+	
+	$("body").submit(function(){
+		$("#modalLoad").fadeIn('fade');
+	});
+	
+	$(".event").click(function(){
+		$("#modalLoad").fadeIn('fade');
+	});
 });

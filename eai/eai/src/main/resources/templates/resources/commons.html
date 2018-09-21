@@ -14,9 +14,8 @@
 </head> 
 <body>
 	<div th:fragment="scripts">
-		<div th:replace="resources/messages :: modal"></div>
-	
-	    <script type="text/javascript" th:src="@{/assets/resources/popper/popper.min.js}"></script>
+		<div th:replace="resources/messages :: modalLoad"></div>
+		<script type="text/javascript" th:src="@{/assets/resources/popper/popper.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/jquery/jquery.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/bootstrap/js/bootstrap.min.js}"></script>
 	    <script type="text/javascript" th:src="@{/assets/resources/fontawesome/all.min.js}"></script>
@@ -28,7 +27,37 @@
 	    	/*<![CDATA[*/
 	    		var header = $("meta[name='csrf_header']").attr("content");
 				var token = $("meta[name='csrf']").attr("content");
+				
+				var errorMessage = /*[[#{errorMessage}]]*/ 'default';
+	    		var internalError = /*[[#{internalError}]]*/ 'default';
+	    		var successful = /*[[#{successful}]]*/ 'default';
 			/*]]>*/
+			
+			function messages(response) {
+				$('#F, #E, #S').text('');
+				
+				switch (response.status) {
+					case 'F':
+						var f = $('#F');
+						f.text(errorMessage);
+					break;
+					case 'E':
+						var e = $('#E');
+						internalError = internalError.replace('{0}', response.code);
+						e.text(internalError);
+					break;
+					case 'S':
+						var s = $('#S');
+						s.text(successful);
+					break;
+				}
+				
+				if(response.errors){
+					for (var i = 0; i < response.errors.length; i++) {
+    					$('#'+response.errors[i].field+"Error").text(response.errors[i].code);
+    				}
+    			}
+			}
 	    </script>
 	</div>
 </body>

@@ -29,7 +29,7 @@
 		          			<a th:each="menu : ${parentMenu.menuList}" 
 		          			   th:text="${menu.menuName}"
 		          			   th:href="'/eai__${menu.urlName}__'" 
-		          			   class="dropdown-item">Action</a>
+		          			   class="dropdown-item event"></a>
 		          		</div>
 		      		</li>
 		        </ul>
@@ -46,7 +46,7 @@
 	           			</a>
 	         		</li>
 	         		<li class="nav-item">
-	           			<a class="nav-link" href="/eai/logout">
+	           			<a class="nav-link event" href="/eai/logout">
 	           				<i class="fas fa-power-off"></i>
 	           			</a>
 	         		</li>

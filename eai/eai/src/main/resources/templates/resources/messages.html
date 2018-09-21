@@ -11,28 +11,27 @@
 			<span th:if="${messagesResponse.status == 'E'}" class="badge badge-danger" th:text="#{internalError(${messagesResponse.code})}"></span>
 			<span th:if="${messagesResponse.status == 'S'}" class="badge badge-success" th:text="#{successful}"></span>
 		</div>
+			
+		<span id="F" class="badge badge-danger"></span>
+		<span id="E" class="badge badge-danger"></span>
+		<span id="S" class="badge badge-success"></span>
 	</div>
-
-	<!-- Modal -->
-	<div th:fragment="modal">
-		<div class="modal fade" data-backdrop="static" id="error">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content panel-warning">
-					<div class="modal-header">
-		               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-		            </div>
-					<div class="modal-body" th:if="${messagesResponse != null}">
-			        	
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-					</div>
-				</div>
+	
+	<!-- Modal load -->
+	<div th:fragment="modalLoad">
+		<div class="load" id="modalLoad" style="display: none;">
+			<div class="loader">
+   				<div class="face face1">
+       				<div class="circle"></div>
+       			</div>
+   				<div class="face face2">
+       				<div class="circle"></div>
+   				</div>
 			</div>
 		</div>
 	</div>
+	<!-- End modal load -->
+	
+	
 </body>
 </html>
