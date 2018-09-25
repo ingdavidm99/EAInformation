@@ -66,7 +66,7 @@ public class ProfileController {
 
 			userDetail = user.getUserDetail();
 			userDetail.setUserName(user.getUsername());
-			userDetail.setRepeatPassword(user.getRole().getName());
+			userDetail.setRoleName(user.getRole().getName());
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_PROFILE));
 	    }
@@ -95,7 +95,7 @@ public class ProfileController {
 				
 				message.setStatus(Constants.FAILURE.val());
 			 }else {
-				  if("2".equals(userDetail.getOption())) {
+				  if("1".equals(userDetail.getOption())) {
 					 userDetailService.updateUserDetail(userDetail);
 				 }else {
 					 userDetailService.updateUserPassword(userDetail);

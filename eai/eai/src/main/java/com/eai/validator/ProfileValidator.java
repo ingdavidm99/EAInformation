@@ -62,7 +62,7 @@ public class ProfileValidator implements Validator{
 		
 		String requiredField = transactionPage.get("requiredField");
 		
-		if("2".equals(userDetail.getOption())) {
+		if("1".equals(userDetail.getOption())) {
 			//fullName
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.FULLNAME.val(), requiredField, requiredField);
 			onlyContainLetters(userDetail, errors);

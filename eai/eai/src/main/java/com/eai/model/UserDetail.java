@@ -49,6 +49,9 @@ public class UserDetail implements Serializable {
     private String privacyPolicy;
     
     @Transient
+    private String roleName;
+    
+    @Transient
     private String option;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDetail", fetch = FetchType.LAZY)
@@ -138,8 +141,16 @@ public class UserDetail implements Serializable {
 
 	public void setPrivacyPolicy(String privacyPolicy) {
 		this.privacyPolicy = privacyPolicy;
-	}
+	}	
 	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	public String getOption() {
 		return option;
 	}

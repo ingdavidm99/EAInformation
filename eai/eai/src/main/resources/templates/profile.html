@@ -30,17 +30,17 @@
 						<div class="row justify-content-center">
 							<div class="col-3">
 								<br/>
-								<div class="row justify-content-start">
-									<div class="col-12">
-										<img src="../eai/assets/images/user.jpg" id="profile-image1" width="50%"/>
-									</div>
+								<div class="row justify-content-center">
+									<img src="../eai/assets/images/user.jpg" id="profile-image1" width="50%" height="50%"/>
 								</div>
 								
 								<br/>
-								<div class="row justify-content-start">
-									<div class="col-12">
-										asdasd
-									</div>
+								<div class="row justify-content-center">
+									<h2 th:text="${UserDetail.userName}"></h2>
+								</div>
+								
+								<div class="row justify-content-center">
+									<p><strong th:text="#{4_profile}"></strong> <label th:text="${UserDetail.roleName}"></label> </p>
 								</div>
 							</div>
 							<div class="col-9">
@@ -50,49 +50,19 @@
 										<div class="col-4">
 											<label 
 												class="col-form-label" 
-												th:text="#{2_userName}"
-												th:title="#{2_userName}" 
+												th:text="#{4_fullName}"
+												th:title="#{4_fullName}" 
 												data-toggle="popover" 
-												th:data-content="#{2_tooltipUserName}"></label>
+												th:data-content="#{4_tooltipFullName}"></label>
 										</div>
 										<div class="col-8">
 											<div class="required-field-block">
 												<input 
 													type="text" 
 													class="form-control form-control-sm"
-													name="userName" 
-													th:placeholder="#{2_userName}"
-													th:value="${UserDetail.userName}"/>
-												<div class="required-icon" th:data-content="#{requiredField}">
-									                <div class="text">*</div>
-									            </div>
-											</div>
-										</div>
-									</div>
-									<div class="row justify-content-center">
-										<div class="col-4"></div>
-										<div class="col-8">
-											<span class="badge badge-danger" th:if="${userName != null}" th:text="${userName}"></span>
-										</div>
-									</div>
-									
-									<br/>
-									<div class="row justify-content-center">
-										<div class="col-4">
-											<label 
-												class="col-form-label" 
-												th:text="#{2_fullName}"
-												th:title="#{2_fullName}" 
-												data-toggle="popover" 
-												th:data-content="#{2_tooltipFullName}"></label>
-										</div>
-										<div class="col-8">
-											<div class="required-field-block">
-												<input 
-													type="text" 
-													class="form-control form-control-sm ellipsis"
-													name="fullName" 
-													th:placeholder="#{2_fullName}"
+													name="fullName"
+													readonly="readonly"
+													th:placeholder="#{4_fullName}"
 													th:value="${UserDetail.fullName}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -112,18 +82,19 @@
 										<div class="col-4">
 											<label 
 												class="col-form-label" 
-												th:text="#{2_birth}"
-												th:title="#{2_birth}" 
+												th:text="#{4_birth}"
+												th:title="#{4_birth}" 
 												data-toggle="popover" 
-												th:data-content="#{2_tooltipBirth}"></label>
+												th:data-content="#{4_tooltipBirth}"></label>
 										</div>
 										<div class="col-8">
 											<div class="required-field-block">
 												<input 
 													type="text" 
-													class="form-control form-control-sm datepicker ellipsis"
-													name="birth" 
-													th:placeholder="#{2_birth}"
+													class="form-control form-control-sm datepicker"
+													name="birth"
+													readonly="readonly" 
+													th:placeholder="#{4_birth}"
 													th:value="${UserDetail.birth}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -143,18 +114,19 @@
 										<div class="col-4">
 											<label 
 												class="col-form-label" 
-												th:text="#{2_emailAddress}"
-												th:title="#{2_emailAddress}" 
+												th:text="#{4_emailAddress}"
+												th:title="#{4_emailAddress}" 
 												data-toggle="popover" 
-												th:data-content="#{2_tooltipEmailAddress}"></label>
+												th:data-content="#{4_tooltipEmailAddress}"></label>
 										</div>
 										<div class="col-8">
 											<div class="required-field-block">
 												<input 
 													type="text" 
-													class="form-control form-control-sm ellipsis"
-													name="email" 
-													th:placeholder="#{2_emailAddress}"
+													class="form-control form-control-sm"
+													name="email"
+													readonly="readonly" 
+													th:placeholder="#{4_emailAddress}"
 													th:value="${UserDetail.email}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
@@ -174,18 +146,19 @@
 										<div class="col-4">
 											<label 
 												class="col-form-label" 
-												th:text="#{2_password}"
-												th:title="#{2_password}" 
+												th:text="#{4_currentPassword}"
+												th:title="#{4_currentPassword}" 
 												data-toggle="popover" 
-												th:data-content="#{2_tooltipPassword}"></label>
+												th:data-content="#{4_tooltipCurrentPassword}"></label>
 										</div>
 										<div class="col-8">
 											<div class="required-field-block">
 												<input 
 													type="password" 
 													class="form-control form-control-sm"
-													name="password" 
-													th:placeholder="#{2_password}"/>
+													name="password"
+													readonly="readonly" 
+													th:placeholder="#{4_currentPassword}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
 									            </div>
@@ -204,18 +177,50 @@
 										<div class="col-4">
 											<label 
 												class="col-form-label" 
-												th:text="#{2_repeatPassword}"
-												th:title="#{2_repeatPassword}" 
+												th:text="#{4_newPassword}"
+												th:title="#{4_newPassword}" 
 												data-toggle="popover" 
-												th:data-content="#{2_tooltipRepeatPassword}"></label>
+												th:data-content="#{4_tooltipNewPassword}"></label>
 										</div>
 										<div class="col-8">
 											<div class="required-field-block">
 												<input 
 													type="password" 
 													class="form-control form-control-sm"
-													name="repeatPassword" 
-													th:placeholder="#{2_repeatPassword}"/>
+													name="newPassword"
+													readonly="readonly" 
+													th:placeholder="#{4_newPassword}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-4"></div>
+										<div class="col-8">
+											<span class="badge badge-danger" th:if="${repeatPassword != null}" th:text="${repeatPassword}"></span>
+										</div>
+									</div>
+										
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{4_repeatPassword}"
+												th:title="#{4_repeatPassword}" 
+												data-toggle="popover" 
+												th:data-content="#{4_tooltipRepeatPassword}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="password" 
+													class="form-control form-control-sm"
+													name="repeatPassword"
+													readonly="readonly" 
+													th:placeholder="#{4_repeatPassword}"/>
 												<div class="required-icon" th:data-content="#{requiredField}">
 									                <div class="text">*</div>
 									            </div>
@@ -229,31 +234,39 @@
 										</div>
 									</div>
 									
-									<br/> 
-									<div class="row justify-content-center">
-										<div class="col-12">
+									<br/>
+									<div class="row justify-content-center">	
+										<div class="col-4">
+											<input id="option" name="option" type="hidden"/>
+											<a href="/eai/profile" class="btn btn-secondary btn-sm" th:text="#{4_cancel}">Cancelar</a>
+											<button id="update" class="btn btn-primary btn-sm" type="submit" disabled="disabled" th:text="#{4_update}"></button>
+										</div>
+										<div class="col-4">
 											<div class="custom-control custom-checkbox mr-sm-2">
 									        	<input 
-									        		type="checkbox" 
+									        		type="radio" 
 									        		class="custom-control-input" 
-									        		id="customControlAutosizing"
-									        		name="privacyPolicy"/>
+									        		id="changeInformation"
+									        		name="radio"/>
 									        	<label 
 									        		class="custom-control-label" 
-									        		for="customControlAutosizing" 
-									        		th:text="#{2_privacy}"></label>
+									        		for="changeInformation"
+									        		th:text="#{4_changeInformation}"></label>
 									      	</div>
-										</div>
-									</div>
-									
-									<br/>
-									<div class="row justify-content-center">
-										<div class="col-12">
-											<input id="option" name="option" type="hidden"/>
-											<button id="update" class="btn btn-primary btn-sm" type="submit" disabled="disabled">Update</button>
-											<button id="changePassword" class="btn btn-primary btn-sm" type="button">Change password</button>
-											<button id="changeInformation" class="btn btn-primary btn-sm" type="button">Change information</button>
-										</div>
+								      	</div>
+								      	<div class="col-4">
+											<div class="custom-control custom-checkbox mr-sm-2">
+									        	<input 
+									        		type="radio" 
+									        		class="custom-control-input" 
+									        		id="changePassword"
+									        		name="radio"/>
+									        	<label 
+									        		class="custom-control-label" 
+									        		for="changePassword"
+									        		th:text="#{4_changePassword}"></label>
+									      	</div>
+								      	</div>	
 									</div>
 									<br/>
 								</form>
