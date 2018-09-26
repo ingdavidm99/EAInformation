@@ -3,6 +3,7 @@ package com.eai.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.eai.model.LogError;
 import com.eai.model.SystemParameters;
 
 public class Pagination {
@@ -19,9 +20,16 @@ public class Pagination {
 	
 	private List<SystemParameters> systemParametersList;
 	
+	private LogError logError;
+	
+	private List<LogError> logErrorList;
+	
 	public Pagination() {
 		systemParameters = new SystemParameters();
 		systemParametersList = new ArrayList<>();
+		
+		logError = new LogError();
+		logErrorList = new ArrayList<>();
 	}
 	
 	public void getPage(long querySize, Long pageSize) {
@@ -80,5 +88,21 @@ public class Pagination {
 
 	public void setSystemParametersList(List<SystemParameters> systemParametersList) {
 		this.systemParametersList = systemParametersList;
+	}
+
+	public LogError getLogError() {
+		return logError;
+	}
+
+	public void setLogError(LogError logError) {
+		this.logError = logError;
+	}
+
+	public List<LogError> getLogErrorList() {
+		return logErrorList;
+	}
+
+	public void setLogErrorList(List<LogError> logErrorList) {
+		this.logErrorList = logErrorList;
 	}
 }

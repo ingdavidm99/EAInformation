@@ -59,10 +59,6 @@ $(function() {
     	$('#formSearch').submit();
     });	
 	
-	$('#clear').click(function () {
-		$(location ).attr("href", "/eai/systemparameters");
-    });
-	
 	$('#firstPage').click(function () {
 		var page = parseInt($('#page').val());
 		var newPage = 1;

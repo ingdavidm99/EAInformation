@@ -26,6 +26,10 @@ public class LogError implements Serializable {
     @Column(name = "ID_LOG_ERROR", nullable = false)
     private Integer idLogError;
     
+    @Lob
+    @Column(name = "ERROR", nullable = false)
+    private String error;
+    
     @Column(name = "USER_NAME", nullable = false)
     private String userName;
     
@@ -34,11 +38,7 @@ public class LogError implements Serializable {
     
     @Column(name = "DATE", nullable = false)
     private String date;
-    
-    @Lob
-    @Column(name = "ERROR", nullable = false)
-    private String error;
-    
+     
     public LogError() {
 	}
     
@@ -64,7 +64,15 @@ public class LogError implements Serializable {
 
 	public void setIdLogError(Integer idLogError) {
 		this.idLogError = idLogError;
-	}	
+	}
+	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
 		
 	public String getUserName() {
 		return userName;
@@ -88,13 +96,5 @@ public class LogError implements Serializable {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-		
-	public String getError() {
-		return error;
-	}
-
-	public void setError(String error) {
-		this.error = error;
 	}	
 }

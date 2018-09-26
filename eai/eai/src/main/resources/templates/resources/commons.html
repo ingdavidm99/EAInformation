@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf_header" th:if="${tp != null}" th:content="${tp.headerName}"/>
-	<meta name="csrf" th:if="${tp != null}" th:content="${tp.token}"/>
+    <meta name="csrf_header" th:if="${transactionPage != null}" th:content="${transactionPage.headerName}"/>
+	<meta name="csrf" th:if="${transactionPage != null}" th:content="${transactionPage.token}"/>
     
     <link rel="stylesheet" th:href="@{/assets/resources/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/assets/resources/datetimepicker/css/bootstrap-datetimepicker.min.css}"/>

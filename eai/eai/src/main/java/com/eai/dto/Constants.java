@@ -18,7 +18,7 @@ public enum Constants {
 	DATE_PATTERN("^\\d{4}-\\d{2}-\\d{2}$"),
 	
 	//GENERAL
-	TRANSACTIONPAGE("tp"),
+	TRANSACTIONPAGE("transactionPage"),
 	PAGINATION("pagination"),
 	MESSAGESRESPONSE("messagesResponse");
 	

@@ -25,7 +25,7 @@ public class IndexController {
 	
 	MessageResponse message;
 	
-	TransactionPage transactionPage = new TransactionPage();
+	TransactionPage transactionPage;
 	
 	@Autowired
 	UserService userService;
@@ -47,10 +47,16 @@ public class IndexController {
 	@RequestMapping(path = PATTH_INDEX, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
-			transactionPage = TransactionPage.getData(request, userService, parentMenuService, menuService, systemParametersService);
+			transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 			
-			request.getSession().removeAttribute("TransactionPage");
-			request.getSession().setAttribute("TransactionPage", transactionPage);
+			if(transactionPage != null) {
+				transactionPage = TransactionPage.getTransactionPage(request, PATTH_INDEX);
+			}else {
+				transactionPage = TransactionPage.getData(request, userService, parentMenuService, menuService, systemParametersService);
+				
+				request.getSession().removeAttribute(Constants.TRANSACTIONPAGE.val());
+				request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
+			}
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_INDEX));
 	    }

@@ -71,7 +71,7 @@ public class ProfileController {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_PROFILE));
 	    }
 		
-		model.addAttribute("tp", transactionPage);
+		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute("UserDetail", userDetail);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
     	
@@ -95,11 +95,15 @@ public class ProfileController {
 				
 				message.setStatus(Constants.FAILURE.val());
 			 }else {
-				  if("1".equals(userDetail.getOption())) {
+				 if("1".equals(userDetail.getOption())) {
 					 userDetailService.updateUserDetail(userDetail);
 				 }else {
 					 userDetailService.updateUserPassword(userDetail);
 				 }
+				  
+				 User user = userService.findByUserName(transactionPage.getUserName());
+				 userDetail.setUserName(user.getUsername());
+				 userDetail.setRoleName(user.getRole().getName());
 				 
 				 message.setStatus(Constants.SUCCESS.val());
 			 }
@@ -109,7 +113,7 @@ public class ProfileController {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_UPDATE_PROFILE));
 		}
 		
-		model.addAttribute("tp", transactionPage);
+		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute("UserDetail", userDetail);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		

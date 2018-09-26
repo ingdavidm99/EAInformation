@@ -132,7 +132,6 @@ public class TransactionPage implements Serializable{
 			pmist.removeIf(parentMenuListPredicate);
 			
 			transactionPage.setUserName(user.toString());
-			transactionPage.setTitle("Home");
 			transactionPage.setIdRole(role);
 			transactionPage.setParentMenuList(pmist);
 			transactionPage.setHeaderName(csrfToken.getHeaderName());
@@ -140,13 +139,14 @@ public class TransactionPage implements Serializable{
 			
 			transactionPage.setPageSize(new Long(systemParametersService.findById(1).getValue()));
 			transactionPage.setLocal(systemParametersService.findById(7).getValue());
+			transactionPage.setTitle(transactionPage.get("/index"));
 		}
 		
 		return transactionPage;
 	}
 	
 	public static TransactionPage getTransactionPage(HttpServletRequest request, String key) {
-		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute("TransactionPage");
+		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 		transactionPage.setTitle(transactionPage.get(key));
 		
 		return transactionPage;

@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
+import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.model.SystemParameters;
 import com.eai.service.LogErrorService;
@@ -40,6 +42,14 @@ public class LanguageController {
 			systemParameters.setValue("EN");
 			
 			systemParametersService.saveOrUpdate(systemParameters);
+			
+			TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
+			
+			if(transactionPage != null) {
+				transactionPage.setLocal("EN");
+				request.getSession().removeAttribute(Constants.TRANSACTIONPAGE.val());
+				request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
+			}
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, PATTH_LANGUAGE_EN, PATTH_LANGUAGE_EN));
 	    }
@@ -55,6 +65,14 @@ public class LanguageController {
 			systemParameters.setValue("ES");
 			
 			systemParametersService.saveOrUpdate(systemParameters);
+			
+			TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
+			
+			if(transactionPage != null) {
+				transactionPage.setLocal("ES");
+				request.getSession().removeAttribute(Constants.TRANSACTIONPAGE.val());
+				request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
+			}
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, PATTH_LANGUAGE_ES, PATTH_LANGUAGE_ES));
 	    }
