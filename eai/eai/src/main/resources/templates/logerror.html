@@ -13,11 +13,11 @@
 				<div class="col eai-head-1 flexcroll">
 					<div class="row">
 						<div class="col">
-							<form th:action="@{/searchsystemparameters}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
+							<form th:action="@{/searchlogerror}" method="post" modelAttribute="Pagination" autocomplete="off" id="formSearch">
 								<table class="table table-sm">
 									<tbody>
 										<tr>
-											<td colspan="5">
+											<td colspan="3">
 												<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 													<div id="search" class="btn-group btn-group-sm mr-2" role="group">
 														<button type="button" class="btn btn-primary">
@@ -25,7 +25,7 @@
 														</button>
 													</div>
 													<div class="btn-group btn-group-sm mr-2" role="group">
-														<a href="/eai/systemparameters" type="button" class="btn btn-primary">
+														<a href="/eai/logerror" type="button" class="btn btn-primary">
 															<i class="fas fa-trash-alt"></i>
 														</a>
 													</div>
@@ -50,7 +50,7 @@
 													</div>
 												</div>
 											</td>
-											<td colspan="3" class="text-right">
+											<td colspan="2" class="text-right">
 												<span th:if="${pagination.length > 0}"
 													class="badge badge-primary"
 													th:text="#{items(${pagination.size}, ${pagination.page})}">
@@ -59,67 +59,48 @@
 											</td>
 										</tr>
 										<tr>
-											<td colspan="8" style="padding-top: 20px;"></td>
+											<td colspan="5" style="padding-top: 20px;"></td>
 										</tr>
 										<tr>
 											<th width="8%" scope="row">
 												<input 
 													class="form-control form-control-sm" 
 													type="text" 
-													name="systemParameters.idSystemParameters"
-													th:placeholder="#{3_n}"
-													th:value="${pagination.systemParameters.idSystemParameters}"/>
+													name="logError.idLogError"
+													th:placeholder="#{5_n}"
+													th:value="${pagination.logError.idLogError}"/>
 											</th>
-											<td width="14%">
+											<td width="38%">
 												<input 
 													class="form-control form-control-sm" 
 													type="text" 
-													name="systemParameters.name"
-													th:placeholder="#{3_name}"
-													th:value="${pagination.systemParameters.name}"/>
+													name="logError.error"
+													th:placeholder="#{5_error}"
+													th:value="${pagination.logError.error}"/>
 											</td>
-											<td width="14%">
+											<td width="18%">
 												<input 
 													class="form-control form-control-sm" 
 													type="text" 
-													name="systemParameters.value"
-													th:placeholder="#{3_value}"
-													th:value="${pagination.systemParameters.value}"/>
+													name="logError.userName"
+													th:placeholder="#{5_userName}"
+													th:value="${pagination.logError.userName}"/>
 											</td>
-											<td width="14%">
+											<td width="18%">
 												<input 
 													class="form-control form-control-sm" 
 													type="text" 
-													name="systemParameters.description"
-													th:placeholder="#{3_description}"
-													th:value="${pagination.systemParameters.description}"/>
+													name="logError.path"
+													th:placeholder="#{5_path}"
+													th:value="${pagination.logError.path}"/>
 											</td>
-											<td width="14%">
-												<input 
-													class="form-control form-control-sm" 
-													type="text" 
-													name="systemParameters.type"
-													th:placeholder="#{3_type}"
-													th:value="${pagination.systemParameters.type}"/>
-											</td>
-											<td width="14%">
-												<input 
-													class="form-control form-control-sm" 
-													type="text" 
-													name="systemParameters.userName"
-													th:placeholder="#{3_userName}"
-													th:value="${pagination.systemParameters.userName}"/>
-											</td>
-											<td width="14%">
+											<td width="18%">
 												<input 
 													class="form-control form-control-sm datepicker" 
 													type="text" 
-													name="systemParameters.date"
-													th:placeholder="#{3_date}"
-													th:value="${pagination.systemParameters.date}"/>
-											</td>
-											<td width="8%" style="cursor: pointer;">
-												<input class="form-control form-control-sm" type="text" placeholder="" disabled="disabled"/>
+													name="logError.date"
+													th:placeholder="#{5_date}"
+													th:value="${pagination.logError.date}"/>
 											</td>
 										</tr>
 									</tbody>
@@ -133,36 +114,25 @@
 						<div class="col">
 							<table class="table table-sm">
 								<tbody>
-									<tr th:each="s : ${pagination.systemParametersList}">
+									<tr th:each="l : ${pagination.logErrorList}">
 										<th width="8%" scope="row">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.idSystemParameters}">
+											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${l.idLogError}">
 										</th>
-										<td width="14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.name}">
+										<td width="38%">
+											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${l.error}">
 										</td>
-										<td width="14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.value}">
+										<td width="18%">
+											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${l.userName}">
 										</td>
-										<td width="14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.description}">
+										<td width="18%">
+											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${l.path}">
 										</td>
-										<td width="14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.type}">
-										</td>
-										<td width="14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.userName}">
-										</td>
-										<td width="14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.date}">
-										</td>
-										<td width="8%" style="cursor: pointer; color: #337ab7;" class="text-center">
-											<button type="button" class="btn btn-primary btn-sm edit" th:title="${s.idSystemParameters}">
-										   		<i class="fas fa-pencil-alt"></i>
-											</button>
+										<td width="18%">
+											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${l.date}">
 										</td>
 									</tr>
 									<tr th:if="${pagination.length == 0}">
-										<td colspan="7" class="text-center">
+										<td colspan="5" class="text-center">
 											<span 
 												class="badge badge-primary"
 												th:text="#{noSearchResultFound}">
@@ -178,9 +148,8 @@
 		</div>
 	</div>
 	
-	<div th:replace="systemparameters_modal :: modal"></div>
-
+	<div th:replace="logerror_modal :: modal"></div>
+	
 	<div th:replace="resources/commons :: scripts"></div>
-	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/systemparameters.js}"></script>
 </body>
 </html>

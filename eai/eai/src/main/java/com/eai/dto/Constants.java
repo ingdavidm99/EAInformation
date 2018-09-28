@@ -2,11 +2,23 @@ package com.eai.dto;
 
 public enum Constants {
 	
+	//PAGE
+	BASEURL("https://www.amazon.com/"),
+	ALPHABET("#,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"),
+	REPLACE("[\\|\\*\\/\\?\\\\(\\)\\,\\\\.\\:]"),
+	
+	PERCENTAGE_GAIN("30"),
+	
 	//STATUS
 	SINGINFAILURE("LF"),
 	FAILURE("F"),
 	ERROR("E"),
 	SUCCESS("S"),
+	PENDING("P"),
+	
+	STARTING("Starting"),		
+	FINISHED("Finished"),		
+	PROCESSING("Processing..."),	
 	
 	//VALIDATE
 	EMAIL_PATTERN("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"),
