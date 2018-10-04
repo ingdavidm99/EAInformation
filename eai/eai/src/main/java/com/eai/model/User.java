@@ -107,16 +107,16 @@ public class User implements Serializable, UserDetails {
         this.userDetail = userDetail;
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role.getName()));
+        
         return authorities;
     }
 
 	@Override
 	public String getUsername() {
         return userName;
-
 	}
 
 	@Override

@@ -10,9 +10,9 @@ public interface LevelFourService{
 
 	public void save(LevelFour levelFour);
 	
-	public void save(List<ViewLevelThree> viewLevelThreeList, BigDecimal usdToCo, BigDecimal shippingUsd, BigDecimal shippingCop);
+	public void saveAll(List<ViewLevelThree> viewLevelThreeList, BigDecimal usdToCo, BigDecimal shippingUsd, BigDecimal shippingCop);
 	
-	public LevelFour findOne(Integer idLevel4);
+	public LevelFour findById(Integer idLevel4);
 	
 	public BigDecimal priceValue(BigDecimal usdToCop, String priceUSD, BigDecimal shippingUsd, BigDecimal shippingCop);
 }

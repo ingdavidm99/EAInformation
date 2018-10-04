@@ -1,19 +1,13 @@
 package com.eai.wizard.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -40,15 +34,10 @@ public class LevelTwo implements Serializable {
     @Column(name = "STATUS")
     private String status;
     
-    @JoinColumn(name = "ID_LEVEL_1", referencedColumnName = "ID_LEVEL_1", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private LevelOne levelOne;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "levelTwo", fetch = FetchType.LAZY)
-    private List<LevelThree> levelThreeList;
+    @Column(name = "ID_LEVEL_1")
+    private Integer idLevel1;
 
-    public LevelTwo() {
-    }
+    public LevelTwo() {}
 
     public LevelTwo(Integer idLevel2) {
         this.idLevel2 = idLevel2;
@@ -59,8 +48,7 @@ public class LevelTwo implements Serializable {
         this.amount = amount;
         this.url = url;
         this.status = status;
-        this.levelOne = new LevelOne();
-        this.levelOne.setIdLevel1(idLevel1);
+        this.idLevel1 = idLevel1;
     }
 
     public Integer getIdLevel2() {
@@ -103,19 +91,11 @@ public class LevelTwo implements Serializable {
         this.status = status;
     }
 
-	public LevelOne getLevelOne() {
-		return levelOne;
-	}
+    public Integer getIdLevel1() {
+        return idLevel1;
+    }
 
-	public void setLevelOne(LevelOne levelOne) {
-		this.levelOne = levelOne;
-	}
-
-	public List<LevelThree> getLevelThreeList() {
-		return levelThreeList;
-	}
-
-	public void setLevelThreeList(List<LevelThree> levelThreeList) {
-		this.levelThreeList = levelThreeList;
-	}
+    public void setIdLevel1(Integer idLevel1) {
+        this.idLevel1 = idLevel1;
+    }	
 }

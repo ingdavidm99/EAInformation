@@ -16,9 +16,9 @@ public enum Constants {
 	SUCCESS("S"),
 	PENDING("P"),
 	
-	STARTING("Starting"),		
-	FINISHED("Finished"),		
-	PROCESSING("Processing..."),	
+	STARTING("7_starting"),		
+	FINISHED("7_finished"),		
+	PROCESSING("7_processing"),	
 	
 	//VALIDATE
 	EMAIL_PATTERN("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"),

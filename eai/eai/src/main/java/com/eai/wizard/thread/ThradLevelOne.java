@@ -1,17 +1,14 @@
-package com.eai.wizard.levelone;
+package com.eai.wizard.thread;
 
 import com.eai.wizard.model.LevelOne;
 import com.eai.wizard.service.LevelOneService;
 
 public class ThradLevelOne extends  Thread{
-	private final PageLevelOne pageLevelOne;
-	
 	private final LevelOne levelOne;
 	private final LevelOneService levelOneService;
     
 
     public ThradLevelOne(LevelOne levelOne, LevelOneService levelOneService) {
-        pageLevelOne = new PageLevelOne();
         
         this.levelOne = levelOne;
     	this.levelOneService = levelOneService;
@@ -20,6 +17,6 @@ public class ThradLevelOne extends  Thread{
        
     @Override
     public void run(){ 
-    	pageLevelOne.levelOne(levelOne, levelOneService);
+    	levelOneService.levelOne(levelOne);
     }
 }

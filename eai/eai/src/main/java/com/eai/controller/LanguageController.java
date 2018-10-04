@@ -38,18 +38,7 @@ public class LanguageController {
     public ResponseEntity<MessageResponse> langEN(Model model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			
-			SystemParameters systemParameters = systemParametersService.findById(7);
-			systemParameters.setValue("EN");
-			
-			systemParametersService.saveOrUpdate(systemParameters);
-			
-			TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
-			
-			if(transactionPage != null) {
-				transactionPage.setLocal("EN");
-				request.getSession().removeAttribute(Constants.TRANSACTIONPAGE.val());
-				request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
-			}
+			this.lang(request, "EN");
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, PATTH_LANGUAGE_EN, PATTH_LANGUAGE_EN));
 	    }
@@ -61,22 +50,26 @@ public class LanguageController {
     public ResponseEntity<MessageResponse> langES(Model model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			
-			SystemParameters systemParameters = systemParametersService.findById(7);
-			systemParameters.setValue("ES");
-			
-			systemParametersService.saveOrUpdate(systemParameters);
-			
-			TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
-			
-			if(transactionPage != null) {
-				transactionPage.setLocal("ES");
-				request.getSession().removeAttribute(Constants.TRANSACTIONPAGE.val());
-				request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
-			}
+			this.lang(request, "ES");
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, PATTH_LANGUAGE_ES, PATTH_LANGUAGE_ES));
 	    }
 		
 		return ResponseEntity.ok(message);
+	}
+	
+	private void lang(HttpServletRequest request, String lang) {
+		SystemParameters systemParameters = systemParametersService.findById(7);
+		systemParameters.setValue(lang);
+		
+		systemParametersService.saveOrUpdate(systemParameters);
+		
+		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
+		
+		if(transactionPage != null) {
+			transactionPage.setLocal(lang);
+			request.getSession().removeAttribute(Constants.TRANSACTIONPAGE.val());
+			request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
+		}
 	}
 }

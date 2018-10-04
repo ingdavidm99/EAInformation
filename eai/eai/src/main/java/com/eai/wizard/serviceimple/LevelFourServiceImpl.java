@@ -45,35 +45,37 @@ public class LevelFourServiceImpl implements LevelFourService {
 	
 	@Override
     @Transactional
-    public void save(List<ViewLevelThree> viewLevelThreeList, BigDecimal usdToCop, BigDecimal shippingUsd, BigDecimal shippingCop){
+    public void saveAll(List<ViewLevelThree> viewLevelThreeList, BigDecimal usdToCop, BigDecimal shippingUsd, BigDecimal shippingCop){
 		String priceCop = "";
 		LevelFour levelFour = null;
 		for(ViewLevelThree viewLevelThree : viewLevelThreeList){
 			Progress progress = Progress.getSingletonInstance();
-			LevelThree levelThree = levelThreeService.findOne(viewLevelThree.getIdLevel3());
+			LevelThree levelThree = levelThreeService.findById(viewLevelThree.getIdLevel3());
 			ViewLevelFour viewLevelFour = viewLevelFourRepository.findById(viewLevelThree.getIdLevel3()).orElse(null);
 			
-			try {
-				priceCop = this.priceValue(usdToCop, viewLevelFour.getPrice(), shippingUsd, shippingCop).toString();
-				
-				levelFour = 
-						new LevelFour(
-								viewLevelFour.getAlphabet(),
-								viewLevelFour.getCategory(),
-								viewLevelFour.getName(),
-								viewLevelFour.getPrice(),
-								priceCop,
-								viewLevelFour.getAttachment(),
-								viewLevelThree.getIdLevel3());
-				
-				this.save(levelFour);
-				
-				progress.setCountSuccess(progress.calculateCountSuccess());
-				levelThree.setStatus(Constants.SUCCESS.val());
-			}catch (Exception ex) {
-    			progress.setCountError(progress.calculateCountError());
-        		levelThree.setStatus(Constants.ERROR.val());
-        	}
+			if(viewLevelFour != null) {
+				try {
+					priceCop = this.priceValue(usdToCop, viewLevelFour.getPrice(), shippingUsd, shippingCop).toString();
+					
+					levelFour = 
+							new LevelFour(
+									viewLevelFour.getAlphabet(),
+									viewLevelFour.getCategory(),
+									viewLevelFour.getName(),
+									viewLevelFour.getPrice(),
+									priceCop,
+									viewLevelFour.getAttachment(),
+									viewLevelThree.getIdLevel3());
+					
+					this.save(levelFour);
+					
+					progress.setCountSuccess(progress.calculateCountSuccess());
+					levelThree.setStatus(Constants.SUCCESS.val());
+				}catch (Exception ex) {
+	    			progress.setCountError(progress.calculateCountError());
+	        		levelThree.setStatus(Constants.ERROR.val());
+	        	}
+			}
 			
 			levelThreeService.save(levelThree);
 		}
@@ -81,7 +83,7 @@ public class LevelFourServiceImpl implements LevelFourService {
 
 	@Override
 	@Transactional
-	public LevelFour findOne(Integer idLevel4) {
+	public LevelFour findById(Integer idLevel4) {
 		return levelFourRepository.findById(idLevel4).orElse(null);
 	}
 	

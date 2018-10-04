@@ -20,9 +20,6 @@ import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
-import com.eai.wizard.levelone.ThradLevelOne;
-import com.eai.wizard.levelthree.ThradLevelThree;
-import com.eai.wizard.leveltwo.ThradLevelTwo;
 import com.eai.wizard.model.LevelOne;
 import com.eai.wizard.model.ViewLevelThree;
 import com.eai.wizard.model.ViewLevelTwo;
@@ -31,6 +28,9 @@ import com.eai.wizard.service.LevelFourService;
 import com.eai.wizard.service.LevelOneService;
 import com.eai.wizard.service.LevelThreeService;
 import com.eai.wizard.service.LevelTwoService;
+import com.eai.wizard.thread.ThradLevelOne;
+import com.eai.wizard.thread.ThradLevelThree;
+import com.eai.wizard.thread.ThradLevelTwo;
 
 @Controller
 public class EAinformationController {
@@ -143,7 +143,6 @@ public class EAinformationController {
 		        	thradLevelTwo = new 
 		        			ThradLevelTwo(
 		        					levelOne, 
-		        					levelOneService, 
 		        					levelTwoService, 
 		        					userAgent,
 		        					numberOfRetries);
@@ -194,10 +193,10 @@ public class EAinformationController {
 		        		valid = false;
 		        	}else {
 		        		progress.setLength(from);
+		        		
 		        		thradLevelThree = new 
 		        				ThradLevelThree(
 		        						viewLevelTwoList, 
-		        						levelTwoService, 
 		        						levelThreeService, 
 		        						userAgent,
 		        						numberOfRetries);
@@ -244,7 +243,7 @@ public class EAinformationController {
 			if(!viewLevelThreeList.isEmpty()) {
 				progress.setLength(viewLevelThreeList.size());
 		        
-		        levelFourService.save(viewLevelThreeList, usdToCop, shippingUsd, shippingCop);
+		        levelFourService.saveAll(viewLevelThreeList, usdToCop, shippingUsd, shippingCop);
 	        }else {
 	        	int successLength = levelThreeService.findSuccess();
 	        	progressEnding(progress, successLength);
@@ -263,7 +262,20 @@ public class EAinformationController {
        
         try {
         	transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
-        	String mens = (progress.getPercentage() == 100)?Constants.FINISHED.val():Constants.PROCESSING.val();
+        	String mens = "";
+        	
+        	switch (""+progress.getPercentage()) {
+				case "100.0":
+					mens = transactionPage.get(Constants.FINISHED.val());
+				break;
+				case "0.0":
+					mens = transactionPage.get(Constants.STARTING.val());
+				break;
+				default:
+					mens = transactionPage.get(Constants.PROCESSING.val());
+				break;
+			}
+        	
 	        progress.setStatus(mens);
         } catch (Exception exception) {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_PROGRESS));
@@ -280,7 +292,7 @@ public class EAinformationController {
         progress.setCountSuccess(0);
         progress.setCountFail(0);
         progress.setCountError(0);
-        progress.setStatus(Constants.STARTING.val());
+        progress.setStatus(transactionPage.get(Constants.STARTING.val()));
 	}
 	
 	public void progressEnding(Progress progress, int length) {
@@ -290,6 +302,6 @@ public class EAinformationController {
         progress.setCountSuccess(length);
         progress.setCountFail(0);
         progress.setCountError(0);
-        progress.setStatus(Constants.FINISHED.val());
+        progress.setStatus(transactionPage.get(Constants.FINISHED.val()));
 	}
 }

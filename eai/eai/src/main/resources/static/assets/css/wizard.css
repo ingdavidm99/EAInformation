@@ -124,7 +124,6 @@
 	margin: 5px;
 	padding: 20px 10px;
 	background-color: #fff;
-	height: 80px;
 	border-radius: 5px;
 	transition: .3s linear all;
 }
@@ -164,18 +163,18 @@
 .card-counter .count-numbers {
 	position: absolute;
 	right: 35px;
-	top: 10px;
-	font-size: 32px;
+	top: 3px;
+	font-size: 25px;
 	display: block;
 }
 
 .card-counter .count-name {
 	position: absolute;
 	right: 35px;
-	top: 60px;
+	top: 45px;
 	font-style: italic;
 	text-transform: capitalize;
 	opacity: 0.5;
 	display: block;
-	font-size: 18px;
+	font-size: 15px;
 }

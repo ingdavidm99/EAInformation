@@ -10,7 +10,7 @@
 				<div class="row justify-content-start">
 			    	<div class="col-10">
 				    	<div class="card-counter primary">
-				        	<i style="opacity: 0.3" class="fas fa-th-list fa-3x"></i>
+				        	<i style="opacity: 0.3" class="fas fa-th-list"></i>
 				        	<span class="count-numbers" id="processing_1">0 - 0</span>
 				        	<span class="count-name" id="status_1"></span>
 				      	</div>
@@ -18,9 +18,9 @@
 			    
 					<div class="col-10">
 				    	<div class="card-counter success">
-				        	<i style="opacity: 0.3" class="fas fa-thumbs-up fa-3x"></i>
+				        	<i style="opacity: 0.3" class="fas fa-thumbs-up"></i>
 				        	<span class="count-numbers" id="success_1">0</span>
-				        	<span class="count-name">Success</span>
+				        	<span class="count-name" th:text="#{7_success}"></span>
 				      	</div>
 				    </div>
 				</div>
@@ -37,17 +37,17 @@
 		    	<div class="row justify-content-end">
 				    <div class="col-10">
 				    	<div class="card-counter warning">
-				        	<i style="opacity: 0.3" class="fas fa-exclamation-triangle fa-3x"></i>
+				        	<i style="opacity: 0.3" class="fas fa-exclamation-triangle"></i>
 				        	<span class="count-numbers" id="fail_1">0</span>
-				        	<span class="count-name">Fail</span>
+				        	<span class="count-name" th:text="#{7_fail}"></span>
 				      	</div>
 				    </div>
 				    
 				     <div class="col-10">
 				    	<div class="card-counter danger">
-				        	<i style="opacity: 0.3" class="fas fa-times fa-3x"></i>
+				        	<i style="opacity: 0.3" class="fas fa-times"></i>
 				        	<span class="count-numbers" id="error_1">0</span>
-				        	<span class="count-name">Error</span>
+				        	<span class="count-name" th:text="#{7_error}"></span>
 				      	</div>
 				    </div>
 			   	</div>
@@ -77,8 +77,8 @@
 			</div>
 			<div class="col-12">
 				<br/><br/>
-				<button id="eainformation1" class="btn btn-primary btn-sm">Start</button>
-				<button class="btn btn-secondary btn-sm next-step" title="1" disabled="disabled">Continue</button>
+				<button id="eainformation1" class="btn btn-primary btn-sm" th:text="#{7_start}"></button>
+				<button class="btn btn-secondary btn-sm next-step" title="1" th:text="#{7_next}"></button>
 			</div>
 		</div>
 	</div>

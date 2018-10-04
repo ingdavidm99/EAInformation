@@ -1,4 +1,4 @@
-$(function () {
+ $(function () {
 	var x = 0;
 	var y = 1;
 	var timer;
@@ -15,10 +15,8 @@ $(function () {
         		data : JSON.stringify(),
         		dataType: 'json',
         		success: function(response) {
-        			messages(response);
-        			
         			if(response.status != 'E'){
-	    				$('#progress-bar'+id).css('width',response.percentage+'%');
+        				$('#progress-bar'+id).css('width',response.percentage+'%');
 	            		$('#progress-bar'+id).text(response.percentage+'%');
 	            		$('#progress-value'+id).css('width',response.percentage+'%');
 	            		$('#status_'+id).text(response.status);
@@ -29,6 +27,7 @@ $(function () {
 	            		x = response.count;
 	            		y = response.length;
         			}else{
+        				messages(response);
         				clearInterval(timer);
         			}
         		}
@@ -48,19 +47,20 @@ $(function () {
     		url: "/eai/"+url,
     		beforeSend: function(xhr){
     			$('#eainformation'+id).attr("disabled", true);
+    			$('.next-step').attr("disabled", true);
+    			$('.prep-step').attr("disabled", true);
     			xhr.setRequestHeader(header, token);
     		},
     		data : JSON.stringify(),
     		dataType: 'json',
     		success: function(response) {
     			messages(response);
-    			if(response.status != 'E'){
-    				x = 0;
-    		    	y = 1;
-    		    	timer = setInterval(progressBar, time, id);
-    			}
     		}
     	});
+		
+		x = 0;
+	    y = 1;
+	    timer = setInterval(progressBar, time, id);
 	}
 	
     $('#eainformation1').click(function () {
@@ -84,13 +84,10 @@ $(function () {
     }); 
     
     function valueDefault(id) {
-    	$('.next-step').attr("disabled", true);
-		$('.prep-step').attr("disabled", true);
-		
     	$('#progress-bar'+id).css('width','0%');
     	$('#progress-bar'+id).text('0%');
 		$('#progress-value'+id).css('width', '0%');
-		$('#status_'+id).text("Starting");
+		$('#status_'+id).text('');
 		$('#processing_'+id).text("0 - 0");
 		$('#success_'+id).text("0");
 		$('#fail_'+id).text("0");
@@ -100,6 +97,7 @@ $(function () {
     $(".next-step").click(function (e) {
     	var id = parseInt($(this).attr('title'));
     	$(".tab"+id).removeClass('active');
+    	
     	$("#tab"+id).fadeOut( "slow", function() {
     		id+=1;
     		$(".tab"+id).addClass('active');
@@ -112,6 +110,7 @@ $(function () {
     $(".prep-step").click(function (e) {
     	var id = parseInt($(this).attr('title'));
     	$(".tab"+id).removeClass('active');
+    	
     	$("#tab"+id).fadeOut( "slow", function() {
     		id-=1;
     		$(".tab"+id).addClass('active');

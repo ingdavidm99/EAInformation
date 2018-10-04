@@ -1,17 +1,13 @@
 package com.eai.wizard.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,11 +31,7 @@ public class LevelOne implements Serializable {
     @Column(name = "STATUS")
     private String status;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "levelOne", fetch = FetchType.LAZY)
-    private List<LevelTwo> levelTwoList;
-
-    public LevelOne() {
-    }
+    public LevelOne() {}
 
     public LevelOne(Integer idLevel1) {
         this.idLevel1 = idLevel1;
@@ -86,12 +78,4 @@ public class LevelOne implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-
-	public List<LevelTwo> getLevelTwoList() {
-		return levelTwoList;
-	}
-
-	public void setLevelTwoList(List<LevelTwo> levelTwoList) {
-		this.levelTwoList = levelTwoList;
-	}
 }

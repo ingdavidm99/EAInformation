@@ -43,13 +43,6 @@ public class LevelFour implements Serializable {
     @Column(name = "ID_LEVEL_3")
     private Integer idLevel3;
 
-	public LevelFour() {
-	}
-	
-	public LevelFour(Integer idLevel4) {
-		this.idLevel4 = idLevel4;
-	}
-
 	public LevelFour(String alphabet, String category, String name, String priceUsd, String priceCop, String attachment, Integer idLevel3) {
 		this.alphabet = alphabet;
 		this.category = category;
@@ -67,60 +60,4 @@ public class LevelFour implements Serializable {
 	public void setIdLevel4(Integer idLevel4) {
 		this.idLevel4 = idLevel4;
 	}
-
-	public String getAlphabet() {
-		return alphabet;
-	}
-
-	public void setAlphabet(String alphabet) {
-		this.alphabet = alphabet;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPriceUsd() {
-		return priceUsd;
-	}
-
-	public void setPriceUsd(String priceUsd) {
-		this.priceUsd = priceUsd;
-	}
-
-	public String getPriceCop() {
-		return priceCop;
-	}
-
-	public void setPriceCop(String priceCop) {
-		this.priceCop = priceCop;
-	}
-
-	public String getAttachment() {
-		return attachment;
-	}
-
-	public void setAttachment(String attachment) {
-		this.attachment = attachment;
-	}
-
-	public Integer getIdLevel3() {
-		return idLevel3;
-	}
-
-	public void setIdLevel3(Integer idLevel3) {
-		this.idLevel3 = idLevel3;
-	}	
 }

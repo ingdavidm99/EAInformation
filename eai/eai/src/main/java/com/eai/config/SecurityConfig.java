@@ -56,9 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             	.antMatchers("/detail/{\\d+}").hasAnyRole(admin, user)
             	.antMatchers("/profile").hasAnyRole(admin, user)
-            	.antMatchers("/logerror", "/searchlogerror").hasAnyRole(admin)
+            	.antMatchers("/index").hasAnyRole(admin, user)
+            	.antMatchers("/eainformation").hasAnyRole(admin)
         		.antMatchers("/systemparameters", "/searchsystemparameters").hasAnyRole(admin)
-        		.antMatchers("/index").hasAnyRole(admin, user);
+        		.antMatchers("/logerror", "/searchlogerror").hasAnyRole(admin);
         
         http
         	.authorizeRequests()
@@ -81,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .sessionManagement()
             	.invalidSessionUrl("/invalid")
-            	.maximumSessions(1)
+            	.maximumSessions(100)
             	.expiredUrl("/expired");
         
         http

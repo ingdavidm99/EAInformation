@@ -11,4 +11,6 @@ public interface LevelOneService{
 	public List<LevelOne> findPendingOrFail();
 	
 	public int findSuccess();
+	
+	public void levelOne(LevelOne levelOne);
 }
