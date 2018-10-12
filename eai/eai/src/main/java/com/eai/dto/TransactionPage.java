@@ -35,15 +35,6 @@ public class TransactionPage implements Serializable{
 	
 	private String local;
 	
-	public TransactionPage() {
-	
-	}
-	
-	public TransactionPage(SystemParametersService systemParametersService) {
-		if(this.local == null)
-			this.local = systemParametersService.findById(7).getValue();
-	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -107,7 +98,11 @@ public class TransactionPage implements Serializable{
 	public void setLocal(String local) {
 		this.local = local;
 	}
-
+	
+	public TransactionPage(String locale) {
+		this.local = locale;
+	}
+	
 	public static TransactionPage getData(
 			HttpServletRequest request, 
 			UserService userService, 
@@ -116,7 +111,8 @@ public class TransactionPage implements Serializable{
 			SystemParametersService systemParametersService) {
 		
 		Object user = request.getSession().getAttribute("user");
-		TransactionPage transactionPage =  new TransactionPage();
+		
+		TransactionPage transactionPage =  new TransactionPage(systemParametersService.findById(7).getValue());
 		
 		if(user != null) {
 			CsrfToken csrfToken = (CsrfToken) request.getAttribute("_csrf");
@@ -138,25 +134,23 @@ public class TransactionPage implements Serializable{
 			transactionPage.setToken(csrfToken.getToken());
 			
 			transactionPage.setPageSize(new Long(systemParametersService.findById(1).getValue()));
-			transactionPage.setLocal(systemParametersService.findById(7).getValue());
 			transactionPage.setTitle(transactionPage.get("/index"));
 		}
 		
 		return transactionPage;
 	}
 	
-	public static TransactionPage getTransactionPage(HttpServletRequest request, String key) {
+	public static TransactionPage getData(HttpServletRequest request, String key) {
 		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 		transactionPage.setTitle(transactionPage.get(key));
 		
 		return transactionPage;
 	}
 	
-	public static String getDefault(String key) {
-		StringBuilder message = new StringBuilder();
-		message.append("messages_en");
+	public static String getData(HttpServletRequest request) {
+		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 		
-		return ResourceBundle.getBundle(message.toString()).getString(key);
+		return transactionPage.getLocal();
 	}
 	
 	public String get(String key) {

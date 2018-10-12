@@ -67,7 +67,7 @@ public class EAinformationController {
 	@RequestMapping(path = PATTH_EAINFORMATION, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
+			transactionPage = TransactionPage.getData(request, PATTH_EAINFORMATION);
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_EAINFORMATION));
 	    }
@@ -84,7 +84,7 @@ public class EAinformationController {
 		progressStarting(progress);
 		
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
+			transactionPage = TransactionPage.getData(request, PATTH_EAINFORMATION);
 			
 			ThradLevelOne thradLevelOne;
 			List<LevelOne> levelOneList = levelOneService.findPendingOrFail();
@@ -126,7 +126,7 @@ public class EAinformationController {
 		progressStarting(progress);
 		
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
+			transactionPage = TransactionPage.getData(request, PATTH_EAINFORMATION);
 			
 			int numberOfRetries = Integer.parseInt(systemParametersService.findById(2).getValue());
 			String userAgent = systemParametersService.findById(6).getValue();
@@ -167,7 +167,7 @@ public class EAinformationController {
 		progressStarting(progress);
 		
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
+			transactionPage = TransactionPage.getData(request, PATTH_EAINFORMATION);
 			
 			int numberOfRetries = Integer.parseInt(systemParametersService.findById(2).getValue());
 			int numberOfThreads = Integer.parseInt(systemParametersService.findById(3).getValue());
@@ -228,7 +228,7 @@ public class EAinformationController {
 		progressStarting(progress);
 		
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
+			transactionPage = TransactionPage.getData(request, PATTH_EAINFORMATION);
 			
 			int numberOfRetries = Integer.parseInt(systemParametersService.findById(2).getValue());
 			
@@ -261,7 +261,7 @@ public class EAinformationController {
         Progress progress = Progress.getSingletonInstance();
        
         try {
-        	transactionPage = TransactionPage.getTransactionPage(request, PATTH_EAINFORMATION);
+        	transactionPage = TransactionPage.getData(request, PATTH_EAINFORMATION);
         	String mens = "";
         	
         	switch (""+progress.getPercentage()) {

@@ -5,15 +5,17 @@ import java.util.List;
 
 import org.springframework.validation.ObjectError;
 
+import com.eai.model.SystemParameters;
+
 public class MessageResponse implements Serializable{
 	
     private static final long serialVersionUID = 3407092064428807228L;
     
 	private String status;
     
-    private Integer code;
+    private int code;
     
-    private Object data;
+    private SystemParameters data;
     
     private List<ObjectError> errors;
         
@@ -25,11 +27,11 @@ public class MessageResponse implements Serializable{
         this.status = status;
     }
     
-	public Integer getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(Integer code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 	
@@ -37,7 +39,7 @@ public class MessageResponse implements Serializable{
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(SystemParameters data) {
 		this.data = data;
 	}
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head></head>
+<head>
+	<title></title>
+</head>
 <body>
 	<div th:fragment="step3">
 		<div class="row" id="tab3" style="display: none;">
@@ -10,7 +12,7 @@
 				<div class="row justify-content-start">
 			    	<div class="col-10">
 				    	<div class="card-counter primary">
-				        	<i style="opacity: 0.3" class="fas fa-th-list"></i>
+				        	<em style="opacity: 0.3" class="fas fa-th-list"></em>
 				        	<span class="count-numbers" id="processing_3">0 - 0</span>
 				        	<span class="count-name" id="status_3"></span>
 				      	</div>
@@ -18,7 +20,7 @@
 			    
 					<div class="col-10">
 				    	<div class="card-counter success">
-				        	<i style="opacity: 0.3" class="fas fa-thumbs-up"></i>
+				        	<em style="opacity: 0.3" class="fas fa-thumbs-up"></em>
 				        	<span class="count-numbers" id="success_3">0</span>
 				        	<span class="count-name" th:text="#{7_success}"></span>
 				      	</div>
@@ -37,7 +39,7 @@
 		    	<div class="row justify-content-end">
 				    <div class="col-10">
 				    	<div class="card-counter warning">
-				        	<i style="opacity: 0.3" class="fas fa-exclamation-triangle"></i>
+				        	<em style="opacity: 0.3" class="fas fa-exclamation-triangle"></em>
 				        	<span class="count-numbers" id="fail_3">0</span>
 				        	<span class="count-name" th:text="#{7_fail}"></span>
 				      	</div>
@@ -45,7 +47,7 @@
 				    
 				     <div class="col-10">
 				    	<div class="card-counter danger">
-				        	<i style="opacity: 0.3" class="fas fa-times"></i>
+				        	<em style="opacity: 0.3" class="fas fa-times"></em>
 				        	<span class="count-numbers" id="error_3">0</span>
 				        	<span class="count-name" th:text="#{7_error}"></span>
 				      	</div>

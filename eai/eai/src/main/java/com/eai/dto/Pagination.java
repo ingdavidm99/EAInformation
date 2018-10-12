@@ -1,6 +1,7 @@
 package com.eai.dto;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.eai.model.LogError;
@@ -16,20 +17,24 @@ public class Pagination {
 	
 	private long paginaton;
 	
-	private SystemParameters systemParameters;
+	private List<String> data;
 	
 	private List<SystemParameters> systemParametersList;
-	
-	private LogError logError;
 	
 	private List<LogError> logErrorList;
 	
 	public Pagination() {
-		systemParameters = new SystemParameters();
-		systemParametersList = new ArrayList<>();
+		data = new LinkedList<>();
+		data.add(null);
+		data.add(null);
+		data.add(null);
+		data.add(null);
+		data.add(null);
+		data.add(null);
+		data.add(null);
 		
-		logError = new LogError();
 		logErrorList = new ArrayList<>();
+		systemParametersList = new ArrayList<>();
 	}
 	
 	public void getPage(long querySize, Long pageSize) {
@@ -71,16 +76,15 @@ public class Pagination {
 
 	public void setPaginaton(long paginaton) {
 		this.paginaton = paginaton;
-	}
+	}	
 	
-	public SystemParameters getSystemParameters() {
-		return systemParameters;
+	public List<String> getData() {
+		return data;
 	}
 
-	public void setSystemParameters(SystemParameters systemParameters) {
-		this.systemParameters = systemParameters;
+	public void setData(List<String> data) {
+		this.data = data;
 	}
-
 
 	public List<SystemParameters> getSystemParametersList() {
 		return systemParametersList;
@@ -88,14 +92,6 @@ public class Pagination {
 
 	public void setSystemParametersList(List<SystemParameters> systemParametersList) {
 		this.systemParametersList = systemParametersList;
-	}
-
-	public LogError getLogError() {
-		return logError;
-	}
-
-	public void setLogError(LogError logError) {
-		this.logError = logError;
 	}
 
 	public List<LogError> getLogErrorList() {

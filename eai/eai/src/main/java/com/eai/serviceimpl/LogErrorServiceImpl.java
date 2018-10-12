@@ -21,7 +21,7 @@ import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
 
 @Service
-public class LogErrorServiceImpl implements LogErrorService {
+public class LogErrorServiceImpl extends SqlImplement implements LogErrorService {
 	
 	@PersistenceContext
     private EntityManager manager;
@@ -49,39 +49,18 @@ public class LogErrorServiceImpl implements LogErrorService {
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
 		StringBuilder sql = new StringBuilder();
-		LogError logError = pagination.getLogError();
 		
     	sql.append("SELECT * FROM log_error l WHERE 1=1 ");
     	
-    	if(logError.getIdLogError() != null) {
-    		sql.append("and l.ID_LOG_ERROR = '")
-    		   .append(logError.getIdLogError())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(0), "ID_LOG_ERROR");
+    	   	
+    	sqlLike(sql, pagination.getData().get(1), "ERROR");
     	
-    	if(logError.getError() != null) {
-    		sql.append("and l.ERROR LIKE '%")
-    		   .append(logError.getError())
-    		   .append("%' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(2), "USER_NAME");
     	
-    	if(!logError.getUserName().equals("")) {
-    		sql.append("and l.USER_NAME = '")
-    		   .append(logError.getUserName())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(3), "PATH");
     	
-    	if(!logError.getPath().equals("")) {
-    		sql.append("and l.PATH = '")
-    		   .append(logError.getPath())
-    		   .append("' ");
-    	}
-    	
-    	if(!logError.getDate().equals("")) {
-    		sql.append("and l.DATE = '")
-    		   .append(logError.getDate())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(4), "DATE");
     	
     	Query query = manager.createNativeQuery(sql.toString(), LogError.class);
     	List<LogError> logErrorList = query.getResultList();

@@ -18,7 +18,7 @@ import com.eai.repository.SystemParametersRepository;
 import com.eai.service.SystemParametersService;
 
 @Service
-public class SystemParametersServiceImpl implements SystemParametersService {
+public class SystemParametersServiceImpl extends SqlImplement implements SystemParametersService {
 	
 	@PersistenceContext
     private EntityManager manager;
@@ -37,51 +37,22 @@ public class SystemParametersServiceImpl implements SystemParametersService {
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
 		StringBuilder sql = new StringBuilder();
-		SystemParameters systemParameters = pagination.getSystemParameters();
 		
-    	sql.append("SELECT * FROM system_parameters s WHERE 1=1 ");
+    	sql.append("SELECT * FROM system_parameters WHERE 1=1 ");
     	
-    	if(systemParameters.getIdSystemParameters() != null) {
-    		sql.append("and s.ID_SYSTEM_PARAMETERS = '")
-    		   .append(systemParameters.getIdSystemParameters())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(0), "ID_SYSTEM_PARAMETERS");
     	
-    	if(!systemParameters.getName().equals("")) {
-    		sql.append("and s.NAME = '")
-    		   .append(systemParameters.getName())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(1), "NAME");
     	
-    	if(!systemParameters.getValue().equals("")) {
-    		sql.append("and s.VALUE = '")
-    		   .append(systemParameters.getValue())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(2), "VALUE");
     	
-    	if(!systemParameters.getDescription().equals("")) {
-    		sql.append("and s.DESCRIPTION = '")
-    		   .append(systemParameters.getDescription())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(3), "DESCRIPTION");
     	
-    	if(systemParameters.getType() != null) {
-    		sql.append("and s.TYPE = '")
-    		   .append(systemParameters.getType())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(4), "TYPE");
     	
-    	if(!systemParameters.getUserName().equals("")) {
-    		sql.append("and s.USER_NAME = '")
-    		   .append(systemParameters.getUserName())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(5), "USER_NAME");
     	
-    	if(!systemParameters.getDate().equals("")) {
-    		sql.append("and s.DATE = '")
-    		   .append(systemParameters.getDate())
-    		   .append("' ");
-    	}
+    	sqlAnd(sql, pagination.getData().get(6), "DATE");
     	
     	Query query = manager.createNativeQuery(sql.toString(), SystemParameters.class);
     	List<SystemParameters> systemParametersList = query.getResultList();
@@ -109,5 +80,5 @@ public class SystemParametersServiceImpl implements SystemParametersService {
 	@Transactional
 	public SystemParameters saveOrUpdate(SystemParameters systemParameters) {
 		return systemParametersRepository.save(systemParameters);
-	}
+	}	
 }

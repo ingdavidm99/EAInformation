@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<head th:replace="resources/commons :: head"></head>
+<head th:replace="resources/commons :: head">
+	<title></title>
 </head>
 <body>
 	<div class="container-fluid eai">
@@ -31,7 +31,7 @@
 							<div class="col-3">
 								<br/>
 								<div class="row justify-content-center">
-									<img src="../eai/assets/images/user.jpg" id="profile-image1" width="50%" height="50%"/>
+									<img src="../eai/assets/images/user.jpg" alt="user.jpg" id="profile-image1" width="50%" height="50%"/>
 								</div>
 								
 								<br/>
@@ -44,7 +44,7 @@
 								</div>
 							</div>
 							<div class="col-9">
-								<form th:action="@{/updateProfile}" method="post" modelAttribute="UserDetail" autocomplete="off">
+								<form th:action="@{/updateProfile}" method="post" autocomplete="off">
 									<input 
 										type="hidden"
 										name="userName"

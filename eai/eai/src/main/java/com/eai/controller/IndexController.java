@@ -50,7 +50,7 @@ public class IndexController {
 			transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 			
 			if(transactionPage != null) {
-				transactionPage = TransactionPage.getTransactionPage(request, PATTH_INDEX);
+				transactionPage = TransactionPage.getData(request, PATTH_INDEX);
 			}else {
 				transactionPage = TransactionPage.getData(request, userService, parentMenuService, menuService, systemParametersService);
 				
@@ -58,7 +58,8 @@ public class IndexController {
 				request.getSession().setAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 			}
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_INDEX));
+			if(transactionPage != null)
+				message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_INDEX));
 	    }
 		
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);

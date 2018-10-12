@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+	<title></title>
 </head> 
 <body>
 	<div th:fragment="menu">
 		<nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark">
 			<span class="navbar-toggler-icon leftmenutrigger"></span>
-			<a class="navbar-brand"  href="/eai/index"><b>EAinformation</b></a>
+			<a class="navbar-brand"  href="/eai/index"><strong>EAinformation</strong></a>
 			<button class="navbar-toggler" type="button" 
 					data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
 	        		aria-expanded="false" aria-label="Toggle navigation">
@@ -21,9 +22,9 @@
 		        		   data-toggle="dropdown" 
 		        		   aria-haspopup="true" 
 		        		   aria-expanded="false">
-		          			<i class="fas fa-user"></i>
+		          			<em class="fas fa-user"></em>
 		          			<span th:text="${parentMenu.menuName}"></span>
-		          			<i class="far fa-user shortmenu animate"></i>
+		          			<em class="far fa-user shortmenu animate"></em>
 		        		</a>
 		        		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		          			<a th:each="menu : ${parentMenu.menuList}" 
@@ -41,13 +42,13 @@
 		        <ul class="navbar-nav ml-md-auto d-md-flex">
 	         		<li class="nav-item">
 	           			<a class="nav-link" href="#">
-	           				<i class="far fa-user"></i>
+	           				<em class="far fa-user"></em>
 	           				<span th:text="${transactionPage.userName}"></span>
 	           			</a>
 	         		</li>
 	         		<li class="nav-item">
 	           			<a class="nav-link event" href="/eai/logout">
-	           				<i class="fas fa-power-off"></i>
+	           				<em class="fas fa-power-off"></em>
 	           			</a>
 	         		</li>
 	       		</ul>

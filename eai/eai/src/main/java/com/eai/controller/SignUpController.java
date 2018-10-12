@@ -47,7 +47,8 @@ public class SignUpController {
 	
 	@InitBinder("UserDetail")
 	protected void setupBinder(WebDataBinder binder) {
-	    binder.addValidators(new UserDetailValidator(userService, systemParametersService));
+		String local = systemParametersService.findById(7).getValue();
+	    binder.addValidators(new UserDetailValidator(userService, local));
 	}
 		
 	@RequestMapping(path = PATTH_SIGNUP, method = RequestMethod.GET)

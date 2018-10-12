@@ -51,8 +51,8 @@ public class ProfileController {
 	public static final String PATTH_UPDATE_PROFILE = "/updateProfile";
 	
 	@InitBinder("UserDetail")
-	protected void setupBinder(WebDataBinder binder) {
-	    binder.addValidators(new ProfileValidator(userService, systemParametersService));
+	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
+		binder.addValidators(new ProfileValidator(userService, TransactionPage.getData(request)));
 	}
 	
 	@RequestMapping(path = PATTH_PROFILE, method = RequestMethod.GET)
@@ -60,7 +60,7 @@ public class ProfileController {
 		
 		UserDetail userDetail = new UserDetail();
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_PROFILE);
+			transactionPage = TransactionPage.getData(request, PATTH_PROFILE);
 			
 			User user = userService.findByUserName(transactionPage.getUserName());
 
@@ -86,7 +86,7 @@ public class ProfileController {
     		BindingResult bindingResult) {
 		
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_PROFILE);
+			transactionPage = TransactionPage.getData(request, PATTH_PROFILE);
 			
 			if (bindingResult.hasErrors()) {
 				for(FieldError error : bindingResult.getFieldErrors()){

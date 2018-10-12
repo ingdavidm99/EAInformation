@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head></head>
+<head>
+	<title></title>
+</head>
 <body>
 	<div th:fragment="modal">
 		<div class="modal fade bd-example-modal-lg" data-backdrop="static" id="systemparametersModal">
@@ -16,7 +18,7 @@
 						<br/>
 						<div class="row justify-content-end">
 							<div class="col-12">
-								<div th:replace="resources/messages :: message"></div>
+								<div th:replace="resources/messages :: messageModal"></div>
 							</div>
 						</div>
 					

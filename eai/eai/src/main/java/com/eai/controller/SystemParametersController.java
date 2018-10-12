@@ -1,14 +1,19 @@
 package com.eai.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +28,7 @@ import com.eai.model.SystemParameters;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
 import com.eai.validator.SystemParametersValidator;
+import com.eai.validator.SystemParametersValidator1;
 
 @Controller
 @Scope("prototype")
@@ -42,11 +48,16 @@ public class SystemParametersController {
 	public static final String PATTH_SEARCH = "/searchsystemparameters";
 	public static final String FINDBYSEARCHSYSTEMPARAMETERS = "/findbyidsystemparameters";
 	public static final String SAVESYSTEMPARAMETERS = "/savesystemparameters";
+	
+	@InitBinder("Pagination")
+	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
+		binder.addValidators(new SystemParametersValidator1(TransactionPage.getData(request)));
+	}
 		
 	@RequestMapping(path = PATTH_SYSTEMPARAMETERS, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request, @ModelAttribute("Pagination") Pagination pagination) {
 		try {
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
+			transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SYSTEMPARAMETERS));
 	    }
@@ -62,11 +73,21 @@ public class SystemParametersController {
     public String search(
     		Model model,
     		HttpServletRequest request,
-    		@ModelAttribute("Pagination") Pagination pagination) {
+    		@ModelAttribute("Pagination") @Valid Pagination pagination,
+    		BindingResult bindingResult) {
 		
         try {
-        	transactionPage = TransactionPage.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
-        	systemParametersService.findAll(pagination, transactionPage.getPageSize());
+        	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
+        	
+        	if (bindingResult.hasErrors()) {
+				for(FieldError error : bindingResult.getFieldErrors()){
+					model.addAttribute(error.getField().replace("logError.", ""), error.getDefaultMessage());
+				}
+				
+				message.setStatus(Constants.FAILURE.val());
+			 }else {
+				 systemParametersService.findAll(pagination, transactionPage.getPageSize());
+			 }
         } catch (Exception exception) {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH));
         }
@@ -87,7 +108,7 @@ public class SystemParametersController {
         SystemParameters systemParameters = null;
        
         try {
-        	transactionPage = TransactionPage.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
+        	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
         	systemParameters = systemParametersService.findById(idSystemParameters.getIdSystemParameters());
         	message.setData(systemParameters);
         } catch (Exception exception) {
@@ -105,8 +126,8 @@ public class SystemParametersController {
     		Errors errors) { 
 		
 		try {
-			ValidationUtils.invokeValidator(new SystemParametersValidator(), systemParameters, errors);
-			transactionPage = TransactionPage.getTransactionPage(request, PATTH_SYSTEMPARAMETERS);
+			transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
+			ValidationUtils.invokeValidator(new SystemParametersValidator(TransactionPage.getData(request)), systemParameters, errors);
 			
 			if(errors.hasErrors()) {
 				message.setErrors(errors.getAllErrors());

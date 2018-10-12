@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<head th:replace="resources/commons :: head"></head>
+<head th:replace="resources/commons :: head">
+	<title></title>
 </head>
 <body>
 	<div class="container-fluid eai">
@@ -20,7 +20,7 @@
 			<div class="eai-body">
 				<div class="eai-main flexcroll">
 					<div class="col">
-						<form th:action="@{/registration}" method="post" modelAttribute="UserDetail" autocomplete="off">
+						<form th:action="@{/registration}" method="post" autocomplete="off">
 							<br/>
 							<div class="row justify-content-center">
 								<div class="col-3">

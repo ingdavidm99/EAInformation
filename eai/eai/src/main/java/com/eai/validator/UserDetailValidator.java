@@ -1,27 +1,18 @@
 package com.eai.validator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.eai.dto.Constants;
-import com.eai.dto.TransactionPage;
 import com.eai.model.User;
 import com.eai.model.UserDetail;
-import com.eai.service.SystemParametersService;
 import com.eai.service.UserService;
 
-public class UserDetailValidator implements Validator{
+public class UserDetailValidator extends ParentValidator implements Validator{
 	
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-	SystemParametersService systemParametersService;
 	
 	private enum Name {
 		FULLNAME("fullName"),
@@ -36,9 +27,9 @@ public class UserDetailValidator implements Validator{
 	    public String val() { return val;}
 	}
 	
-	public UserDetailValidator(UserService userService, SystemParametersService systemParametersService) {
+	public UserDetailValidator(UserService userService, String local) {
+		super(local);
 		this.userService = userService;
-		this.systemParametersService = systemParametersService;
 	}
 	
 	@Override
@@ -49,26 +40,15 @@ public class UserDetailValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		UserDetail userDetail = (UserDetail) target;
-		TransactionPage transactionPage = new TransactionPage(this.systemParametersService);
 		
-		String requiredField = transactionPage.get("requiredField");
-		String onlyContainLetters = transactionPage.get("onlyContainLetters");
-		String yourEmailIncorrect = transactionPage.get("2_emailIncorrect");
-		String passwordsMatch = transactionPage.get("2_passwordsNotMatch");
-		String privacyPolicy = transactionPage.get("2_privacyPolicy");
-		String userAlreadyExists = transactionPage.get("2_userAlreadyExists");
-		String incorrectDateFormat = transactionPage.get("2_incorrectDateFormat");
+		String requiredField = getTransactionPage().get("requiredField");
+		String passwordsMatch = getTransactionPage().get("2_passwordsNotMatch");
+		String privacyPolicy = getTransactionPage().get("2_privacyPolicy");
+		String userAlreadyExists = getTransactionPage().get("2_userAlreadyExists");
 			
 		//fullName
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.FULLNAME.val(), requiredField, requiredField);
-		if (!errors.hasFieldErrors(Name.FULLNAME.val())) {
-			Pattern pattern = Pattern.compile(Constants.NAME_PATTERN.val());  
-			Matcher matcher = pattern.matcher(userDetail.getFullName());
-			
-			if (!matcher.matches()) {  
-				errors.rejectValue(Name.FULLNAME.val(), onlyContainLetters, onlyContainLetters);  
-			} 
-		}
+		onlyContainLetters(Name.FULLNAME.val(), userDetail.getFullName(), errors);
 		
 		//userName
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.USERNAME.val(), requiredField, requiredField);
@@ -80,25 +60,11 @@ public class UserDetailValidator implements Validator{
 			
 		//birth
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.BIRTH.val(), requiredField, requiredField);
-		if (!errors.hasFieldErrors(Name.BIRTH.val())) {
-			Pattern pattern = Pattern.compile(Constants.DATE_PATTERN.val());  
-			Matcher matcher = pattern.matcher(userDetail.getBirth());
-			
-			if (!matcher.matches()) {  
-				errors.rejectValue(Name.BIRTH.val(), incorrectDateFormat, incorrectDateFormat);  
-			} 
-		}
+		incorrectDateFormat(Name.BIRTH.val(), userDetail.getBirth(), errors);
 		
 		//email
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.EMAIL.val(), requiredField, requiredField);
-		if (!errors.hasFieldErrors(Name.EMAIL.val())) {  
-			Pattern pattern = Pattern.compile(Constants.EMAIL_PATTERN.val());  
-			Matcher matcher = pattern.matcher(userDetail.getEmail());  
-			   
-			if (!matcher.matches()) {  
-				errors.rejectValue(Name.EMAIL.val(), yourEmailIncorrect, yourEmailIncorrect);  
-			}  
-		}  
+		emailIncorrect(Name.EMAIL.val(), userDetail.getEmail(), errors);  
 		
 		//password
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.PASSWORD.val(), requiredField, requiredField);
