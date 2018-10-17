@@ -26,32 +26,19 @@ public class ParentMenu implements Serializable {
     @Column(name = "ID_PARENT_MENU", nullable = false)
     private Integer idParentMenu;
     
-    @Column(name = "MENU_NAME", nullable = false, length = 45)
-    private String menuName;
+    @Column(name = "MENU_ICON", nullable = false, length = 45)
+    private String menuIcon;
     
     @Column(name = "ORDER", nullable = false)
     private int order;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentMenu", fetch = FetchType.LAZY)
+    private List<Menu> menuList;
+
     @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID_ROLE", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Role role;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentMenu", fetch = FetchType.LAZY)
-    private List<Menu> menuList;
-
-    public ParentMenu() {
-    }
-
-    public ParentMenu(Integer idParentMenu) {
-        this.idParentMenu = idParentMenu;
-    }
-
-    public ParentMenu(Integer idParentMenu, String menuName, int order) {
-        this.idParentMenu = idParentMenu;
-        this.menuName = menuName;
-        this.order = order;
-    }
-
     public Integer getIdParentMenu() {
         return idParentMenu;
     }
@@ -59,16 +46,16 @@ public class ParentMenu implements Serializable {
     public void setIdParentMenu(Integer idParentMenu) {
         this.idParentMenu = idParentMenu;
     }
+    
+    public String getMenuIcon() {
+		return menuIcon;
+	}
 
-    public String getMenuName() {
-        return menuName;
-    }
+	public void setMenuIcon(String menuIcon) {
+		this.menuIcon = menuIcon;
+	}
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    public int getOrder() {
+	public int getOrder() {
         return order;
     }
 
@@ -76,6 +63,14 @@ public class ParentMenu implements Serializable {
         this.order = order;
     }
 
+    public List<Menu> getMenuList() {
+       return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
+    
     public Role getRole() {
         return role;
     }
@@ -83,12 +78,4 @@ public class ParentMenu implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public List<Menu> getMenuList() {
-        return menuList;
-    }
-
-    public void setMenuList(List<Menu> menuList) {
-        this.menuList = menuList;
-    }   
 }

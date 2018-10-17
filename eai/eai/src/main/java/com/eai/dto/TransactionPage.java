@@ -1,8 +1,9 @@
 package com.eai.dto;
 
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Properties;
 import java.util.function.Predicate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -154,16 +155,21 @@ public class TransactionPage implements Serializable{
 	}
 	
 	public String get(String key) {
-		StringBuilder message = new StringBuilder();
-		message.append("messages_");
+		Properties props = new Properties();
 		
-		if("ES".equals(local)) {
-			message.append("es");
-		}else {
-			message.append("en");
+		try{
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			
+			if("ES".equals(local)) {
+				props.load(new InputStreamReader(loader.getResourceAsStream("messages_es.properties"), "UTF-8"));
+			}else {
+				props.load(new InputStreamReader(loader.getResourceAsStream("messages_en.properties"), "UTF-8"));
+			}
+		}catch (Exception e) {
+			return key;
 		}
-		
-		return ResourceBundle.getBundle(message.toString()).getString(key);
+				
+		return  props.getProperty(key);
 	}
 	
 }

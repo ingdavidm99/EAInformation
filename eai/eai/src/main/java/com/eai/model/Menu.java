@@ -23,9 +23,6 @@ public class Menu implements Serializable {
     @Column(name = "ID_MENU", nullable = false)
     private Integer idMenu;
     
-    @Column(name = "MENU_NAME", nullable = false, length = 45)
-    private String menuName;
-    
     @Column(name = "URL_NAME", nullable = false, length = 45)
     private String urlName;
     
@@ -39,35 +36,13 @@ public class Menu implements Serializable {
     @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID_ROLE", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Role role;
-
-    public Menu() {
-    }
-
-    public Menu(Integer idMenu) {
-        this.idMenu = idMenu;
-    }
-
-    public Menu(Integer idMenu, String menuName, String urlName, int order) {
-        this.idMenu = idMenu;
-        this.menuName = menuName;
-        this.urlName = urlName;
-        this.order = order;
-    }
-
+    
     public Integer getIdMenu() {
         return idMenu;
     }
 
     public void setIdMenu(Integer idMenu) {
         this.idMenu = idMenu;
-    }
-
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
     }
 
     public String getUrlName() {
@@ -85,15 +60,15 @@ public class Menu implements Serializable {
     public void setOrder(int order) {
         this.order = order;
     }
-
-    public ParentMenu getParentMenu() {
+    
+	public ParentMenu getParentMenu() {
         return parentMenu;
     }
 
     public void setParentMenu(ParentMenu parentMenu) {
         this.parentMenu = parentMenu;
     }
-
+    
     public Role getRole() {
         return role;
     }

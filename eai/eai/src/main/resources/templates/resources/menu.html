@@ -22,13 +22,13 @@
 		        		   data-toggle="dropdown" 
 		        		   aria-haspopup="true" 
 		        		   aria-expanded="false">
-		          			<em class="fas fa-user"></em>
-		          			<span th:text="${parentMenu.menuName}"></span>
-		          			<em class="far fa-user shortmenu animate"></em>
+		          			<em th:class="${parentMenu.menuIcon}"></em>
+		          			<span th:text="#{${parentMenu.idParentMenu}}"></span>
+		          			<em th:classappend="${parentMenu.menuIcon}" class="shortmenu animate"></em>
 		        		</a>
 		        		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		          			<a th:each="menu : ${parentMenu.menuList}" 
-		          			   th:text="${menu.menuName}"
+		          			   th:text="#{${menu.urlName}}"
 		          			   th:href="'/eai__${menu.urlName}__'" 
 		          			   class="dropdown-item event"></a>
 		          		</div>
@@ -36,7 +36,7 @@
 		        </ul>
 		        <ul class="navbar-nav">
 				   <li class="nav-item active">
-				     <a class="nav-link" href="" th:text="${transactionPage.title}">Home</a>
+				     <a class="nav-link" href="" th:text="'/ __${transactionPage.title}__'"></a>
 				   </li>
 				 </ul>
 		        <ul class="navbar-nav ml-md-auto d-md-flex">

@@ -42,9 +42,7 @@ public class UserDetailValidator extends ParentValidator implements Validator{
 		UserDetail userDetail = (UserDetail) target;
 		
 		String requiredField = getTransactionPage().get("requiredField");
-		String passwordsMatch = getTransactionPage().get("2_passwordsNotMatch");
 		String privacyPolicy = getTransactionPage().get("2_privacyPolicy");
-		String userAlreadyExists = getTransactionPage().get("2_userAlreadyExists");
 			
 		//fullName
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.FULLNAME.val(), requiredField, requiredField);
@@ -54,8 +52,11 @@ public class UserDetailValidator extends ParentValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.USERNAME.val(), requiredField, requiredField);
 		if (!errors.hasFieldErrors(Name.USERNAME.val())) {
 			User user = userService.findByUserName(userDetail.getUserName());
-			if(user != null)
-				errors.rejectValue(Name.USERNAME.val(), userAlreadyExists, userAlreadyExists); 
+			if(user != null) {
+				String userAlreadyExists = getTransactionPage().get("2_userAlreadyExists");
+				errors.rejectValue(Name.USERNAME.val(), userAlreadyExists, userAlreadyExists);
+			}
+				 
 		}
 			
 		//birth
@@ -77,6 +78,7 @@ public class UserDetailValidator extends ParentValidator implements Validator{
 				&& !errors.hasFieldErrors(Name.REPEATPASSWORD.val())
 				&& !userDetail.getPassword().equals(userDetail.getRepeatPassword())) {
 			
+			String passwordsMatch = getTransactionPage().get("2_passwordsNotMatch");
 			errors.rejectValue(Name.PASSWORD.val(), passwordsMatch, passwordsMatch);
 		}
 		
