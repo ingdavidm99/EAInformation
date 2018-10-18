@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.MutableSortDefinition;
@@ -48,21 +51,21 @@ public class LogErrorServiceImpl extends SqlImplement implements LogErrorService
 	@Override
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
-		StringBuilder sql = new StringBuilder();
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+    	CriteriaQuery<LogError> criteria = builder.createQuery(LogError.class);
+    	Root<LogError> root = criteria.from(LogError.class);
 		
-    	sql.append("SELECT * FROM log_error l WHERE 1=1 ");
-    	
-    	sqlAnd(sql, pagination.getData().get(0), "ID_LOG_ERROR");
+    	sqlEqual(builder, criteria, root.get("idLogError"), pagination.getData().get(0));
     	   	
-    	sqlLike(sql, pagination.getData().get(1), "ERROR");
+    	sqlLike(builder, criteria, root.get("error"), pagination.getData().get(1));
     	
-    	sqlAnd(sql, pagination.getData().get(2), "USER_NAME");
+    	sqlEqual(builder, criteria, root.get("userName"), pagination.getData().get(2));
     	
-    	sqlAnd(sql, pagination.getData().get(3), "PATH");
+    	sqlEqual(builder, criteria, root.get("path"), pagination.getData().get(3));
     	
-    	sqlAnd(sql, pagination.getData().get(4), "DATE");
+    	sqlEqual(builder, criteria, root.get("date"), pagination.getData().get(4));
     	
-    	Query query = manager.createNativeQuery(sql.toString(), LogError.class);
+    	Query query = manager.createQuery(criteria);
     	List<LogError> logErrorList = query.getResultList();
     	
     	if(!logErrorList.isEmpty()) {

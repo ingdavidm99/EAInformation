@@ -26,8 +26,8 @@ import com.eai.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private String admin = "ADMIN";
-    private String user = "USER";
+	private static final String ADMIN = "ADMIN";
+    private static final String USER = "USER";
 	
 	@Autowired
     private UserService userService;
@@ -54,12 +54,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            	.antMatchers("/detail/{\\d+}").hasAnyRole(admin, user)
-            	.antMatchers("/profile").hasAnyRole(admin, user)
-            	.antMatchers("/index").hasAnyRole(admin, user)
-            	.antMatchers("/eainformation").hasAnyRole(admin)
-        		.antMatchers("/systemparameters", "/searchsystemparameters").hasAnyRole(admin)
-        		.antMatchers("/logerror", "/searchlogerror").hasAnyRole(admin);
+            	.antMatchers("/profile").hasAnyRole(ADMIN, USER)
+            	.antMatchers("/index").hasAnyRole(ADMIN, USER)
+            	
+            	.antMatchers("/eainformation").hasAnyRole(ADMIN)
+            	.antMatchers("/systemparameters", "/searchsystemparameters").hasAnyRole(ADMIN)
+        		.antMatchers("/logerror", "/searchlogerror").hasAnyRole(ADMIN)
+        		.antMatchers("/users", "/searchusers").hasAnyRole(ADMIN);
         
         http
         	.authorizeRequests()

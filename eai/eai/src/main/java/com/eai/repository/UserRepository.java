@@ -9,7 +9,8 @@ import com.eai.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-    User findByUserName(String userName);
+    
+	User findByUserName(String userName);
     
     List<User> findAll();
 }

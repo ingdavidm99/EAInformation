@@ -1,5 +1,8 @@
 package com.eai.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -110,7 +113,11 @@ public class SystemParametersController {
         try {
         	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
         	systemParameters = systemParametersService.findById(idSystemParameters.getIdSystemParameters());
-        	message.setData(systemParameters);
+        	
+        	List<SystemParameters> systemParametersList = new ArrayList<>();
+        	systemParametersList.add(systemParameters);
+        	
+        	message.setData(systemParametersList);
         } catch (Exception exception) {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
         }
@@ -135,7 +142,6 @@ public class SystemParametersController {
 			 }else {
 				 systemParametersService.saveOrUpdate(systemParameters);
 				 message.setStatus(Constants.SUCCESS.val());
-				 message.setData(systemParameters);
 			 }
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), SAVESYSTEMPARAMETERS));

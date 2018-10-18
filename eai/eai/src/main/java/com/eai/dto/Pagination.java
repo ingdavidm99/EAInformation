@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.eai.model.LogError;
 import com.eai.model.SystemParameters;
+import com.eai.model.User;
 
 public class Pagination {
 	
@@ -23,6 +24,8 @@ public class Pagination {
 	
 	private List<LogError> logErrorList;
 	
+	private List<User> userList;
+	
 	public Pagination() {
 		data = new LinkedList<>();
 		data.add(null);
@@ -33,8 +36,9 @@ public class Pagination {
 		data.add(null);
 		data.add(null);
 		
-		logErrorList = new ArrayList<>();
 		systemParametersList = new ArrayList<>();
+		logErrorList = new ArrayList<>();
+		userList = new ArrayList<>();
 	}
 	
 	public void getPage(long querySize, Long pageSize) {
@@ -100,5 +104,13 @@ public class Pagination {
 
 	public void setLogErrorList(List<LogError> logErrorList) {
 		this.logErrorList = logErrorList;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 }

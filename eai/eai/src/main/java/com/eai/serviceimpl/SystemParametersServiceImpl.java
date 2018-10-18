@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.MutableSortDefinition;
@@ -36,25 +39,25 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 	@Override
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
-		StringBuilder sql = new StringBuilder();
-		
-    	sql.append("SELECT * FROM system_parameters WHERE 1=1 ");
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+    	CriteriaQuery<SystemParameters> criteria = builder.createQuery(SystemParameters.class);
+    	Root<SystemParameters> root = criteria.from(SystemParameters.class);
     	
-    	sqlAnd(sql, pagination.getData().get(0), "ID_SYSTEM_PARAMETERS");
+    	sqlEqual(builder, criteria, root.get("idSystemParameters"), pagination.getData().get(0));
     	
-    	sqlAnd(sql, pagination.getData().get(1), "NAME");
+    	sqlLike(builder, criteria, root.get("name"), pagination.getData().get(1));
     	
-    	sqlAnd(sql, pagination.getData().get(2), "VALUE");
+    	sqlLike(builder, criteria, root.get("value"), pagination.getData().get(2));
     	
-    	sqlAnd(sql, pagination.getData().get(3), "DESCRIPTION");
+    	sqlLike(builder, criteria, root.get("description"), pagination.getData().get(3));
     	
-    	sqlAnd(sql, pagination.getData().get(4), "TYPE");
+    	sqlEqual(builder, criteria, root.get("type"), pagination.getData().get(4));
     	
-    	sqlAnd(sql, pagination.getData().get(5), "USER_NAME");
+    	sqlLike(builder, criteria, root.get("userName"), pagination.getData().get(5));
     	
-    	sqlAnd(sql, pagination.getData().get(6), "DATE");
+    	sqlEqual(builder, criteria, root.get("date"), pagination.getData().get(6));
     	
-    	Query query = manager.createNativeQuery(sql.toString(), SystemParameters.class);
+    	Query query = manager.createQuery(criteria);
     	List<SystemParameters> systemParametersList = query.getResultList();
     	
     	if(!systemParametersList.isEmpty()) {

@@ -11,13 +11,13 @@ $(function () {
     			messages(response);
     			
     			if(response.status === null){
-    				$("#idSystemParameters").val(response.data.idSystemParameters);
-	    			$("#name").val(response.data.name);
-	    			$("#value").val(response.data.value);
-	    			$("#description").val(response.data.description);
-	    			$("#type").val(response.data.type);
-	    			$("#userName").val(response.data.userName);
-	    			$("#date").val(response.data.date);
+    				$("#idSystemParameters").val(response.data[0].idSystemParameters);
+	    			$("#name").val(response.data[0].name);
+	    			$("#value").val(response.data[0].value);
+	    			$("#description").val(response.data[0].description);
+	    			$("#type").val(response.data[0].type);
+	    			$("#userName").val(response.data[0].userName);
+	    			$("#date").val(response.data[0].date);
     			}
     			
     			$("#systemparametersModal").modal();
