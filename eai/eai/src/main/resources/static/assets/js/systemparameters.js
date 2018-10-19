@@ -8,17 +8,14 @@ $(function () {
     		data : JSON.stringify({idSystemParameters : $(this).attr('title')}),
     		dataType: 'json',
     		success: function(response) {
-    			messages(response);
+    			messages(response[0]);
     			
-    			if(response.status === null){
-    				$("#idSystemParameters").val(response.data[0].idSystemParameters);
-	    			$("#name").val(response.data[0].name);
-	    			$("#value").val(response.data[0].value);
-	    			$("#description").val(response.data[0].description);
-	    			$("#type").val(response.data[0].type);
-	    			$("#userName").val(response.data[0].userName);
-	    			$("#date").val(response.data[0].date);
-    			}
+    			if(response[0].status === null){
+    				$("#idSystemParameters").val(response[1].idSystemParameters);
+	    			$("#value").val(response[1].value);
+	    			$("#description").val(response[1].description);
+	    			$("#type").val(response[1].type);
+	    		}
     			
     			$("#systemparametersModal").modal();
     		}
@@ -36,12 +33,9 @@ $(function () {
     		data : 
     			JSON.stringify({
     				idSystemParameters : $("#idSystemParameters").val(),
-    				name : $("#name").val(),
     				value : $("#value").val(),
     				description : $("#description").val(),
-    				type : $("#type").val(),
-    				userName : $("#userName").val(),
-    				date : $("#date").val()
+    				type : $("#type").val()
     			}),
     		dataType: 'json',
     		success: function(response) {

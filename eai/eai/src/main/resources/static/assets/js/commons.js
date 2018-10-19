@@ -57,7 +57,12 @@ $(function() {
 	
 	$('#search').click(function () {
     	$('#formSearch').submit();
-    });	
+    });
+	
+	$('#clear').click(function () {
+    	var href = $('#href').attr('lang');
+    	$(location ).attr("href", href);
+    });
 	
 	$('#firstPage').click(function () {
 		var page = parseInt($('#page').val());

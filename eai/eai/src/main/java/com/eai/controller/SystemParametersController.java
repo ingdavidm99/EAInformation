@@ -113,16 +113,15 @@ public class SystemParametersController {
         try {
         	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
         	systemParameters = systemParametersService.findById(idSystemParameters.getIdSystemParameters());
-        	
-        	List<SystemParameters> systemParametersList = new ArrayList<>();
-        	systemParametersList.add(systemParameters);
-        	
-        	message.setData(systemParametersList);
         } catch (Exception exception) {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
         }
         
-        return ResponseEntity.ok(message);
+    	List<Object> response = new ArrayList<>();
+    	response.add(message);
+    	response.add(systemParameters);	
+    	
+        return ResponseEntity.ok(response);
 	}
 	
 	@RequestMapping(path = SAVESYSTEMPARAMETERS, method = RequestMethod.POST)

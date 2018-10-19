@@ -18,6 +18,7 @@
 									<tbody>
 										<tr>
 											<td colspan="5">
+												<em id="href" lang="/eai/systemparameters"></em>
 												<div th:replace="resources/pagination :: pagination"></div>
 											</td>
 											<td colspan="3" class="text-right">
@@ -65,12 +66,16 @@
 													th:value="${pagination.data[3]}"/>
 											</td>
 											<td style="width: 14%">
-												<input 
-													class="form-control form-control-sm" 
-													type="text" 
-													name="data[4]"
-													th:placeholder="#{3_type}"
-													th:value="${pagination.data[4]}"/>
+												<select 
+													th:field="${pagination.data[4]}" 
+													class="custom-select custom-select-sm" 
+													name="data[4]">
+													
+													<option th:value="0" th:text="#{selectOption}"></option>
+												  	<option th:value="1" th:text="1"></option>
+												  	<option th:value="2" th:text="2"></option>
+												  	<option th:value="3" th:text="3"></option>
+												</select>
 											</td>
 											<td style="width: 14%">
 												<input 
@@ -117,7 +122,17 @@
 											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.description}">
 										</td>
 										<td style="width: 14%">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.type}">
+											<div th:switch="${s.type}">
+									      		<div th:case="1">
+									       			<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="#{3_alphabetical}">
+									       		</div>
+									      		<div th:case="2">
+									        	 	<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="#{3_numeric}">
+									      		</div>
+									      		<div th:case="3">
+									        	 	<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="#{3_alphanumeric}">
+									      		</div>
+									 		</div>
 										</td>
 										<td style="width: 14%">
 											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.userName}">

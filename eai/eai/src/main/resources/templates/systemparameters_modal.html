@@ -21,48 +21,8 @@
 								<div th:replace="resources/messages :: messageModal"></div>
 							</div>
 						</div>
-					
-						<br/>
-						<div class="row justify-content-center">
-							<div class="col-3">
-								<label 
-									class="col-form-label" 
-									th:text="#{3_n}"
-									th:title="#{3_n}" 
-									data-toggle="popover" 
-									th:data-content="#{3_tooltipN}"></label>
-							</div>
-							<div class="col-6">
-								<div class="required-field-block">
-									<input 
-										type="text" 
-										class="form-control form-control-sm"
-										id="idSystemParameters"
-										readonly="readonly"/>
-								</div>
-							</div>
-						</div>
-						
-						<br/>
-						<div class="row justify-content-center">
-							<div class="col-3">
-								<label 
-									class="col-form-label" 
-									th:text="#{3_name}"
-									th:title="#{3_name}" 
-									data-toggle="popover" 
-									th:data-content="#{3_tooltipName}"></label>
-							</div>
-							<div class="col-6">
-								<div class="required-field-block">
-									<input 
-										type="text" 
-										class="form-control form-control-sm"
-										id="name"
-										readonly="readonly"/>
-								</div>
-							</div>
-						</div>
+						<input type="hidden" id="idSystemParameters"/>
+						<input type="hidden" id="type"/>
 						
 						<br/>
 						<div class="row justify-content-center">
@@ -116,69 +76,6 @@
 							<div class="col-3"></div>
 							<div class="col-6">
 								<span class="badge badge-danger" id="descriptionError"></span>
-							</div>
-						</div>
-						
-						<br/>
-						<div class="row justify-content-center">
-							<div class="col-3">
-								<label 
-									class="col-form-label" 
-									th:text="#{3_type}"
-									th:title="#{3_type}" 
-									data-toggle="popover" 
-									th:data-content="#{3_tooltipType}"></label>
-							</div>
-							<div class="col-6">
-								<div class="required-field-block">
-									<input 
-										type="text" 
-										class="form-control form-control-sm"
-										id="type"
-										readonly="readonly"/>
-								</div>
-							</div>
-						</div>
-						
-						<br/>
-						<div class="row justify-content-center">
-							<div class="col-3">
-								<label 
-									class="col-form-label" 
-									th:text="#{3_userName}"
-									th:title="#{3_userName}" 
-									data-toggle="popover" 
-									th:data-content="#{3_tooltipUserName}"></label>
-							</div>
-							<div class="col-6">
-								<div class="required-field-block">
-									<input 
-										type="text" 
-										class="form-control form-control-sm"
-										id="userName"
-										readonly="readonly"/>
-								</div>
-							</div>
-						</div>
-										
-						<br/>
-						<div class="row justify-content-center">
-							<div class="col-3">
-								<label 
-									class="col-form-label" 
-									th:text="#{3_date}"
-									th:title="#{3_date}" 
-									data-toggle="popover" 
-									th:data-content="#{3_tooltipDate}"></label>
-							</div>
-							<div class="col-6">
-								<div class="required-field-block">
-									<input 
-										type="text" 
-										class="form-control form-control-sm"
-										id="date"
-										readonly="readonly"/>
-								</div>
 							</div>
 						</div>
 					</div>

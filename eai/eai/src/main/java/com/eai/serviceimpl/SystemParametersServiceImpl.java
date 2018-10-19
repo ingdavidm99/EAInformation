@@ -81,7 +81,12 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 
 	@Override
 	@Transactional
-	public SystemParameters saveOrUpdate(SystemParameters systemParameters) {
-		return systemParametersRepository.save(systemParameters);
+	public SystemParameters saveOrUpdate(SystemParameters systemParametersOld) {
+		SystemParameters systemParametersNew = this.findById(systemParametersOld.getIdSystemParameters());
+		
+		systemParametersNew.setValue(systemParametersOld.getValue());
+		systemParametersNew.setDescription(systemParametersOld.getDescription());
+		
+		return systemParametersRepository.save(systemParametersNew);
 	}	
 }
