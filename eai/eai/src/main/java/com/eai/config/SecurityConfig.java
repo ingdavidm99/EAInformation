@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .sessionManagement()
             	.invalidSessionUrl("/invalid")
-            	.maximumSessions(100)
+            	.maximumSessions(1)
             	.expiredUrl("/expired");
         
         http

@@ -3,22 +3,55 @@
 <head th:replace="resources/commons :: head">
 	<title></title>
 </head>
-<body>
+<body class="flexcroll">
 	<div class="container-fluid eai">
 		<div class="row">
-			<div class="col eai-menu">
+			<div class="col eai-menu-1">
 				<div th:replace="resources/menu :: menu"></div>
 			</div>
 			<div class="col eai-body">
-				<div class="col eai-head-1 flexcroll">
-			
+				<div class="col eai-head-1">
+					<div class="row">
+						<div class="col">
+							<form method="post" autocomplete="off" id="formSearch">
+								<table class="table table-sm">
+									<tbody>
+										<tr>
+											<td colspan="5">
+												<em id="href" lang="/eai/index"></em>
+												<div th:replace="resources/pagination :: pagination"></div>
+											</td>
+											<td colspan="3" class="text-right">
+												<span th:if="${pagination.length > 0}"
+													class="badge badge-primary"
+													th:text="#{items(${pagination.size}, ${pagination.page})}">
+												</span>
+												<div th:replace="resources/messages :: message"></div>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="8" style="padding-top: 20px;"></td>
+										</tr>
+										<tr>
+											
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						</div>
+					</div>
 				</div>
-				<div class="col eai-main-1 flexcroll">
+				<div class="col eai-main-1">
+					<div class="row">
+						<div class="col">
+							
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<div th:replace="resources/commons :: scripts"></div>
-</body>
+	</body>
 </html>

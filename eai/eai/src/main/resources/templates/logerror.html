@@ -3,14 +3,14 @@
 <head th:replace="resources/commons :: head">
 	<title></title>
 </head>
-<body>
+<body class="flexcroll">
 	<div class="container-fluid eai">
 		<div class="row">
-			<div class="col eai-menu">
+			<div class="col eai-menu-1">
 				<div th:replace="resources/menu :: menu"></div>
 			</div>
 			<div class="col eai-body">
-				<div class="col eai-head-1 flexcroll">
+				<div class="col eai-head-1">
 					<div class="row">
 						<div class="col">
 							<form th:action="@{/searchlogerror}" method="post" autocomplete="off" id="formSearch">
@@ -18,7 +18,6 @@
 									<tbody>
 										<tr>
 											<td colspan="3">
-												<em id="href" lang="/eai/logerror"></em>
 												<div th:replace="resources/pagination :: pagination"></div>
 											</td>
 											<td colspan="2" class="text-right">
@@ -80,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col eai-main-1 flexcroll">
+				<div class="col eai-main-1">
 					<div class="row">
 						<div class="col">
 							<table class="table table-sm">
@@ -116,10 +115,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>				
 	</div>
-	
-	<div th:replace="logerror_modal :: modal"></div>
 	
 	<div th:replace="resources/commons :: scripts"></div>
 </body>

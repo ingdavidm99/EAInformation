@@ -3,11 +3,10 @@
 <head th:replace="resources/commons :: head">
 	<title></title>
 </head>
-<body>
+<body class="flexcroll">
 	<div class="container-fluid eai">
 		<div class="row">
-			<div class="col eai-menu" style="border-bottom: 4px double #1C6EA4;">
-				<br/>
+			<div class="col eai-menu-2" style="border-bottom: 4px double #1C6EA4;">
 				<div class="row justify-content-end">
 					<div class="col-11">
 						<div th:replace="resources/messages :: message"></div>
@@ -18,7 +17,7 @@
 				</div>
 			</div>
 			<div class="eai-body">
-				<div class="eai-main flexcroll">
+				<div class="eai-main">
 					<div class="col">
 						<form th:action="@{/registration}" method="post" autocomplete="off">
 							<br/>
