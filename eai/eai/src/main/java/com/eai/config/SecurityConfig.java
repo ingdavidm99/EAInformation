@@ -58,9 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             	.antMatchers("/index").hasAnyRole(ADMIN, USER)
             	
             	.antMatchers("/eainformation").hasAnyRole(ADMIN)
-            	.antMatchers("/systemparameter", "/searchsystemparameter").hasAnyRole(ADMIN)
-        		.antMatchers("/logerror", "/searchlogerror").hasAnyRole(ADMIN)
-        		.antMatchers("/user", "/searchuser").hasAnyRole(ADMIN);
+            	.antMatchers("/systemparameter", "/searchSystemparameter").hasAnyRole(ADMIN)
+        		.antMatchers("/logerror", "/searchLogerror").hasAnyRole(ADMIN)
+        		.antMatchers("/user", "/searchUser").hasAnyRole(ADMIN);
         
         http
         	.authorizeRequests()

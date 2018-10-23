@@ -3,7 +3,7 @@ $(function () {
 		$.ajax({
     		type: "POST",
     		contentType: "application/json",
-    		url: "/eai/findbyidsystemparameter",
+    		url: "/eai/findByIdSystemparameter",
     		beforeSend: function(xhr){xhr.setRequestHeader(header, token)},
     		data : JSON.stringify({idSystemParameter : $(this).attr('title')}),
     		dataType: 'json',
@@ -28,7 +28,7 @@ $(function () {
 		$.ajax({
 			type: "POST",
     		contentType: "application/json",
-    		url: "/eai/savesystemparameter",
+    		url: "/eai/updateSystemparameter",
     		beforeSend: function(xhr){xhr.setRequestHeader(header, token)},
     		data : 
     			JSON.stringify({

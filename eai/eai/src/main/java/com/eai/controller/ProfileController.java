@@ -22,7 +22,6 @@ import com.eai.model.LogError;
 import com.eai.model.User;
 import com.eai.model.UserDetail;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
 import com.eai.service.UserDetailService;
 import com.eai.service.UserService;
 import com.eai.validator.ProfileValidator;
@@ -43,10 +42,7 @@ public class ProfileController {
 		
 	@Autowired
 	LogErrorService logErrorService;
-	
-	@Autowired
-	SystemParametersService systemParametersService;
-	
+		
 	public static final String PATTH_PROFILE = "/profile";
 	public static final String PATTH_UPDATE_PROFILE = "/updateProfile";
 	
@@ -79,7 +75,7 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(path = PATTH_UPDATE_PROFILE, method = RequestMethod.POST)
-    public String registration(
+    public String updateProfile(
     		Model model,
     		HttpServletRequest request,
     		@ModelAttribute("UserDetail") @Valid UserDetail userDetail,

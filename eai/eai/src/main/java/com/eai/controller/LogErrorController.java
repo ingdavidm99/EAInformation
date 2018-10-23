@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,7 +34,7 @@ public class LogErrorController {
 	LogErrorService logErrorService;
 		
 	public static final String PATTH_LOGERROR = "/logerror";
-	public static final String PATTH_SEARCH = "/searchlogerror";
+	public static final String PATTH_SEARCH_LOGERROR = "/searchLogerror";
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
@@ -43,7 +42,7 @@ public class LogErrorController {
 	}
 	
 	@RequestMapping(path = PATTH_LOGERROR, method = RequestMethod.GET)
-    public String page(Model model, HttpServletRequest request, @ModelAttribute("Pagination") Pagination pagination) {
+    public String page(Model model, HttpServletRequest request) {
 		try {
 			transactionPage = TransactionPage.getData(request, PATTH_LOGERROR);
 		} catch (Exception exception) {
@@ -57,8 +56,8 @@ public class LogErrorController {
     	return  PATTH_LOGERROR;
 	}
 	
-	@RequestMapping(path = PATTH_SEARCH, method = RequestMethod.POST)
-    public String search(
+	@RequestMapping(path = PATTH_SEARCH_LOGERROR, method = RequestMethod.POST)
+    public String searchLogerror(
     		Model model,
     		HttpServletRequest request,
     		@ModelAttribute("Pagination") @Valid Pagination pagination,
@@ -68,16 +67,12 @@ public class LogErrorController {
         	transactionPage = TransactionPage.getData(request, PATTH_LOGERROR);
         	
         	if (bindingResult.hasErrors()) {
-				for(FieldError error : bindingResult.getFieldErrors()){
-					model.addAttribute(error.getField().replace("logError.", ""), error.getDefaultMessage());
-				}
-				
 				message.setStatus(Constants.FAILURE.val());
 			 }else {
 				 logErrorService.findAll(pagination, transactionPage.getPageSize());
 			 }
         } catch (Exception exception) {
-        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH));
+        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH_LOGERROR));
         }
                 
     	model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage); 
