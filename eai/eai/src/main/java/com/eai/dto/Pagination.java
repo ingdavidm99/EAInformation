@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.eai.model.LogError;
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 import com.eai.model.User;
 
 public class Pagination {
@@ -20,7 +20,7 @@ public class Pagination {
 	
 	private List<String> data;
 	
-	private List<SystemParameters> systemParametersList;
+	private List<SystemParameter> systemParameterList;
 	
 	private List<LogError> logErrorList;
 	
@@ -36,7 +36,7 @@ public class Pagination {
 		data.add(null);
 		data.add(null);
 		
-		systemParametersList = new ArrayList<>();
+		systemParameterList = new ArrayList<>();
 		logErrorList = new ArrayList<>();
 		userList = new ArrayList<>();
 	}
@@ -90,12 +90,12 @@ public class Pagination {
 		this.data = data;
 	}
 
-	public List<SystemParameters> getSystemParametersList() {
-		return systemParametersList;
+	public List<SystemParameter> getSystemParameterList() {
+		return systemParameterList;
 	}
 
-	public void setSystemParametersList(List<SystemParameters> systemParametersList) {
-		this.systemParametersList = systemParametersList;
+	public void setSystemParameterList(List<SystemParameter> systemParameterList) {
+		this.systemParameterList = systemParameterList;
 	}
 
 	public List<LogError> getLogErrorList() {

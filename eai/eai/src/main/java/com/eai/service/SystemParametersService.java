@@ -1,13 +1,13 @@
 package com.eai.service;
 
 import com.eai.dto.Pagination;
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 
 public interface SystemParametersService{
 
-	public SystemParameters findById(Integer idSystemParameters);
+	public SystemParameter findById(Integer idSystemParameter);
 	
 	public void findAll(Pagination pagination, Long pageSize);
 	
-	public SystemParameters saveOrUpdate(SystemParameters systemParameters);
+	public SystemParameter saveOrUpdate(SystemParameter systemParameter);
 }

@@ -3,21 +3,21 @@ $(function () {
 		$.ajax({
     		type: "POST",
     		contentType: "application/json",
-    		url: "/eai/findbyidsystemparameters",
+    		url: "/eai/findbyidsystemparameter",
     		beforeSend: function(xhr){xhr.setRequestHeader(header, token)},
-    		data : JSON.stringify({idSystemParameters : $(this).attr('title')}),
+    		data : JSON.stringify({idSystemParameter : $(this).attr('title')}),
     		dataType: 'json',
     		success: function(response) {
     			messages(response[0]);
     			
-    			if(response[0].status === null){
-    				$("#idSystemParameters").val(response[1].idSystemParameters);
+    			if(response.status === null){
+    				$("#idSystemParameter").val(response[1].idSystemParameter);
 	    			$("#value").val(response[1].value);
 	    			$("#description").val(response[1].description);
 	    			$("#type").val(response[1].type);
 	    		}
     			
-    			$("#systemparametersModal").modal();
+    			$("#systemparameterModal").modal();
     		}
     	});
 	});
@@ -28,11 +28,11 @@ $(function () {
 		$.ajax({
 			type: "POST",
     		contentType: "application/json",
-    		url: "/eai/savesystemparameters",
+    		url: "/eai/savesystemparameter",
     		beforeSend: function(xhr){xhr.setRequestHeader(header, token)},
     		data : 
     			JSON.stringify({
-    				idSystemParameters : $("#idSystemParameters").val(),
+    				idSystemParameter : $("#idSystemParameter").val(),
     				value : $("#value").val(),
     				description : $("#description").val(),
     				type : $("#type").val()

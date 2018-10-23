@@ -27,7 +27,7 @@ import com.eai.dto.MessageResponse;
 import com.eai.dto.Pagination;
 import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
 import com.eai.validator.SystemParametersValidator;
@@ -35,7 +35,7 @@ import com.eai.validator.SystemParametersValidator1;
 
 @Controller
 @Scope("prototype")
-public class SystemParametersController {
+public class SystemParameterController {
 	
 	MessageResponse message = new MessageResponse();
 	
@@ -47,10 +47,10 @@ public class SystemParametersController {
 	@Autowired
 	SystemParametersService systemParametersService;
 	
-	public static final String PATTH_SYSTEMPARAMETERS = "/systemparameters";
-	public static final String PATTH_SEARCH = "/searchsystemparameters";
-	public static final String FINDBYSEARCHSYSTEMPARAMETERS = "/findbyidsystemparameters";
-	public static final String SAVESYSTEMPARAMETERS = "/savesystemparameters";
+	public static final String PATTH_SYSTEMPARAMETERS = "/systemparameter";
+	public static final String PATTH_SEARCH = "/searchsystemparameter";
+	public static final String FINDBYSEARCHSYSTEMPARAMETERS = "/findbyidsystemparameter";
+	public static final String SAVESYSTEMPARAMETERS = "/savesystemparameter";
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
@@ -106,20 +106,20 @@ public class SystemParametersController {
     public ResponseEntity<Object> findByIdsystemParameters(
     		Model model, 
     		HttpServletRequest request,
-    		@RequestBody SystemParameters idSystemParameters) {
+    		@RequestBody SystemParameter idSystemParameters) {
 		
-        SystemParameters systemParameters = null;
+        SystemParameter systemParameter = null;
        
         try {
         	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
-        	systemParameters = systemParametersService.findById(idSystemParameters.getIdSystemParameters());
+        	systemParameter = systemParametersService.findById(idSystemParameters.getIdSystemParameter());
         } catch (Exception exception) {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBYSEARCHSYSTEMPARAMETERS));
         }
         
     	List<Object> response = new ArrayList<>();
     	response.add(message);
-    	response.add(systemParameters);	
+    	response.add(systemParameter);	
     	
         return ResponseEntity.ok(response);
 	}
@@ -128,18 +128,18 @@ public class SystemParametersController {
     public ResponseEntity<Object> save(
     		Model model,
     		HttpServletRequest request,
-    		@RequestBody SystemParameters systemParameters,
+    		@RequestBody SystemParameter systemParameter,
     		Errors errors) { 
 		
 		try {
 			transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETERS);
-			ValidationUtils.invokeValidator(new SystemParametersValidator(TransactionPage.getData(request)), systemParameters, errors);
+			ValidationUtils.invokeValidator(new SystemParametersValidator(TransactionPage.getData(request)), systemParameter, errors);
 			
 			if(errors.hasErrors()) {
 				message.setErrors(errors.getAllErrors());
 				message.setStatus(Constants.FAILURE.val());
 			 }else {
-				 systemParametersService.saveOrUpdate(systemParameters);
+				 systemParametersService.saveOrUpdate(systemParameter);
 				 message.setStatus(Constants.SUCCESS.val());
 			 }
 		} catch (Exception exception) {

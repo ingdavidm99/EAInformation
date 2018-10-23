@@ -32,6 +32,11 @@ public class UserServiceImpl extends SqlImplement implements UserService {
 	
 	@Autowired
     private UserRepository userRepository;
+	
+	@Override
+	public User findById(Integer idUser) {
+		return userRepository.findById(idUser).orElse(null);
+	}
 
     @Override
     @Transactional

@@ -11,15 +11,15 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "system_parameters")
-public class SystemParameters implements Serializable {
+@Table(name = "system_parameter")
+public class SystemParameter implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_SYSTEM_PARAMETERS", nullable = false)
-    private Integer idSystemParameters;
+    @Column(name = "ID_SYSTEM_PARAMETER", nullable = false)
+    private Integer idSystemParameter;
     
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -41,10 +41,10 @@ public class SystemParameters implements Serializable {
     @Column(name = "DATE", nullable = false)
     private String date;
     
-    public SystemParameters() {
+    public SystemParameter() {
 	}
     
-    public SystemParameters(String name, String value, String description, String userName, String date) {
+    public SystemParameter(String name, String value, String description, String userName, String date) {
     	this.name = name;
     	this.value = value;
 		this.description = description;
@@ -52,12 +52,12 @@ public class SystemParameters implements Serializable {
 		this.date = date;
 	}
 
-	public Integer getIdSystemParameters() {
-		return idSystemParameters;
+	public Integer getIdSystemParameter() {
+		return idSystemParameter;
 	}
 
-	public void setIdSystemParameters(Integer idSystemParameters) {
-		this.idSystemParameters = idSystemParameters;
+	public void setIdSystemParameter(Integer idSystemParameter) {
+		this.idSystemParameter = idSystemParameter;
 	}	
 
 	public String getName() {

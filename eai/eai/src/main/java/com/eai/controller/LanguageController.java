@@ -15,7 +15,7 @@ import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
 import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
 
@@ -59,10 +59,10 @@ public class LanguageController {
 	}
 	
 	private void lang(HttpServletRequest request, String lang) {
-		SystemParameters systemParameters = systemParametersService.findById(7);
-		systemParameters.setValue(lang);
+		SystemParameter systemParameter = systemParametersService.findById(7);
+		systemParameter.setValue(lang);
 		
-		systemParametersService.saveOrUpdate(systemParameters);
+		systemParametersService.saveOrUpdate(systemParameter);
 		
 		TransactionPage transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 		

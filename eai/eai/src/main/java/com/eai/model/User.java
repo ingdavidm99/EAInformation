@@ -47,20 +47,6 @@ public class User implements Serializable, UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     private UserDetail userDetail;
 
-    public User() {
-    }
-
-    public User(Integer idUser) {
-        this.idUser = idUser;
-    }
-
-    public User(Integer idUser, String userName, String password, boolean enabled) {
-        this.idUser = idUser;
-        this.userName = userName;
-        this.password = password;
-        this.enabled = enabled;
-    }
-
     public Integer getIdUser() {
         return idUser;
     }

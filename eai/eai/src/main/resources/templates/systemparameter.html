@@ -13,12 +13,12 @@
 				<div class="col eai-head-1">
 					<div class="row">
 						<div class="col">
-							<form th:action="@{/searchsystemparameters}" method="post" autocomplete="off" id="formSearch">
+							<form th:action="@{/searchsystemparameter}" method="post" autocomplete="off" id="formSearch">
 								<table class="table table-sm">
 									<tbody>
 										<tr>
 											<td colspan="5">
-												<em id="href" lang="/eai/systemparameters"></em>
+												<em id="href" lang="/eai/systemparameter"></em>
 												<div th:replace="resources/pagination :: pagination"></div>
 											</td>
 											<td colspan="3" class="text-right">
@@ -108,9 +108,9 @@
 						<div class="col">
 							<table class="table table-sm">
 								<tbody>
-									<tr th:each="s : ${pagination.systemParametersList}">
+									<tr th:each="s : ${pagination.systemParameterList}">
 										<th style="width: 8%" scope="row">
-											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.idSystemParameters}">
+											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.idSystemParameter}">
 										</th>
 										<td style="width: 14%">
 											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.name}">
@@ -141,7 +141,7 @@
 											<input class="form-control form-control-sm ellipsis" disabled="disabled" th:value="${s.date}">
 										</td>
 										<td style="width: 8% cursor: pointer; color: #337ab7;" class="text-center">
-											<button type="button" class="btn btn-primary btn-sm edit" th:title="${s.idSystemParameters}">
+											<button type="button" class="btn btn-primary btn-sm edit" th:title="${s.idSystemParameter}">
 										   		<em class="fas fa-pencil-alt"></em>
 											</button>
 										</td>
@@ -163,9 +163,9 @@
 		</div>
 	</div>
 	
-	<div th:replace="systemparameters_modal :: modal"></div>
+	<div th:replace="systemparameter_modal :: modal"></div>
 
 	<div th:replace="resources/commons :: scripts"></div>
-	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/systemparameters.js}"></script>
+	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/systemparameter.js}"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 
 public class SystemParametersValidator extends ParentValidator implements Validator{
 	
@@ -29,12 +29,12 @@ public class SystemParametersValidator extends ParentValidator implements Valida
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return SystemParameters.class.isAssignableFrom(clazz);
+		return SystemParameter.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		SystemParameters systemParameters = (SystemParameters) target;
+		SystemParameter systemParameter = (SystemParameter) target;
 		
 		String requiredField = getTransactionPage().get("requiredField");
 			
@@ -42,12 +42,12 @@ public class SystemParametersValidator extends ParentValidator implements Valida
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.VALUE.val(), requiredField, requiredField);
 		if (!errors.hasFieldErrors(Name.VALUE.val())) {
 			
-			switch (systemParameters.getType()) {
+			switch (systemParameter.getType()) {
 				case 1:
-					onlyContainLetters(Name.VALUE.val(), systemParameters.getValue(), errors);
+					onlyContainLetters(Name.VALUE.val(), systemParameter.getValue(), errors);
 				break;
 				case 2:
-					onlyContainNumber(Name.VALUE.val(), systemParameters.getValue(), errors);
+					onlyContainNumber(Name.VALUE.val(), systemParameter.getValue(), errors);
 				break;
 				default:
 					

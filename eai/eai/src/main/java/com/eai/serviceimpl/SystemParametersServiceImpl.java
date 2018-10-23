@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eai.dto.Pagination;
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 import com.eai.repository.SystemParametersRepository;
 import com.eai.service.SystemParametersService;
 
@@ -31,7 +31,7 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 	
 	@Override
 	@Transactional
-	public SystemParameters findById(Integer idSystemParameters) {
+	public SystemParameter findById(Integer idSystemParameters) {
 		return systemParametersRepository.findById(idSystemParameters).orElse(null);
 	}
 	
@@ -40,10 +40,10 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-    	CriteriaQuery<SystemParameters> criteria = builder.createQuery(SystemParameters.class);
-    	Root<SystemParameters> root = criteria.from(SystemParameters.class);
+    	CriteriaQuery<SystemParameter> criteria = builder.createQuery(SystemParameter.class);
+    	Root<SystemParameter> root = criteria.from(SystemParameter.class);
     	
-    	sqlEqual(builder, criteria, root.get("idSystemParameters"), pagination.getData().get(0));
+    	sqlEqual(builder, criteria, root.get("idSystemParameter"), pagination.getData().get(0));
     	
     	sqlLike(builder, criteria, root.get("name"), pagination.getData().get(1));
     	
@@ -58,12 +58,12 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
     	sqlEqual(builder, criteria, root.get("date"), pagination.getData().get(6));
     	
     	Query query = manager.createQuery(criteria);
-    	List<SystemParameters> systemParametersList = query.getResultList();
+    	List<SystemParameter> systemParametersList = query.getResultList();
     	
     	if(!systemParametersList.isEmpty()) {
     		pagination.getPage(query.getResultList().size(), pageSize);
         	
-        	PagedListHolder<SystemParameters> pageList = new PagedListHolder<>(systemParametersList);
+        	PagedListHolder<SystemParameter> pageList = new PagedListHolder<>(systemParametersList);
         	MutableSortDefinition x = new MutableSortDefinition ("name", true, true);
         	pageList.setSort(x);
         	pageList.resort();
@@ -71,7 +71,7 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
         	int page = (int)(pagination.getPage()-1);
         	pageList.setPageSize(pageSize.intValue());
         	pageList.setPage(page); 	
-        	pagination.setSystemParametersList(pageList.getPageList());
+        	pagination.setSystemParameterList(pageList.getPageList());
     	}else {
     		pagination.setLength(0);
     		pagination.setPage(0);
@@ -81,8 +81,8 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 
 	@Override
 	@Transactional
-	public SystemParameters saveOrUpdate(SystemParameters systemParametersOld) {
-		SystemParameters systemParametersNew = this.findById(systemParametersOld.getIdSystemParameters());
+	public SystemParameter saveOrUpdate(SystemParameter systemParametersOld) {
+		SystemParameter systemParametersNew = this.findById(systemParametersOld.getIdSystemParameter());
 		
 		systemParametersNew.setValue(systemParametersOld.getValue());
 		systemParametersNew.setDescription(systemParametersOld.getDescription());

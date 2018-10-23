@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
 import com.eai.model.LogError;
-import com.eai.model.SystemParameters;
+import com.eai.model.SystemParameter;
 import com.eai.model.User;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
@@ -61,10 +61,10 @@ public class SignInController {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		
-		SystemParameters systemParameters = systemParametersService.findById(7);
-		systemParameters.setValue("EN");
+		SystemParameter systemParameter = systemParametersService.findById(7);
+		systemParameter.setValue("EN");
 		
-		systemParametersService.saveOrUpdate(systemParameters);
+		systemParametersService.saveOrUpdate(systemParameter);
 		
 		request.getSession().setAttribute("logoutTimeOut", PATTH_LOGOUT);
 		
