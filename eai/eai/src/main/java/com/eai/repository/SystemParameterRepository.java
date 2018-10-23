@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.eai.model.SystemParameter;
 
 @Repository
-public interface SystemParametersRepository extends CrudRepository<SystemParameter, Integer> {
+public interface SystemParameterRepository extends CrudRepository<SystemParameter, Integer> {
 
 }

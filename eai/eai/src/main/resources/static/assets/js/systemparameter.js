@@ -8,13 +8,13 @@ $(function () {
     		data : JSON.stringify({idSystemParameter : $(this).attr('title')}),
     		dataType: 'json',
     		success: function(response) {
-    			messages(response[0]);
+    			messages(response.messagesResponse);
     			
-    			if(response.status === null){
-    				$("#idSystemParameter").val(response[1].idSystemParameter);
-	    			$("#value").val(response[1].value);
-	    			$("#description").val(response[1].description);
-	    			$("#type").val(response[1].type);
+    			if(response.messagesResponse.status === null){
+    				$("#idSystemParameter").val(response.systemParameter.idSystemParameter);
+	    			$("#value").val(response.systemParameter.value);
+	    			$("#description").val(response.systemParameter.description);
+	    			$("#type").val(response.systemParameter.type);
 	    		}
     			
     			$("#systemparameterModal").modal();

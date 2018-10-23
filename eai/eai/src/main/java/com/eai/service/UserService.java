@@ -12,4 +12,6 @@ public interface UserService extends UserDetailsService {
 	public User findByUserName(String userName);
     
 	public void findAll(Pagination pagination, Long pageSize);
+	
+	public User saveOrUpdate(User userOld);
 }

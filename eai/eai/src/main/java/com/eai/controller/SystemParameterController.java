@@ -1,7 +1,7 @@
 package com.eai.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -29,8 +29,8 @@ import com.eai.model.LogError;
 import com.eai.model.SystemParameter;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParametersService;
-import com.eai.validator.SystemParametersValidator;
-import com.eai.validator.SystemParametersValidator1;
+import com.eai.validator.SystemParameterValidator;
+import com.eai.validator.UpdateSystemParameterValidator;
 
 @Controller
 @Scope("prototype")
@@ -53,7 +53,7 @@ public class SystemParameterController {
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
-		binder.addValidators(new SystemParametersValidator1(TransactionPage.getData(request)));
+		binder.addValidators(new SystemParameterValidator(TransactionPage.getData(request)));
 	}
 		
 	@RequestMapping(path = PATTH_SYSTEMPARAMETER, method = RequestMethod.GET)
@@ -112,9 +112,9 @@ public class SystemParameterController {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_FINDBY_ID_SYSTEMPARAMETER));
         }
         
-    	List<Object> response = new ArrayList<>();
-    	response.add(message);
-    	response.add(systemParameter);	
+    	Map<String, Object> response = new HashMap<>();
+    	response.put(Constants.MESSAGESRESPONSE.val(), message);
+    	response.put("systemParameter", systemParameter);	
     	
         return ResponseEntity.ok(response);
 	}
@@ -128,7 +128,7 @@ public class SystemParameterController {
 		
 		try {
 			transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETER);
-			ValidationUtils.invokeValidator(new SystemParametersValidator(TransactionPage.getData(request)), systemParameter, errors);
+			ValidationUtils.invokeValidator(new UpdateSystemParameterValidator(TransactionPage.getData(request)), systemParameter, errors);
 			
 			if(errors.hasErrors()) {
 				message.setErrors(errors.getAllErrors());

@@ -9,5 +9,5 @@ public interface SystemParametersService{
 	
 	public void findAll(Pagination pagination, Long pageSize);
 	
-	public SystemParameter saveOrUpdate(SystemParameter systemParameter);
+	public SystemParameter saveOrUpdate(SystemParameter systemParameterOld);
 }

@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.eai.model.SystemParameter;
 
-public class SystemParametersValidator extends ParentValidator implements Validator{
+public class UpdateSystemParameterValidator extends ParentValidator implements Validator{
 	
 	private enum Name {
 		VALUE("value"),
@@ -23,7 +23,7 @@ public class SystemParametersValidator extends ParentValidator implements Valida
 	    }
 	}
 	
-	public SystemParametersValidator(String local) {
+	public UpdateSystemParameterValidator(String local) {
 		super(local);
 	}
 	

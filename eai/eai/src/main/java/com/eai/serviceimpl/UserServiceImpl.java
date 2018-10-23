@@ -34,6 +34,7 @@ public class UserServiceImpl extends SqlImplement implements UserService {
     private UserRepository userRepository;
 	
 	@Override
+	@Transactional
 	public User findById(Integer idUser) {
 		return userRepository.findById(idUser).orElse(null);
 	}
@@ -98,5 +99,25 @@ public class UserServiceImpl extends SqlImplement implements UserService {
     		pagination.setPage(0);
     		pagination.setSize(0);
     	}
+	}
+
+	@Override
+	@Transactional
+	public User saveOrUpdate(User userOld) {
+		User userNew = this.findById(userOld.getIdUser());
+		
+		userNew.getUserDetail().setFullName(userOld.getUserDetail().getFullName());
+		userNew.setEnabled(userOld.isEnabled());
+		userNew.getUserDetail().setEmail(userOld.getUserDetail().getEmail());
+		Role role = new Role();
+		if("ROLE_USER".equals(userOld.getRole().getName())) {
+			role.setIdRole(1);
+		}else {
+			role.setIdRole(2);
+		}
+		
+		userNew.setRole(role);
+		
+		return userRepository.save(userNew);
 	}
 }

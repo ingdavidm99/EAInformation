@@ -54,7 +54,7 @@
 				
 				if(response.errors){
 					for (var i = 0; i < response.errors.length; i++) {
-    					$('#'+response.errors[i].field+"Error").text(response.errors[i].code);
+						$('#'+response.errors[i].field.replace('.','')+"Error").text(response.errors[i].code);
     				}
     			}
 			}

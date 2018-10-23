@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eai.dto.Pagination;
 import com.eai.model.SystemParameter;
-import com.eai.repository.SystemParametersRepository;
+import com.eai.repository.SystemParameterRepository;
 import com.eai.service.SystemParametersService;
 
 @Service
@@ -27,12 +27,12 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
     private EntityManager manager;
 	
 	@Autowired
-	SystemParametersRepository systemParametersRepository;
+	SystemParameterRepository systemParameterRepository;
 	
 	@Override
 	@Transactional
 	public SystemParameter findById(Integer idSystemParameters) {
-		return systemParametersRepository.findById(idSystemParameters).orElse(null);
+		return systemParameterRepository.findById(idSystemParameters).orElse(null);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -87,6 +87,6 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 		systemParametersNew.setValue(systemParametersOld.getValue());
 		systemParametersNew.setDescription(systemParametersOld.getDescription());
 		
-		return systemParametersRepository.save(systemParametersNew);
+		return systemParameterRepository.save(systemParametersNew);
 	}	
 }
