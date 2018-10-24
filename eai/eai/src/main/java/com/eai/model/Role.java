@@ -38,6 +38,12 @@ public class Role implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)
     private List<User> userList;
 
+    public Role() {}
+    
+    public Role(Integer idRole) {
+        this.idRole = idRole;
+    }
+
     public Integer getIdRole() {
         return idRole;
     }

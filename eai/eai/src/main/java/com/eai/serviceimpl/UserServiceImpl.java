@@ -109,14 +109,13 @@ public class UserServiceImpl extends SqlImplement implements UserService {
 		userNew.getUserDetail().setFullName(userOld.getUserDetail().getFullName());
 		userNew.setEnabled(userOld.isEnabled());
 		userNew.getUserDetail().setEmail(userOld.getUserDetail().getEmail());
-		Role role = new Role();
 		if("ROLE_USER".equals(userOld.getRole().getName())) {
-			role.setIdRole(1);
+			userNew.setRole(new Role(new Integer("1")));
 		}else {
-			role.setIdRole(2);
+			userNew.setRole(new Role(new Integer("2")));
 		}
 		
-		userNew.setRole(role);
+		
 		
 		return userRepository.save(userNew);
 	}
