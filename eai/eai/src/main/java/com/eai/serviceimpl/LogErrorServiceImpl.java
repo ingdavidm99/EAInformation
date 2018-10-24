@@ -54,7 +54,7 @@ public class LogErrorServiceImpl extends SqlImplement implements LogErrorService
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
     	CriteriaQuery<LogError> criteria = builder.createQuery(LogError.class);
     	Root<LogError> root = criteria.from(LogError.class);
-		
+    	
     	sqlEqual(builder, criteria, root.get("idLogError"), pagination.getData().get(0));
     	   	
     	sqlLike(builder, criteria, root.get("error"), pagination.getData().get(1));

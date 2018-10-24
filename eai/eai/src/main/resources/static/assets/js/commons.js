@@ -30,8 +30,7 @@ $(function() {
 	$('#es').click(function () {
 		lenguaje('langES?lang=es')
     });
-	
-	
+		
 	$('.required-icon, label').css("cursor","pointer");
 	
 	$('[data-toggle="tooltip"]').tooltip();
