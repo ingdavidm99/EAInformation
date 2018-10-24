@@ -1,8 +1,5 @@
 package com.eai.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -112,11 +109,15 @@ public class SystemParameterController {
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_FINDBY_ID_SYSTEMPARAMETER));
         }
         
-    	Map<String, Object> response = new HashMap<>();
-    	response.put(Constants.MESSAGESRESPONSE.val(), message);
-    	response.put("systemParameter", systemParameter);	
+    	if(systemParameter != null) {
+    		message.setData("idSystemParameter", systemParameter.getIdSystemParameter());
+        	message.setData("name", systemParameter.getName());
+        	message.setData("value", systemParameter.getValue());
+        	message.setData("description", systemParameter.getDescription());
+        	message.setData("type", systemParameter.getType());
+    	}
     	
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(message);
 	}
 	
 	@RequestMapping(path = PATTH_UPDATE_SYSTEMPARAMETER, method = RequestMethod.POST)
