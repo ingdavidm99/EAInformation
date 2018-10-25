@@ -6,7 +6,7 @@ import javax.persistence.criteria.Expression;
 
 import com.eai.dto.Constants;
 
-public class SqlImplement {
+public class CriteriaSql {
 
 	public void sqlEqual(CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Expression<?> root, Object value) {
 		if(!Constants.EMPTY.val().equals(value) && !Constants.ZERO.val().equals(value)) {

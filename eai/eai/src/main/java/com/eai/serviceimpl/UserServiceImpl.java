@@ -25,7 +25,7 @@ import com.eai.repository.UserRepository;
 import com.eai.service.UserService;
 
 @Service
-public class UserServiceImpl extends SqlImplement implements UserService {
+public class UserServiceImpl extends CriteriaSql implements UserService {
    
 	@PersistenceContext
 	private EntityManager manager;

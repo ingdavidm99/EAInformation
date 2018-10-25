@@ -24,7 +24,7 @@ import com.eai.service.LogErrorService;
 import com.eai.service.SystemParameterService;
 
 @Service
-public class LogErrorServiceImpl extends SqlImplement implements LogErrorService {
+public class LogErrorServiceImpl extends CriteriaSql implements LogErrorService {
 	
 	@PersistenceContext
     private EntityManager manager;
@@ -72,7 +72,7 @@ public class LogErrorServiceImpl extends SqlImplement implements LogErrorService
 	    	pagination.getPage(query.getResultList().size(), pageSize);
 	    	
 	    	PagedListHolder<LogError> pageList = new PagedListHolder<>(logErrorList);
-	    	MutableSortDefinition x = new MutableSortDefinition ("date", true, false);
+	    	MutableSortDefinition x = new MutableSortDefinition ("idLogError", true, false);
 	    	pageList.setSort(x);
 	    	pageList.resort();
 	    	

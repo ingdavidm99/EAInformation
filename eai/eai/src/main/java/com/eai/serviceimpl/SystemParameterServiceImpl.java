@@ -21,7 +21,7 @@ import com.eai.repository.SystemParameterRepository;
 import com.eai.service.SystemParameterService;
 
 @Service
-public class SystemParameterServiceImpl extends SqlImplement implements SystemParameterService {
+public class SystemParameterServiceImpl extends CriteriaSql implements SystemParameterService {
 	
 	@PersistenceContext
     private EntityManager manager;
@@ -64,7 +64,7 @@ public class SystemParameterServiceImpl extends SqlImplement implements SystemPa
     		pagination.getPage(query.getResultList().size(), pageSize);
         	
         	PagedListHolder<SystemParameter> pageList = new PagedListHolder<>(systemParameterList);
-        	MutableSortDefinition x = new MutableSortDefinition ("name", true, true);
+        	MutableSortDefinition x = new MutableSortDefinition ("idSystemParameter", true, true);
         	pageList.setSort(x);
         	pageList.resort();
         	
