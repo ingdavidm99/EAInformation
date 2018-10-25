@@ -8,15 +8,15 @@ import com.eai.dto.Constants;
 
 public class SqlImplement {
 
-	public void sqlEqual(CriteriaBuilder builder, CriteriaQuery<?> criteria, Expression<?> root, Object value) {
-		if(!Constants.EMPTY.val().equals(value)) {
-			criteria.where(builder.equal(root, value));
+	public void sqlEqual(CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Expression<?> root, Object value) {
+		if(!Constants.EMPTY.val().equals(value) && !Constants.ZERO.val().equals(value)) {
+			criteriaQuery.where(criteriaBuilder.equal(root, value));
 		}	
 	}
 	
-    public void sqlLike(CriteriaBuilder builder, CriteriaQuery<?> criteria, Expression<String> root, Object value) {
+    public void sqlLike(CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Expression<String> root, Object value) {
     	if(!Constants.EMPTY.val().equals(value)) {
-    		criteria.where(builder.like(root, value.toString()));
+    		criteriaQuery.where(criteriaBuilder.like(root, "%" + value.toString() + "%"));
     	}	
     }
     

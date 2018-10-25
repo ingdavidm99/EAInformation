@@ -17,7 +17,7 @@ import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.model.SystemParameter;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 
 @Controller
 @Scope("prototype")
@@ -29,7 +29,7 @@ public class LanguageController {
 	LogErrorService logErrorService;
 	
 	@Autowired
-	SystemParametersService systemParametersService;
+	SystemParameterService systemParametersService;
 	
 	public static final String PATTH_LANGUAGE_EN = "/langEN";
 	public static final String PATTH_LANGUAGE_ES = "/langES";

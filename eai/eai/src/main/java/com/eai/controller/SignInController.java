@@ -19,7 +19,7 @@ import com.eai.model.LogError;
 import com.eai.model.SystemParameter;
 import com.eai.model.User;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 
 @Controller
 @Scope("prototype")
@@ -31,7 +31,7 @@ public class SignInController {
 	LogErrorService logErrorService;
 	
 	@Autowired
-	SystemParametersService systemParametersService;
+	SystemParameterService systemParametersService;
 	
 	public static final String PATTH_SIGNIN = "/signin";
 	public static final String PATTH_LOGOUT = "/logout";

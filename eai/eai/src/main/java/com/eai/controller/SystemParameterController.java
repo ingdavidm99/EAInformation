@@ -25,7 +25,7 @@ import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.model.SystemParameter;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 import com.eai.validator.SystemParameterValidator;
 import com.eai.validator.UpdateSystemParameterValidator;
 
@@ -41,7 +41,7 @@ public class SystemParameterController {
 	LogErrorService logErrorService;
 	
 	@Autowired
-	SystemParametersService systemParametersService;
+	SystemParameterService systemParametersService;
 	
 	public static final String PATTH_SYSTEMPARAMETER = "/systemparameter";
 	public static final String PATTH_SEARCH_SYSTEMPARAMETER = "/searchSystemparameter";

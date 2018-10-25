@@ -72,7 +72,6 @@ public class LogErrorController {
 				 logErrorService.findAll(pagination, transactionPage.getPageSize());
 			 }
         } catch (Exception exception) {
-        	exception.printStackTrace();
         	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH_LOGERROR));
         }
                 

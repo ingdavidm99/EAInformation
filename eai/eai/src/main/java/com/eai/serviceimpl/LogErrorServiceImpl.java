@@ -21,7 +21,7 @@ import com.eai.dto.Pagination;
 import com.eai.model.LogError;
 import com.eai.repository.LogErrorRepository;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 
 @Service
 public class LogErrorServiceImpl extends SqlImplement implements LogErrorService {
@@ -33,7 +33,7 @@ public class LogErrorServiceImpl extends SqlImplement implements LogErrorService
 	LogErrorRepository logErrorRepository;
 	
 	@Autowired
-	SystemParametersService systemParametersService;
+	SystemParameterService systemParametersService;
 		
 	@Override
     @Transactional
@@ -51,21 +51,21 @@ public class LogErrorServiceImpl extends SqlImplement implements LogErrorService
 	@Override
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-    	CriteriaQuery<LogError> criteria = builder.createQuery(LogError.class);
-    	Root<LogError> root = criteria.from(LogError.class);
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+    	CriteriaQuery<LogError> criteriaQuery = criteriaBuilder.createQuery(LogError.class);
+    	Root<LogError> root = criteriaQuery.from(LogError.class);
     	
-    	sqlEqual(builder, criteria, root.get("idLogError"), pagination.getData().get(0));
-    	   	
-    	sqlLike(builder, criteria, root.get("error"), pagination.getData().get(1));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("idLogError"), pagination.getData().get(0));
     	
-    	sqlEqual(builder, criteria, root.get("userName"), pagination.getData().get(2));
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("error"), pagination.getData().get(1));
+
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("userName"), pagination.getData().get(2));
     	
-    	sqlEqual(builder, criteria, root.get("path"), pagination.getData().get(3));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("path"), pagination.getData().get(3));
     	
-    	sqlEqual(builder, criteria, root.get("date"), pagination.getData().get(4));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("date"), pagination.getData().get(4));
     	
-    	Query query = manager.createQuery(criteria);
+    	Query query = manager.createQuery(criteriaQuery);
     	List<LogError> logErrorList = query.getResultList();
     	
     	if(!logErrorList.isEmpty()) {

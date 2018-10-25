@@ -17,9 +17,13 @@ public class MessageResponse implements Serializable{
     
     private List<ObjectError> errors;
     
-    private Map<String, Object> data = new HashMap<>();
+    private Map<String, Object> data;
         
-    public String getStatus() {
+    public MessageResponse() {
+    	data = new HashMap<>();
+	}
+
+	public String getStatus() {
         return status;
     }
 

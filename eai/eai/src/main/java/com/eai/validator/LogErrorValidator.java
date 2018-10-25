@@ -3,9 +3,25 @@ package com.eai.validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.eai.dto.Constants;
 import com.eai.dto.Pagination;
 
 public class LogErrorValidator extends ParentValidator implements Validator{
+	
+	private enum Name {
+		IDLOGERROR("data[0]"),
+		DATE("data[3]");
+		
+		private String val;
+
+		Name(String val) {
+	        this.val = val;
+	    }
+
+	    public String val() {
+	        return val;
+	    }
+	}
 	
 	public LogErrorValidator(String local) {
 		super(local);
@@ -19,5 +35,13 @@ public class LogErrorValidator extends ParentValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		Pagination pagination = (Pagination) target;
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(0))) {
+			onlyContainNumber(Name.IDLOGERROR.val(), pagination.getData().get(0), errors);
+		}
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(4))) {
+			incorrectDateFormat(Name.DATE.val(), pagination.getData().get(4), errors);
+		}
 	}
 }

@@ -18,7 +18,7 @@ import com.eai.model.LogError;
 import com.eai.service.LogErrorService;
 import com.eai.service.MenuService;
 import com.eai.service.ParentMenuService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 import com.eai.service.UserService;
 
 @Controller
@@ -42,7 +42,7 @@ public class IndexController {
 	LogErrorService logErrorService;
 	
 	@Autowired
-	SystemParametersService systemParametersService;
+	SystemParameterService systemParametersService;
 	
 	public static final String PATTH_INDEX = "/index";
 	

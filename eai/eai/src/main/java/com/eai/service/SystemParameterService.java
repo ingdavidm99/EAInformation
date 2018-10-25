@@ -3,7 +3,7 @@ package com.eai.service;
 import com.eai.dto.Pagination;
 import com.eai.model.SystemParameter;
 
-public interface SystemParametersService{
+public interface SystemParameterService{
 
 	public SystemParameter findById(Integer idSystemParameter);
 	

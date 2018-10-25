@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eai.dto.Pagination;
 import com.eai.model.SystemParameter;
 import com.eai.repository.SystemParameterRepository;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 
 @Service
-public class SystemParametersServiceImpl extends SqlImplement implements SystemParametersService {
+public class SystemParameterServiceImpl extends SqlImplement implements SystemParameterService {
 	
 	@PersistenceContext
     private EntityManager manager;
@@ -39,31 +39,31 @@ public class SystemParametersServiceImpl extends SqlImplement implements SystemP
 	@Override
 	@Transactional
 	public void findAll(Pagination pagination, Long pageSize) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-    	CriteriaQuery<SystemParameter> criteria = builder.createQuery(SystemParameter.class);
-    	Root<SystemParameter> root = criteria.from(SystemParameter.class);
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+    	CriteriaQuery<SystemParameter> criteriaQuery = criteriaBuilder.createQuery(SystemParameter.class);
+    	Root<SystemParameter> root = criteriaQuery.from(SystemParameter.class);
     	
-    	sqlEqual(builder, criteria, root.get("idSystemParameter"), pagination.getData().get(0));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("idSystemParameter"), pagination.getData().get(0));
     	
-    	sqlLike(builder, criteria, root.get("name"), pagination.getData().get(1));
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("name"), pagination.getData().get(1));
     	
-    	sqlLike(builder, criteria, root.get("value"), pagination.getData().get(2));
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("value"), pagination.getData().get(2));
     	
-    	sqlLike(builder, criteria, root.get("description"), pagination.getData().get(3));
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("description"), pagination.getData().get(3));
     	
-    	sqlEqual(builder, criteria, root.get("type"), pagination.getData().get(4));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("type"), pagination.getData().get(4));
     	
-    	sqlLike(builder, criteria, root.get("userName"), pagination.getData().get(5));
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("userName"), pagination.getData().get(5));
     	
-    	sqlEqual(builder, criteria, root.get("date"), pagination.getData().get(6));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("date"), pagination.getData().get(6));
     	
-    	Query query = manager.createQuery(criteria);
-    	List<SystemParameter> systemParametersList = query.getResultList();
+    	Query query = manager.createQuery(criteriaQuery);
+    	List<SystemParameter> systemParameterList = query.getResultList();
     	
-    	if(!systemParametersList.isEmpty()) {
+    	if(!systemParameterList.isEmpty()) {
     		pagination.getPage(query.getResultList().size(), pageSize);
         	
-        	PagedListHolder<SystemParameter> pageList = new PagedListHolder<>(systemParametersList);
+        	PagedListHolder<SystemParameter> pageList = new PagedListHolder<>(systemParameterList);
         	MutableSortDefinition x = new MutableSortDefinition ("name", true, true);
         	pageList.setSort(x);
         	pageList.resort();

@@ -13,7 +13,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import com.eai.model.ParentMenu;
 import com.eai.service.MenuService;
 import com.eai.service.ParentMenuService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 import com.eai.service.UserService;
 
 public class TransactionPage implements Serializable{
@@ -109,7 +109,7 @@ public class TransactionPage implements Serializable{
 			UserService userService, 
 			ParentMenuService parentMenuService,
 			MenuService menuService,
-			SystemParametersService systemParametersService) {
+			SystemParameterService systemParametersService) {
 		
 		Object user = request.getSession().getAttribute("user");
 		

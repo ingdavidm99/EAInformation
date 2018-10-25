@@ -19,7 +19,7 @@ import com.eai.dto.MessageResponse;
 import com.eai.model.LogError;
 import com.eai.model.UserDetail;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 import com.eai.service.UserDetailService;
 import com.eai.service.UserService;
 import com.eai.validator.UserDetailValidator;
@@ -40,7 +40,7 @@ public class SignUpController {
 	UserService userService;
 	
 	@Autowired
-	private SystemParametersService systemParametersService;
+	private SystemParameterService systemParametersService;
 	
 	public static final String PATTH_SIGNUP = "/signup";
 	public static final String PATTH_REGISTRATION = "/registration";

@@ -20,6 +20,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.eai.dto.Constants;
 import com.eai.dto.MessageResponse;
+import com.eai.model.LogError;
+import com.eai.service.LogErrorService;
 import com.eai.service.UserService;
 
 @Configuration
@@ -31,13 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     private UserService userService;
+	
+	@Autowired
+    private LogErrorService logErrorService;
 		
 	@Value("${server.session-timeout}")
     private Integer maxInactiveIntervalInSeconds;
     
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
+        try {
+			auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+		} catch (Exception exception) {
+			logErrorService.save(new LogError(exception, "N/A", "/SecurityConfig"));
+		}
     }
 
     @Bean

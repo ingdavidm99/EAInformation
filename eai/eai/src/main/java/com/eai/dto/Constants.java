@@ -3,6 +3,7 @@ package com.eai.dto;
 public enum Constants {
 	
 	EMPTY(""),
+	ZERO("0"),
 	
 	//PAGE
 	BASEURL("https://www.amazon.com/"),

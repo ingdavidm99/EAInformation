@@ -19,7 +19,7 @@ import com.eai.dto.Progress;
 import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParametersService;
+import com.eai.service.SystemParameterService;
 import com.eai.wizard.model.LevelOne;
 import com.eai.wizard.model.ViewLevelThree;
 import com.eai.wizard.model.ViewLevelTwo;
@@ -43,7 +43,7 @@ public class EAinformationController {
 	LogErrorService logErrorService;
 	
 	@Autowired
-	SystemParametersService systemParametersService;
+	SystemParameterService systemParametersService;
 	
 	@Autowired
 	LevelOneService levelOneService;
