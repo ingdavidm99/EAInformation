@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -67,7 +68,11 @@ public class LogErrorController {
         	transactionPage = TransactionPage.getData(request, PATTH_LOGERROR);
         	
         	if (bindingResult.hasErrors()) {
-				message.setStatus(Constants.FAILURE.val());
+        		for(FieldError error : bindingResult.getFieldErrors()){
+        			model.addAttribute(error.getField().replace("[","_").replace("]",""), error.getDefaultMessage());
+				}
+        		
+        		message.setStatus(Constants.FAILURE.val());
 			 }else {
 				 logErrorService.findAll(pagination, transactionPage.getPageSize());
 			 }

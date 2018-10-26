@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -79,6 +80,10 @@ public class SystemParameterController {
         	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETER);
         	
         	if (bindingResult.hasErrors()) {
+        		for(FieldError error : bindingResult.getFieldErrors()){
+        			model.addAttribute(error.getField().replace("[","_").replace("]",""), error.getDefaultMessage());
+				}
+        		
 				message.setStatus(Constants.FAILURE.val());
 			 }else {
 				 systemParametersService.findAll(pagination, transactionPage.getPageSize());

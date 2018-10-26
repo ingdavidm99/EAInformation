@@ -22,7 +22,7 @@ public class ParentValidator {
 			Matcher matcher = pattern.matcher(value.toString());
 			
 			if (!matcher.matches()) { 
-				String onlyContainLetters = transactionPage.get("only_contain_letters");
+				String onlyContainLetters = transactionPage.get("onlyContainLetters");
 				errors.rejectValue(element, onlyContainLetters, onlyContainLetters);  
 			} 
 		}

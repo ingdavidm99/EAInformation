@@ -8,13 +8,13 @@ import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 
-public class TaskTest implements Task {
+public class TaskSignIn implements Task {
 
 	private String userName;
 	
 	private String password;	
 
-	public TaskTest(String userName, String password) {
+	public TaskSignIn(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
 	}
@@ -29,7 +29,7 @@ public class TaskTest implements Task {
 			);
 	}
 	
-	public static TaskTest with(String userName, String password) {
-		return Tasks.instrumented(TaskTest.class, userName, password);
+	public static TaskSignIn with(String userName, String password) {
+		return Tasks.instrumented(TaskSignIn.class, userName, password);
 	}
 }

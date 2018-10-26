@@ -1,3 +1,38 @@
+.hola {
+  cursor: default;
+  position: relative;
+  top: 2px;
+  
+  -webkit-animation: bounce .3s ease infinite alternate;
+  
+  color: #FFF;
+  text-align: center;
+ }
+/* ANIMATION */
+@-webkit-keyframes bounce {
+  100% {
+    top: -2px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .eai {
 	display: none;
 	position: absolute;
@@ -33,14 +68,14 @@
 	border-bottom: 4px double #1C6EA4;
 	background: white;
 	z-index: 2;
-	height: 7rem;
+	height: 7.5rem;
 }
 
 .eai-main-1 {
 	position: absolute;
 	width: 95%;
 	left: 5%;
-	margin-top: 7rem;
+	margin-top: 7.5rem;
 }
 
 .eai-head-2 {

@@ -115,8 +115,6 @@ public class UserServiceImpl extends CriteriaSql implements UserService {
 			userNew.setRole(new Role(new Integer("2")));
 		}
 		
-		
-		
 		return userRepository.save(userNew);
 	}
 }

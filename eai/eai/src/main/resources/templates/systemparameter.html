@@ -29,8 +29,36 @@
 												<div th:replace="resources/messages :: message"></div>
 											</td>
 										</tr>
-										<tr>
-											<td colspan="8" style="padding-top: 20px;"></td>
+										<tr style="height: 2rem; text-align: center;">
+											<th style="width: 8%" scope="row">
+												<span class="badge badge-danger hola" 
+													  th:if="${data_0 != null}"
+													  data-toggle="popover" 
+													  th:data-content="${data_0}">
+													<em class="fas fa-exclamation-triangle"></em>
+												</span>
+											</th>
+											<td style="width: 14%">
+												<span class="badge badge-danger hola" 
+													  th:if="${data_1 != null}"
+													  data-toggle="popover" 
+													  th:data-content="${data_1}">
+													<em class="fas fa-exclamation-triangle"></em>
+												</span>
+											</td>
+											<td style="width: 14%"></td>
+											<td style="width: 14%">
+												<span class="badge badge-danger hola" 
+													  th:if="${data_3 != null}"
+													  data-toggle="popover" 
+													  th:data-content="${data_3}">
+													<em class="fas fa-exclamation-triangle"></em>
+												</span>
+											</td>
+											<td style="width: 14%"></td>
+											<td style="width: 14%"></td>
+											<td style="width: 14%"></td>
+											<td style="width: 8%"></td>
 										</tr>
 										<tr>
 											<th style="width: 8%" scope="row">

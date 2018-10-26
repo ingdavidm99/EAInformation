@@ -10,6 +10,7 @@ public class LogErrorValidator extends ParentValidator implements Validator{
 	
 	private enum Name {
 		IDLOGERROR("data[0]"),
+		USERNAME("data[2]"),
 		DATE("data[3]");
 		
 		private String val;
@@ -38,6 +39,10 @@ public class LogErrorValidator extends ParentValidator implements Validator{
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(0))) {
 			onlyContainNumber(Name.IDLOGERROR.val(), pagination.getData().get(0), errors);
+		}
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(2))) {
+			onlyContainLetters(Name.USERNAME.val(), pagination.getData().get(2), errors);
 		}
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(4))) {

@@ -61,5 +61,7 @@ input[type=text]:placeholder {
 }
 
 #icon {
-	width: 60%;
+	width: 40%;
+	border-radius: 100px;
+    padding-top: 10px;
 }

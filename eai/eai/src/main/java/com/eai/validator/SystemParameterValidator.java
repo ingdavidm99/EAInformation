@@ -10,6 +10,8 @@ public class SystemParameterValidator extends ParentValidator implements Validat
 	
 	private enum Name {
 		IDSYSTEMPARAMETER("data[0]"),
+		NAME("data[1]"),
+		DESCRIPTION("data[3]"),
 		DATE("data[6]");
 		
 		private String val;
@@ -38,6 +40,14 @@ public class SystemParameterValidator extends ParentValidator implements Validat
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(0))) {
 			onlyContainNumber(Name.IDSYSTEMPARAMETER.val(), pagination.getData().get(0), errors);
+		}
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(1))) {
+			onlyContainLetters(Name.NAME.val(), pagination.getData().get(1), errors);
+		}
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(3))) {
+			onlyContainLetters(Name.DESCRIPTION.val(), pagination.getData().get(3), errors);
 		}
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(6))) {
