@@ -1,4 +1,4 @@
-package com.eaitest.runners;
+package com.eaitest.runner;
 
 import org.junit.runner.RunWith;
 
@@ -8,10 +8,10 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-		features = "src/test/resources/features/SignIn.feature",
+		features = "src/test/resources/features/homePage.feature",
 		snippets = SnippetType.CAMELCASE,
-		glue = "com.eaitest.definitions",
+		glue = "com.eaitest.definition",
 		plugin = {"pretty", "html:target/cucumber-html-report"})
-public class RunnerSignIn {
+public class HomePageRunner {
 
 }
