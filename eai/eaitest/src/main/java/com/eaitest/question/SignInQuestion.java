@@ -23,7 +23,7 @@ public class SignInQuestion implements Question<Boolean>{
 		}	
 	}
 	
-	public static SignInQuestion errorFailed(String type) {
+	public static SignInQuestion validateTheAnswer(String type) {
 		return new SignInQuestion(type);
 	}
 

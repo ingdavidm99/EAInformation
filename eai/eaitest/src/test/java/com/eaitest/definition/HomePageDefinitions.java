@@ -16,14 +16,14 @@ public class HomePageDefinitions {
 	@Managed(driver = "chrome",  options="--start-maximized --ignore-certificate-errors --disable-infobars ")
 	WebDriver webDriver;
 	
-	@Given("^Abrir navegador$")
-	public void abrirNavegador(){
+	@Given("^Open browser$")
+	public void openBrowser(){
 		OnStage.setTheStage(new OnlineCast());
 		OnStage.theActorCalled("david").can(BrowseTheWeb.with(webDriver));
 	}
 
-	@When("^Abrir pagina principal$")
-	public void abrirPaginaPrincipal() {
-		OnStage.theActorInTheSpotlight().attemptsTo(HomePageTask.openBrowser());
+	@When("^Open main web page$")
+	public void openMainWebPage() {
+		OnStage.theActorInTheSpotlight().attemptsTo(HomePageTask.openMainWebPage());
 	}
 }

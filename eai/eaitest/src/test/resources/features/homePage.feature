@@ -1,7 +1,7 @@
 @tag
-Feature: Title of your test
+Feature: I want to enter the application web
 
   @tag1
-  Scenario: Abrir
-    Given Abrir navegador
-    When  Abrir pagina principal
+  Scenario: Browser
+    Given Open browser
+    When  Open main web page

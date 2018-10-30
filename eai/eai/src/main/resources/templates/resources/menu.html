@@ -21,7 +21,8 @@
 		        		   role="button" 
 		        		   data-toggle="dropdown" 
 		        		   aria-haspopup="true" 
-		        		   aria-expanded="false">
+		        		   aria-expanded="false"
+		        		   th:id="'menu__-${parentMenu.idParentMenu}__'">
 		          			<em th:class="${parentMenu.menuIcon}"></em>
 		          			<span th:text="#{${parentMenu.idParentMenu}}"></span>
 		          			<em th:classappend="${parentMenu.menuIcon}" class="shortmenu animate"></em>
@@ -29,6 +30,7 @@
 		        		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		          			<a th:each="menu : ${parentMenu.menuList}" 
 		          			   th:text="#{${menu.urlName}}"
+		          			   th:ID="'subMenu__-${menu.idMenu}__'"
 		          			   th:href="'/eai__${menu.urlName}__'" 
 		          			   class="dropdown-item event"></a>
 		          		</div>

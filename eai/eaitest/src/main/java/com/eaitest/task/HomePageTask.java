@@ -14,7 +14,7 @@ public class HomePageTask implements Task {
 		actor.attemptsTo(Open.browserOn(new HomePage()));
 	}
 	
-	public static HomePageTask openBrowser() {
+	public static HomePageTask openMainWebPage() {
 		return Tasks.instrumented(HomePageTask.class);
 	}
 }
