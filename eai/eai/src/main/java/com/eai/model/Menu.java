@@ -20,20 +20,20 @@ public class Menu implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_MENU", nullable = false)
+    @Column(name = "ID_MENU")
     private Integer idMenu;
     
-    @Column(name = "URL_NAME", nullable = false, length = 45)
+    @Column(name = "URL_NAME", length = 45)
     private String urlName;
     
-    @Column(name = "ORDER", nullable = false)
+    @Column(name = "ORDER")
     private int order;
     
-    @JoinColumn(name = "ID_PARENT_MENU", referencedColumnName = "ID_PARENT_MENU", nullable = false)
+    @JoinColumn(name = "ID_PARENT_MENU", referencedColumnName = "ID_PARENT_MENU")
     @ManyToOne(fetch = FetchType.LAZY)
     private ParentMenu parentMenu;
     
-    @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID_ROLE", nullable = false)
+    @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID_ROLE")
     @ManyToOne(fetch = FetchType.LAZY)
     private Role role;
     

@@ -14,11 +14,11 @@ import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.model.Rule;
 import com.eai.service.LogErrorService;
-import com.eai.service.SystemParameterService;
+import com.eai.service.RuleService;
 import com.eai.wizard.service.ExtractInformationService;
 
 @Controller
-public class EAinformationController {
+public class RuleTestController {
 	
 	MessageResponse message = new MessageResponse();
 	
@@ -26,44 +26,29 @@ public class EAinformationController {
 		
 	@Autowired
 	LogErrorService logErrorService;
-	
-	@Autowired
-	SystemParameterService systemParametersService;
-	
+		
 	@Autowired
 	ExtractInformationService extractInformationService;
 	
-	public static final String EAINFORMATION = "/eainformation";
+	@Autowired
+	RuleService ruleService;
+	
+	public static final String RULETEST = "/ruletest";
 		
-	@RequestMapping(path = EAINFORMATION, method = RequestMethod.GET)
+	@RequestMapping(path = RULETEST, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
-			transactionPage = TransactionPage.getData(request, EAINFORMATION);
+			transactionPage = TransactionPage.getData(request, RULETEST);
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), EAINFORMATION));
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), RULETEST));
 	    }
 		
-		Rule rule = new Rule();
-		
-		rule.setBaseUrl("https://www.gamestorrents.tv");
-		
-		rule.setUrlRegex("[(href)#bs-example-navbar-collapse-1 .nav li a:not(.active)]");
-		rule.setPaginationUrl(false);
-		rule.setPaginationUrlRegex("");
-		
-		rule.setLinkRegex("[(href)#home h6 a]");
-		rule.setPaginationLink(true);
-		rule.setPaginationLinkRegex("[(!?)page/{0}/]");
-		
-		rule.setDescriptionRegex(
-				"[(title).listencio.*?\\n.*?li.*?<strong>(.*?)<\\/strong><\\/li>]"
-			  + "\n"
-			  + "[(img)img.*?post_imagem.*?src=\"(.*?)\"]");
+		Rule rule = ruleService.findById(1);
 				
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		model.addAttribute("Rule", rule);
 		
-    	return  EAINFORMATION;
+    	return  RULETEST;
 	}
 }

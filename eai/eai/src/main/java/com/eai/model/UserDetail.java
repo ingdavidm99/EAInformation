@@ -21,19 +21,19 @@ public class UserDetail implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_USER_DETAIL", nullable = false)
+    @Column(name = "ID_USER_DETAIL")
     private Integer idUserDetail;
     
-    @Column(name = "FULL_NAME", nullable = false, length = 50)
+    @Column(name = "FULL_NAME", length = 50)
     private String fullName;
     
     @Transient
     private String userName;
     
-    @Column(name = "BIRTH", nullable = false)
+    @Column(name = "BIRTH")
     private String birth;
     
-    @Column(name = "EMAIL", nullable = false, length = 50)
+    @Column(name = "EMAIL", length = 50)
     private String email;
     
     @Transient

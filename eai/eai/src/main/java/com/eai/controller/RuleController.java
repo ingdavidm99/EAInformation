@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,43 +20,46 @@ import com.eai.dto.Pagination;
 import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.service.LogErrorService;
-import com.eai.validator.LogErrorValidator;
+import com.eai.service.RuleService;
+import com.eai.validator.RuleValidator;
 
 @Controller
-@Scope("prototype")
-public class LogErrorController {
+public class RuleController {
 	
 	MessageResponse message = new MessageResponse();
 	
 	TransactionPage transactionPage;
-	
+		
 	@Autowired
 	LogErrorService logErrorService;
-		
-	public static final String LOGERROR = "/logerror";
-	public static final String SEARCH_LOGERROR = "/searchLogerror";
+	
+	@Autowired
+	RuleService ruleService;
+			
+	public static final String RULE = "/rule";
+	public static final String SEARCH_RULE = "/searchRule";
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
-		binder.addValidators(new LogErrorValidator(TransactionPage.getData(request)));
+		binder.addValidators(new RuleValidator(TransactionPage.getData(request)));
 	}
-	
-	@RequestMapping(path = LOGERROR, method = RequestMethod.GET)
+		
+	@RequestMapping(path = RULE, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
-			transactionPage = TransactionPage.getData(request, LOGERROR);
+			transactionPage = TransactionPage.getData(request, RULE);
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), LOGERROR));
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), RULE));
 	    }
 		
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute(Constants.PAGINATION.val(), new Pagination());
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-    	return  LOGERROR;
+    	return  RULE;
 	}
 	
-	@RequestMapping(path = SEARCH_LOGERROR, method = RequestMethod.POST)
+	@RequestMapping(path = SEARCH_RULE, method = RequestMethod.POST)
     public String searchLogerror(
     		Model model,
     		HttpServletRequest request,
@@ -65,7 +67,7 @@ public class LogErrorController {
     		BindingResult bindingResult) {
 		
         try {
-        	transactionPage = TransactionPage.getData(request, LOGERROR);
+        	transactionPage = TransactionPage.getData(request, RULE);
         	
         	if (bindingResult.hasErrors()) {
         		for(FieldError error : bindingResult.getFieldErrors()){
@@ -74,16 +76,16 @@ public class LogErrorController {
         		
         		message.setStatus(Constants.FAILURE.val());
 			 }else {
-				 logErrorService.findAll(pagination, transactionPage.getPageSize());
+				 ruleService.findAll(pagination, transactionPage.getPageSize());
 			 }
         } catch (Exception exception) {
-        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), SEARCH_LOGERROR));
+        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), SEARCH_RULE));
         }
                 
     	model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage); 
     	model.addAttribute(Constants.PAGINATION.val(), pagination); 
         model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
         
-        return  LOGERROR;
+        return  RULE;
 	}
 }

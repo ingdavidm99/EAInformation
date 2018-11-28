@@ -44,32 +44,32 @@ public class SystemParameterController {
 	@Autowired
 	SystemParameterService systemParametersService;
 	
-	public static final String PATTH_SYSTEMPARAMETER = "/systemparameter";
-	public static final String PATTH_SEARCH_SYSTEMPARAMETER = "/searchSystemparameter";
-	public static final String PATTH_FINDBY_ID_SYSTEMPARAMETER = "/findByIdSystemparameter";
-	public static final String PATTH_UPDATE_SYSTEMPARAMETER = "/updateSystemparameter";
+	public static final String SYSTEMPARAMETER = "/systemparameter";
+	public static final String SEARCH_SYSTEMPARAMETER = "/searchSystemparameter";
+	public static final String FINDBY_ID_SYSTEMPARAMETER = "/findByIdSystemparameter";
+	public static final String UPDATE_SYSTEMPARAMETER = "/updateSystemparameter";
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
 		binder.addValidators(new SystemParameterValidator(TransactionPage.getData(request)));
 	}
 		
-	@RequestMapping(path = PATTH_SYSTEMPARAMETER, method = RequestMethod.GET)
+	@RequestMapping(path = SYSTEMPARAMETER, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
-			transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETER);
+			transactionPage = TransactionPage.getData(request, SYSTEMPARAMETER);
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SYSTEMPARAMETER));
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), SYSTEMPARAMETER));
 	    }
 		
 		model.addAttribute(Constants.TRANSACTIONPAGE.val() ,transactionPage);
 		model.addAttribute(Constants.PAGINATION.val(), new Pagination());	 
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-    	return  PATTH_SYSTEMPARAMETER;
+    	return  SYSTEMPARAMETER;
 	}
 	
-	@RequestMapping(path = PATTH_SEARCH_SYSTEMPARAMETER, method = RequestMethod.POST)
+	@RequestMapping(path = SEARCH_SYSTEMPARAMETER, method = RequestMethod.POST)
     public String searchSystemparameter(
     		Model model,
     		HttpServletRequest request,
@@ -77,7 +77,7 @@ public class SystemParameterController {
     		BindingResult bindingResult) {
 		
         try {
-        	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETER);
+        	transactionPage = TransactionPage.getData(request, SYSTEMPARAMETER);
         	
         	if (bindingResult.hasErrors()) {
         		for(FieldError error : bindingResult.getFieldErrors()){
@@ -89,17 +89,17 @@ public class SystemParameterController {
 				 systemParametersService.findAll(pagination, transactionPage.getPageSize());
 			 }
         } catch (Exception exception) {
-        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_SEARCH_SYSTEMPARAMETER));
+        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), SEARCH_SYSTEMPARAMETER));
         }
         
         model.addAttribute(Constants.TRANSACTIONPAGE.val() ,transactionPage);
         model.addAttribute(Constants.PAGINATION.val(), pagination);
         model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
         
-        return  PATTH_SYSTEMPARAMETER;
+        return  SYSTEMPARAMETER;
 	}
 	
-	@RequestMapping(path = PATTH_FINDBY_ID_SYSTEMPARAMETER, method = RequestMethod.POST)
+	@RequestMapping(path = FINDBY_ID_SYSTEMPARAMETER, method = RequestMethod.POST)
     public ResponseEntity<Object> findByIdsystemParameters(
     		Model model, 
     		HttpServletRequest request,
@@ -108,10 +108,10 @@ public class SystemParameterController {
         SystemParameter systemParameter = null;
        
         try {
-        	transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETER);
+        	transactionPage = TransactionPage.getData(request, SYSTEMPARAMETER);
         	systemParameter = systemParametersService.findById(idSystemParameters.getIdSystemParameter());
         } catch (Exception exception) {
-        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_FINDBY_ID_SYSTEMPARAMETER));
+        	message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), FINDBY_ID_SYSTEMPARAMETER));
         }
         
     	if(systemParameter != null) {
@@ -125,7 +125,7 @@ public class SystemParameterController {
         return ResponseEntity.ok(message);
 	}
 	
-	@RequestMapping(path = PATTH_UPDATE_SYSTEMPARAMETER, method = RequestMethod.POST)
+	@RequestMapping(path = UPDATE_SYSTEMPARAMETER, method = RequestMethod.POST)
     public ResponseEntity<Object> updateSystemparameter(
     		Model model,
     		HttpServletRequest request,
@@ -133,7 +133,7 @@ public class SystemParameterController {
     		Errors errors) { 
 		
 		try {
-			transactionPage = TransactionPage.getData(request, PATTH_SYSTEMPARAMETER);
+			transactionPage = TransactionPage.getData(request, SYSTEMPARAMETER);
 			ValidationUtils.invokeValidator(new UpdateSystemParameterValidator(TransactionPage.getData(request)), systemParameter, errors);
 			
 			if(errors.hasErrors()) {
@@ -144,7 +144,7 @@ public class SystemParameterController {
 				 message.setStatus(Constants.SUCCESS.val());
 			 }
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_UPDATE_SYSTEMPARAMETER));
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), UPDATE_SYSTEMPARAMETER));
 		}
 		
 		return ResponseEntity.ok(message);

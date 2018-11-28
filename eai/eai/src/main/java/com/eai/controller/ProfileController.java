@@ -43,20 +43,20 @@ public class ProfileController {
 	@Autowired
 	LogErrorService logErrorService;
 		
-	public static final String PATTH_PROFILE = "/profile";
-	public static final String PATTH_UPDATE_PROFILE = "/updateProfile";
+	public static final String PROFILE = "/profile";
+	public static final String UPDATE_PROFILE = "/updateProfile";
 	
 	@InitBinder("UserDetail")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
 		binder.addValidators(new ProfileValidator(userService, TransactionPage.getData(request)));
 	}
 	
-	@RequestMapping(path = PATTH_PROFILE, method = RequestMethod.GET)
+	@RequestMapping(path = PROFILE, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		
 		UserDetail userDetail = new UserDetail();
 		try {
-			transactionPage = TransactionPage.getData(request, PATTH_PROFILE);
+			transactionPage = TransactionPage.getData(request, PROFILE);
 			
 			User user = userService.findByUserName(transactionPage.getUserName());
 
@@ -64,17 +64,17 @@ public class ProfileController {
 			userDetail.setUserName(user.getUsername());
 			userDetail.setRoleName(user.getRole().getName());
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_PROFILE));
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PROFILE));
 	    }
 		
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute("UserDetail", userDetail);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
     	
-		return  PATTH_PROFILE;
+		return  PROFILE;
 	}
 	
-	@RequestMapping(path = PATTH_UPDATE_PROFILE, method = RequestMethod.POST)
+	@RequestMapping(path = UPDATE_PROFILE, method = RequestMethod.POST)
     public String updateProfile(
     		Model model,
     		HttpServletRequest request,
@@ -82,7 +82,7 @@ public class ProfileController {
     		BindingResult bindingResult) {
 		
 		try {
-			transactionPage = TransactionPage.getData(request, PATTH_PROFILE);
+			transactionPage = TransactionPage.getData(request, PROFILE);
 			
 			if (bindingResult.hasErrors()) {
 				for(FieldError error : bindingResult.getFieldErrors()){
@@ -106,13 +106,13 @@ public class ProfileController {
 						
 			
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_UPDATE_PROFILE));
+			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), UPDATE_PROFILE));
 		}
 		
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute("UserDetail", userDetail);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-		return  PATTH_PROFILE;
+		return  PROFILE;
 	}
 }

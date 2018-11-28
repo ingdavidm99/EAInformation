@@ -23,19 +23,19 @@ public class ParentMenu implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_PARENT_MENU", nullable = false)
+    @Column(name = "ID_PARENT_MENU")
     private Integer idParentMenu;
     
-    @Column(name = "MENU_ICON", nullable = false, length = 45)
+    @Column(name = "MENU_ICON", length = 45)
     private String menuIcon;
     
-    @Column(name = "ORDER", nullable = false)
+    @Column(name = "ORDER")
     private int order;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentMenu", fetch = FetchType.LAZY)
     private List<Menu> menuList;
 
-    @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID_ROLE", nullable = false)
+    @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID_ROLE")
     @ManyToOne(fetch = FetchType.LAZY)
     private Role role;
     

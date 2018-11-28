@@ -44,15 +44,15 @@ public class IndexController {
 	@Autowired
 	SystemParameterService systemParametersService;
 	
-	public static final String PATTH_INDEX = "/index";
+	public static final String INDEX = "/index";
 	
-	@RequestMapping(path = PATTH_INDEX, method = RequestMethod.GET)
+	@RequestMapping(path = INDEX, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request, @ModelAttribute("Pagination") Pagination pagination) {
 		try {
 			transactionPage = (TransactionPage) request.getSession().getAttribute(Constants.TRANSACTIONPAGE.val());
 			
 			if(transactionPage != null) {
-				transactionPage = TransactionPage.getData(request, PATTH_INDEX);
+				transactionPage = TransactionPage.getData(request, INDEX);
 			}else {
 				transactionPage = TransactionPage.getData(request, userService, parentMenuService, menuService, systemParametersService);
 				
@@ -61,13 +61,13 @@ public class IndexController {
 			}
 		} catch (Exception exception) {
 			if(transactionPage != null)
-				message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), PATTH_INDEX));
+				message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), INDEX));
 	    }
 		
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute(Constants.PAGINATION.val(), pagination);	 
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-    	return PATTH_INDEX;
+    	return INDEX;
 	}
 }

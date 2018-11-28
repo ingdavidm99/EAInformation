@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="resources/commons :: head">
 	<title></title>
-	<head th:replace="resources/commons :: head"><title></title></head>
-	<link rel="stylesheet" th:href="@{/assets/css/wizard.css}"/>
 </head>
 <body class="flexcroll">
 	<div class="container-fluid eai">
@@ -12,73 +10,26 @@
 				<div th:replace="resources/menu :: menu"></div>
 			</div>
 			<div class="col eai-body">
-				<div class="col eai-head-1">
+				<div class="col eai-head-2">
 					<div class="row">
 						<div class="col">
-							<br/>
 							<div class="row justify-content-end">
-								<div class="col-12">
+								<div class="col-11">
 									<div th:replace="resources/messages :: message"></div>
-									<table class="table table-sm">
-										<tbody>
-											<tr>
-												<td>
-													<div class="form-bootstrapWizard">
-														<ul class="bootstrapWizard form-wizard">
-															<li class="tab1 active">
-																<a data-toggle="tab">
-																	<span class="step">
-																		<em class="fas fa-tasks"></em>
-																	</span>
-																</a>
-															</li>
-															<li class="tab2">
-																<a data-toggle="tab">
-																	<span class="step">
-																		<em class="fas fa-sort-alpha-down"></em>
-																	</span>
-																</a>
-															</li>
-															<li class="tab3">
-																<a data-toggle="tab">
-																	<span class="step">
-																		<em class="fas fa-list-ol"></em>
-																	</span>
-																</a>
-															</li>
-															<li class="tab4">
-																<a data-toggle="tab">
-																	<span class="step">
-																		<em class="fas fa-thumbs-up"></em>
-																	</span>
-																</a>
-															</li>
-														</ul>
-														<div class="clearfix"></div>
-													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col eai-main-1">
-					<div th:replace="eainformation_step1 :: step1"></div>
-					
-					<div th:replace="eainformation_step2 :: step2"></div>
-					
-					<div th:replace="eainformation_step3 :: step3"></div>
-					
-					<div th:replace="eainformation_step4 :: step4"></div>
+				<div class="col eai-main-2">
+					<div class="container">
+						
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div th:replace="resources/commons :: scripts"></div>
-	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/eainformation.js}"></script>
 </body>
 </html>

@@ -42,8 +42,8 @@ public class SignUpController {
 	@Autowired
 	private SystemParameterService systemParametersService;
 	
-	public static final String PATTH_SIGNUP = "/signup";
-	public static final String PATTH_REGISTRATION = "/registration";
+	public static final String SIGNUP = "/signup";
+	public static final String REGISTRATION = "/registration";
 	
 	@InitBinder("UserDetail")
 	protected void setupBinder(WebDataBinder binder) {
@@ -51,21 +51,21 @@ public class SignUpController {
 	    binder.addValidators(new UserDetailValidator(userService, local));
 	}
 		
-	@RequestMapping(path = PATTH_SIGNUP, method = RequestMethod.GET)
+	@RequestMapping(path = SIGNUP, method = RequestMethod.GET)
     public String page(Model model) {
 		try {
 			model.addAttribute("UserDetail", new UserDetail());
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, "N/A", PATTH_SIGNUP));
+			message = logErrorService.save(new LogError(exception, "N/A", SIGNUP));
 	    }
 		
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-    	return  PATTH_SIGNUP;
+    	return  SIGNUP;
 	}
 	
-	@RequestMapping(path = PATTH_REGISTRATION, method = RequestMethod.POST)
-    public String registration(
+	@RequestMapping(path = REGISTRATION, method = RequestMethod.POST)
+    public String save(
     		Model model, 
     		@ModelAttribute("UserDetail") @Valid UserDetail userDetail,
     		BindingResult bindingResult) {
@@ -82,12 +82,12 @@ public class SignUpController {
 				 userDetailService.saveUserDetail(userDetail);
 			 }
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, "N/A", PATTH_REGISTRATION));
+			message = logErrorService.save(new LogError(exception, "N/A", REGISTRATION));
 		}
 		
 		model.addAttribute("UserDetail", userDetail);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-		return  PATTH_SIGNUP;
+		return  SIGNUP;
 	}
 }

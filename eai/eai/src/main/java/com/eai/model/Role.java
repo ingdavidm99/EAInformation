@@ -22,11 +22,11 @@ public class Role implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_ROLE", nullable = false)
+    @Column(name = "ID_ROLE")
     private Integer idRole;
     
     @Basic(optional = false)
-    @Column(name = "NAME", nullable = false, length = 255)
+    @Column(name = "NAME", length = 255)
     private String name;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.LAZY)

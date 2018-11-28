@@ -67,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             	.antMatchers("/index").hasAnyRole(ADMIN, USER)
             	
             	.antMatchers("/eainformation").hasAnyRole(ADMIN)
+            	.antMatchers("/ruletest").hasAnyRole(ADMIN)
+            	.antMatchers("/rule", "searchRule").hasAnyRole(ADMIN)
             	.antMatchers("/systemparameter", "/searchSystemparameter").hasAnyRole(ADMIN)
         		.antMatchers("/logerror", "/searchLogerror").hasAnyRole(ADMIN)
         		.antMatchers("/user", "/searchUser").hasAnyRole(ADMIN);

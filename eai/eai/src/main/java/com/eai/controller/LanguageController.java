@@ -31,28 +31,28 @@ public class LanguageController {
 	@Autowired
 	SystemParameterService systemParametersService;
 	
-	public static final String PATTH_LANGUAGE_EN = "/langEN";
-	public static final String PATTH_LANGUAGE_ES = "/langES";
+	public static final String LANGUAGE_EN = "/langEN";
+	public static final String LANGUAGE_ES = "/langES";
 	
-	@RequestMapping(path = PATTH_LANGUAGE_EN, method = RequestMethod.GET)
+	@RequestMapping(path = LANGUAGE_EN, method = RequestMethod.GET)
     public ResponseEntity<MessageResponse> langEN(Model model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			
 			this.lang(request, "EN");
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, PATTH_LANGUAGE_EN, PATTH_LANGUAGE_EN));
+			message = logErrorService.save(new LogError(exception, LANGUAGE_EN, LANGUAGE_EN));
 	    }
 		
 		return ResponseEntity.ok(message);
 	}
 	
-	@RequestMapping(path = PATTH_LANGUAGE_ES, method = RequestMethod.GET)
+	@RequestMapping(path = LANGUAGE_ES, method = RequestMethod.GET)
     public ResponseEntity<MessageResponse> langES(Model model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			
 			this.lang(request, "ES");
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, PATTH_LANGUAGE_ES, PATTH_LANGUAGE_ES));
+			message = logErrorService.save(new LogError(exception, LANGUAGE_ES, LANGUAGE_ES));
 	    }
 		
 		return ResponseEntity.ok(message);

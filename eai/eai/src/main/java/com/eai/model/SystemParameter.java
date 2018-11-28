@@ -18,27 +18,27 @@ public class SystemParameter implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_SYSTEM_PARAMETER", nullable = false)
+    @Column(name = "ID_SYSTEM_PARAMETER")
     private Integer idSystemParameter;
     
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME")
     private String name;
     
     @Lob
-    @Column(name = "VALUE", nullable = false)
+    @Column(name = "VALUE")
     private String value;
     
     @Lob
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DESCRIPTION")
     private String description;
     
-    @Column(name = "TYPE", nullable = false)
+    @Column(name = "TYPE")
     private Integer type;
     
-    @Column(name = "USER_NAME", nullable = false)
+    @Column(name = "USER_NAME")
     private String userName;
     
-    @Column(name = "DATE", nullable = false)
+    @Column(name = "DATE")
     private String date;
     
     public SystemParameter() {

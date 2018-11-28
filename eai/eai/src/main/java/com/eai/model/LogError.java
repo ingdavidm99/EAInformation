@@ -23,20 +23,20 @@ public class LogError implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_LOG_ERROR", nullable = false)
+    @Column(name = "ID_LOG_ERROR")
     private Integer idLogError;
     
     @Lob
-    @Column(name = "ERROR", nullable = false)
+    @Column(name = "ERROR")
     private String error;
     
-    @Column(name = "USER_NAME", nullable = false)
+    @Column(name = "USER_NAME")
     private String userName;
     
-    @Column(name = "PATH", nullable = false)
+    @Column(name = "PATH")
     private String path;
     
-    @Column(name = "DATE", nullable = false)
+    @Column(name = "DATE")
     private String date;
      
     public LogError() {

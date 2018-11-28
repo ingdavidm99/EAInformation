@@ -33,10 +33,10 @@ public class SignInController {
 	@Autowired
 	SystemParameterService systemParametersService;
 	
-	public static final String PATTH_SIGNIN = "/signin";
-	public static final String PATTH_LOGOUT = "/logout";
+	public static final String SIGNIN = "/signin";
+	public static final String LOGOUT = "/logout";
 	
-	@RequestMapping(path = PATTH_SIGNIN, method = RequestMethod.GET)
+	@RequestMapping(path = SIGNIN, method = RequestMethod.GET)
     public String page(Model model, HttpServletRequest request) {
 		try {
 	        model.addAttribute("user", new User());
@@ -46,15 +46,15 @@ public class SignInController {
 	        
 	        request.getSession().removeAttribute(Constants.MESSAGESRESPONSE.val());
 	     } catch (Exception exception) {
-	    	 message = logErrorService.save(new LogError(exception, null, PATTH_SIGNIN));
+	    	 message = logErrorService.save(new LogError(exception, null, SIGNIN));
 	    }
 		
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
 		
-        return PATTH_SIGNIN;
+        return SIGNIN;
     }
 	
-	@RequestMapping(path = PATTH_LOGOUT, method = RequestMethod.GET)
+	@RequestMapping(path = LOGOUT, method = RequestMethod.GET)
 	public String logoutPage (Model model, HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null){    
@@ -66,7 +66,7 @@ public class SignInController {
 		
 		systemParametersService.saveOrUpdate(systemParameter);
 		
-		request.getSession().setAttribute("logoutTimeOut", PATTH_LOGOUT);
+		request.getSession().setAttribute("logoutTimeOut", LOGOUT);
 		
 		return "redirect:/signin";
 	}

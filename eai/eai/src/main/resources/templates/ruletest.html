@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="resources/commons :: head">
+	<title></title>
+</head>
+<body class="flexcroll">
+	<div class="container-fluid eai">
+		<div class="row">
+			<div class="col eai-menu-1">
+				<div th:replace="resources/menu :: menu"></div>
+			</div>
+			<div class="col eai-body">
+				<div class="col eai-head-2">
+					<div class="row">
+						<div class="col">
+							<div class="row justify-content-end">
+								<div class="col-11">
+									<div th:replace="resources/messages :: message"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col eai-main-2">
+					<div class="col">
+						<form th:action="@{/registration}" method="post" autocomplete="off">
+							<br/>
+							<div class="row justify-content-center">
+								<div class="col-7">
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{9_baseUrl}"
+												th:title="#{9_baseUrl}" 
+												data-toggle="popover" 
+												th:data-content="#{9_tooltipbaseUrl}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													id="baseUrl" 
+													th:placeholder="#{9_baseUrl}"
+													th:value="${Rule.baseUrl}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{9_url}"
+												th:title="#{9_url}" 
+												data-toggle="popover" 
+												th:data-content="#{9_tooltipUrl}"></label>
+										</div>
+										<div class="col-8">
+											<input 
+												type="text" 
+												class="form-control form-control-sm"
+												id="urlRegex" 
+												th:placeholder="#{9_url}"
+												th:value="${Rule.urlRegex}"/>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<div class="custom-control custom-checkbox mr-sm-2">
+									        	<input 
+									        		type="checkbox" 
+									        		class="custom-control-input" 
+									        		id="paginationUrl"
+									        		th:checked="${Rule.paginationUrl}"/>
+									        	<label 
+									        		class="custom-control-label" 
+									        		for="paginationUrl" 
+									        		th:text="#{9_paginationUrl}"
+													th:title="#{9_paginationUrl}" 
+													data-toggle="popover" 
+													th:data-content="#{9_tooltipPaginationUrl}"></label>
+									      	</div>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													id="paginationUrlRegex" 
+													th:placeholder="#{9_paginationUrl}"
+													th:readonly="${Rule.paginationUrl} == false"
+													th:value="${Rule.paginationUrlRegex}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{9_link}"
+												th:title="#{9_link}" 
+												data-toggle="popover" 
+												th:data-content="#{9_tooltipLink}"></label>
+										</div>
+										<div class="col-8">
+											<input 
+												type="text" 
+												class="form-control form-control-sm"
+												id="linkRegex" 
+												th:placeholder="#{9_link}"
+												th:value="${Rule.linkRegex}"/>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<div class="custom-control custom-checkbox mr-sm-2">
+									        	<input 
+									        		type="checkbox" 
+									        		class="custom-control-input" 
+									        		id="paginationLink"
+									        		th:checked="${Rule.paginationLink}"/>
+									        	<label 
+									        		class="custom-control-label" 
+									        		for="paginationLink" 
+									        		th:text="#{9_paginationLink}"
+													th:title="#{9_paginationLink}" 
+													data-toggle="popover" 
+													th:data-content="#{9_tooltipPaginationLink}"></label>
+									      	</div>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													id="paginationLinkRegex" 
+													th:placeholder="#{9_paginationLink}"
+													th:readonly="${Rule.paginationLink} == false"
+													th:value="${Rule.paginationLinkRegex}"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{9_subLink}"
+												th:title="#{9_subLink}" 
+												data-toggle="popover" 
+												th:data-content="#{9_tooltipSubLink}"></label>
+										</div>
+										<div class="col-8">
+											<input 
+												type="text" 
+												class="form-control form-control-sm"
+												id="subLinkRegex" 
+												th:placeholder="#{9_subLink}"/>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<div class="custom-control custom-checkbox mr-sm-2">
+									        	<input 
+									        		type="checkbox" 
+									        		class="custom-control-input" 
+									        		id="paginationSubLink"
+									        		th:checked="${Rule.paginationSubLink}"/>
+									        	<label 
+									        		class="custom-control-label" 
+									        		for="paginationSubLink" 
+									        		th:text="#{9_paginationSubLink}"
+													th:title="#{9_paginationSubLink}" 
+													data-toggle="popover" 
+													th:data-content="#{9_tooltipPaginationSubLink}"></label>
+									      	</div>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<input 
+													type="text" 
+													class="form-control form-control-sm"
+													id="paginationSubLinkRegex" 
+													th:placeholder="#{9_paginationSubLink}"
+													th:readonly="${Rule.paginationSubLink} == false"/>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-4">
+											<label 
+												class="col-form-label" 
+												th:text="#{3_description}"
+												th:title="#{3_description}" 
+												data-toggle="popover" 
+												th:data-content="#{3_tooltipDescription}"></label>
+										</div>
+										<div class="col-8">
+											<div class="required-field-block">
+												<textarea 
+													id="descriptionRegex" 
+													style="resize: none; 
+													min-width: 100%; 
+													min-height: 100px;"
+													th:text="${Rule.descriptionRegex}"></textarea>
+												<div class="required-icon" th:data-content="#{requiredField}">
+									                <div class="text">*</div>
+									            </div>
+											</div>
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row justify-content-center">
+										<div class="col-12">
+											<button class="btn btn-primary btn-sm" type="submit" th:text="#{9_updateRule}"></button>
+										</div>
+									</div>
+								</div>
+								<div class="col-5">
+									b
+								</div>
+							</div>
+							<br/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="resources/commons :: scripts"></div>
+	<script th:inline="javascript" type="text/javascript" th:src="@{/assets/js/rule.js}"></script>
+</body>
+</html>
