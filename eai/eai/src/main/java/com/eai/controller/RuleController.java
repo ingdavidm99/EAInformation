@@ -22,7 +22,7 @@ import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.service.LogErrorService;
 import com.eai.service.RuleService;
-import com.eai.validator.RuleValidator;
+import com.eai.validator.SearchRuleValidator;
 
 @Controller
 @Scope("prototype")
@@ -43,7 +43,7 @@ public class RuleController {
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
-		binder.addValidators(new RuleValidator(TransactionPage.getData(request)));
+		binder.addValidators(new SearchRuleValidator(TransactionPage.getData(request)));
 	}
 		
 	@RequestMapping(path = RULE, method = RequestMethod.GET)

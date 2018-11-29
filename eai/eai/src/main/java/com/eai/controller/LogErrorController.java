@@ -21,7 +21,7 @@ import com.eai.dto.Pagination;
 import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.service.LogErrorService;
-import com.eai.validator.LogErrorValidator;
+import com.eai.validator.SearchLogErrorValidator;
 
 @Controller
 @Scope("prototype")
@@ -39,7 +39,7 @@ public class LogErrorController {
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
-		binder.addValidators(new LogErrorValidator(TransactionPage.getData(request)));
+		binder.addValidators(new SearchLogErrorValidator(TransactionPage.getData(request)));
 	}
 	
 	@RequestMapping(path = LOGERROR, method = RequestMethod.GET)

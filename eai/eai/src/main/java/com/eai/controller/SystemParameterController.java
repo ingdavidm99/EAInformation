@@ -27,8 +27,8 @@ import com.eai.model.LogError;
 import com.eai.model.SystemParameter;
 import com.eai.service.LogErrorService;
 import com.eai.service.SystemParameterService;
+import com.eai.validator.SearchSystemParameterValidator;
 import com.eai.validator.SystemParameterValidator;
-import com.eai.validator.UpdateSystemParameterValidator;
 
 @Controller
 @Scope("prototype")
@@ -51,7 +51,7 @@ public class SystemParameterController {
 	
 	@InitBinder("Pagination")
 	protected void setupBinder(WebDataBinder binder, HttpServletRequest request) {
-		binder.addValidators(new SystemParameterValidator(TransactionPage.getData(request)));
+		binder.addValidators(new SearchSystemParameterValidator(TransactionPage.getData(request)));
 	}
 		
 	@RequestMapping(path = SYSTEMPARAMETER, method = RequestMethod.GET)
@@ -134,7 +134,7 @@ public class SystemParameterController {
 		
 		try {
 			transactionPage = TransactionPage.getData(request, SYSTEMPARAMETER);
-			ValidationUtils.invokeValidator(new UpdateSystemParameterValidator(TransactionPage.getData(request)), systemParameter, errors);
+			ValidationUtils.invokeValidator(new SystemParameterValidator(TransactionPage.getData(request)), systemParameter, errors);
 			
 			if(errors.hasErrors()) {
 				message.setErrors(errors.getAllErrors());

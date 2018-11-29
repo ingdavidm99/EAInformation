@@ -6,12 +6,11 @@ import org.springframework.validation.Validator;
 import com.eai.dto.Constants;
 import com.eai.dto.Pagination;
 
-public class LogErrorValidator extends ParentValidator implements Validator{
+public class SearchRuleValidator extends ParentValidator implements Validator{
 	
 	private enum Name {
-		IDLOGERROR("data[0]"),
-		USERNAME("data[2]"),
-		DATE("data[3]");
+		IDRULE("data[0]"),
+		CODE("data[1]");
 		
 		private String val;
 
@@ -24,7 +23,7 @@ public class LogErrorValidator extends ParentValidator implements Validator{
 	    }
 	}
 	
-	public LogErrorValidator(String local) {
+	public SearchRuleValidator(String local) {
 		super(local);
 	}
 	
@@ -38,15 +37,11 @@ public class LogErrorValidator extends ParentValidator implements Validator{
 		Pagination pagination = (Pagination) target;
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(0))) {
-			onlyContainNumber(Name.IDLOGERROR.val(), pagination.getData().get(0), errors);
+			onlyContainNumber(Name.IDRULE.val(), pagination.getData().get(0), errors);
 		}
 		
-		if(!Constants.EMPTY.val().equals(pagination.getData().get(2))) {
-			onlyContainLetters(Name.USERNAME.val(), pagination.getData().get(2), errors);
-		}
-		
-		if(!Constants.EMPTY.val().equals(pagination.getData().get(4))) {
-			incorrectDateFormat(Name.DATE.val(), pagination.getData().get(4), errors);
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(1))) {
+			onlyContainLetters(Name.CODE.val(), pagination.getData().get(1), errors);
 		}
 	}
 }

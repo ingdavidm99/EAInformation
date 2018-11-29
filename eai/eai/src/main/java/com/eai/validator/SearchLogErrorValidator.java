@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 import com.eai.dto.Constants;
 import com.eai.dto.Pagination;
 
-public class RuleValidator extends ParentValidator implements Validator{
+public class SearchLogErrorValidator extends ParentValidator implements Validator{
 	
 	private enum Name {
 		IDLOGERROR("data[0]"),
@@ -24,7 +24,7 @@ public class RuleValidator extends ParentValidator implements Validator{
 	    }
 	}
 	
-	public RuleValidator(String local) {
+	public SearchLogErrorValidator(String local) {
 		super(local);
 	}
 	
@@ -43,6 +43,10 @@ public class RuleValidator extends ParentValidator implements Validator{
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(2))) {
 			onlyContainLetters(Name.USERNAME.val(), pagination.getData().get(2), errors);
+		}
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(4))) {
+			incorrectDateFormat(Name.DATE.val(), pagination.getData().get(4), errors);
 		}
 	}
 }

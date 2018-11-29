@@ -1,18 +1,16 @@
 package com.eai.validator;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.eai.dto.Constants;
-import com.eai.dto.Pagination;
+import com.eai.model.SystemParameter;
 
 public class SystemParameterValidator extends ParentValidator implements Validator{
 	
 	private enum Name {
-		IDSYSTEMPARAMETER("data[0]"),
-		NAME("data[1]"),
-		DESCRIPTION("data[3]"),
-		DATE("data[6]");
+		VALUE("value"),
+		DESCRIPTION("description");
 		
 		private String val;
 
@@ -31,27 +29,33 @@ public class SystemParameterValidator extends ParentValidator implements Validat
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Pagination.class.isAssignableFrom(clazz);
+		return SystemParameter.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Pagination pagination = (Pagination) target;
+		SystemParameter systemParameter = (SystemParameter) target;
 		
-		if(!Constants.EMPTY.val().equals(pagination.getData().get(0))) {
-			onlyContainNumber(Name.IDSYSTEMPARAMETER.val(), pagination.getData().get(0), errors);
+		String requiredField = getTransactionPage().get("requiredField");
+			
+		//value
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.VALUE.val(), requiredField, requiredField);
+		if (!errors.hasFieldErrors(Name.VALUE.val())) {
+			
+			switch (systemParameter.getType()) {
+				case 1:
+					onlyContainLetters(Name.VALUE.val(), systemParameter.getValue(), errors);
+				break;
+				case 2:
+					onlyContainNumber(Name.VALUE.val(), systemParameter.getValue(), errors);
+				break;
+				default:
+					
+				break;
+			}
 		}
 		
-		if(!Constants.EMPTY.val().equals(pagination.getData().get(1))) {
-			onlyContainLetters(Name.NAME.val(), pagination.getData().get(1), errors);
-		}
-		
-		if(!Constants.EMPTY.val().equals(pagination.getData().get(3))) {
-			onlyContainLetters(Name.DESCRIPTION.val(), pagination.getData().get(3), errors);
-		}
-		
-		if(!Constants.EMPTY.val().equals(pagination.getData().get(6))) {
-			incorrectDateFormat(Name.DATE.val(), pagination.getData().get(6), errors);
-		}
+		//description
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Name.DESCRIPTION.val(), requiredField, requiredField);
 	}
 }
