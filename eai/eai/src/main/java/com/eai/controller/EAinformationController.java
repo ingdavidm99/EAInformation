@@ -3,6 +3,7 @@ package com.eai.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.eai.service.SystemParameterService;
 import com.eai.wizard.service.ExtractInformationService;
 
 @Controller
+@Scope("prototype")
 public class EAinformationController {
 	
 	MessageResponse message = new MessageResponse();

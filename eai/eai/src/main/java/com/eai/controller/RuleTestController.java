@@ -3,8 +3,10 @@ package com.eai.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +20,7 @@ import com.eai.service.RuleService;
 import com.eai.wizard.service.ExtractInformationService;
 
 @Controller
+@Scope("prototype")
 public class RuleTestController {
 	
 	MessageResponse message = new MessageResponse();
@@ -35,15 +38,16 @@ public class RuleTestController {
 	
 	public static final String RULETEST = "/ruletest";
 		
-	@RequestMapping(path = RULETEST, method = RequestMethod.GET)
-    public String page(Model model, HttpServletRequest request) {
+	@RequestMapping(path = RULETEST + "/{id}", method = RequestMethod.GET)
+    public String page(Model model, HttpServletRequest request, @PathVariable("id") int id) {
 		try {
-			transactionPage = TransactionPage.getData(request, RULETEST);
+			transactionPage = TransactionPage.getData(request, RULETEST + "/0");
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), RULETEST));
 	    }
 		
-		Rule rule = ruleService.findById(1);
+		Rule rule = new Rule();
+		if(id > 0) rule = ruleService.findById(id);
 				
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
