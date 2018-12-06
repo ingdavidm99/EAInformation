@@ -1,34 +1,47 @@
-package com.eai.wizard.utils;
+package com.eai.wizard.serviceimple;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.transaction.Transactional;
+
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.eai.model.Data;
 import com.eai.repository.DataRepository;
+import com.eai.service.SystemParameterService;
+import com.eai.wizard.service.RegexService;
+import com.eai.wizard.utils.Page;
+import com.eai.wizard.utils.Xml;
 
-public class Regex {
+@Service
+public class RegexServiceImpl implements RegexService{
 	
-	private String userAgent;
-	private int numberOfRetries;
+	@Autowired
+	SystemParameterService systemParameterService;
 	
-	public Regex(String userAgent, int numberOfRetries) {
-		this.userAgent = userAgent;
-		this.numberOfRetries = numberOfRetries;
-	}
-
-	public void link(String baseUrl, String href,final String pagination1, boolean isPagination, Queue<String> data){
+	@Autowired
+	DataRepository dataRepository;
+	
+	@Override
+	@Transactional
+	public Queue<String> link(String baseUrl, String href, String pagination, boolean isPagination){
 		Page page = new Page();
+		Queue<String> data = new LinkedList<>();
+		String userAgent = systemParameterService.findById(6).getValue();
+		int numberOfRetries = Integer.parseInt(systemParameterService.findById(2).getValue());
 		
 		String url = null;
 		String match = href(href);
-		String pagination = (isPagination)? pagination(pagination1) : "";
+		pagination = (isPagination)? pagination(pagination) : "";
 		
 		boolean statusCode = true;
 		int index = 1;
@@ -52,6 +65,8 @@ public class Regex {
 			else
 				index +=1;
 		}
+		
+		return data;
 	}
 	
 	private String href(String text) {
@@ -82,9 +97,13 @@ public class Regex {
        return cadena.toString();
 	}
 
-	public void data(String baseUrl, String rule, DataRepository dataRepository){
+	@Override
+	@Transactional
+	public void data(String baseUrl, String rule ){
 		Page page = new Page();
 		List<Map<String, String>> match = tag(rule);
+		String userAgent = systemParameterService.findById(6).getValue();
+		int numberOfRetries = Integer.parseInt(systemParameterService.findById(2).getValue());
 		
 		Document document = page.response(baseUrl, userAgent, numberOfRetries);
 			
@@ -101,7 +120,7 @@ public class Regex {
 				
 				while(matcher.find()) {
 					key.add(e.getKey());
-					value.add(matcher.group(1));
+					value.add(matcher.group(1).trim());
 				}
 			}
 			
@@ -119,7 +138,7 @@ public class Regex {
 	}
 	
 	private List<Map<String, String>> tag(String text) {
-		String patternString = "\\[\\((.*?)\\)(.*?)\\]";
+		String patternString = "\\{\\((.*?)\\)(.*?)\\}";
 
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(text);

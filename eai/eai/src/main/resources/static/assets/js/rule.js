@@ -1,23 +1,9 @@
 $(function() {
-	$('#paginationUrl').click(function () {
+	$('#paginationUrl, #paginationLink, #paginationSubLink').click(function () {
 		if($(this).is(':checked'))
-			$('#paginationUrlRegex').removeAttr('readonly');
+			$('#' + $(this).attr('id') + 'Regex').removeAttr('readonly');
 		else
-			$('#paginationUrlRegex').attr('readonly', 'readonly');
-	});
-	
-	$('#paginationLink').click(function () {
-		if($(this).is(':checked'))
-			$('#paginationLinkRegex').removeAttr('readonly');
-		else
-			$('#paginationLinkRegex').attr('readonly', 'readonly');
-	});
-	
-	$('#paginationSubLink').click(function () {
-		if($(this).is(':checked'))
-			$('#paginationSubLinkRegex').removeAttr('readonly');
-		else
-			$('#paginationSubLinkRegex').attr('readonly', 'readonly');
+			$('#' + $(this).attr('id') + 'Regex').attr('readonly', 'readonly');
 	});
 	
 	$('.run').click(function () {

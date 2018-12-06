@@ -48,6 +48,9 @@ public class RuleTestController {
 		
 		Rule rule = new Rule();
 		if(id > 0) rule = ruleService.findById(id);
+		
+		
+		extractInformationService.extractInformation(rule);
 				
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);

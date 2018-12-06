@@ -51,9 +51,7 @@ public class Xml {
 	        
 	        return sw.toString();  
 	    } catch (Exception e) {
-    		e.printStackTrace();
-		}
-    	
-    	return null;
+	    	return null;
+	    }
 	}
 }
