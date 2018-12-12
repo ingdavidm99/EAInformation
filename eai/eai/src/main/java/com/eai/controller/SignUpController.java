@@ -56,7 +56,7 @@ public class SignUpController {
 		try {
 			model.addAttribute("UserDetail", new UserDetail());
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, "N/A", SIGNUP));
+			message = logErrorService.save(new LogError(exception, "NA", SIGNUP));
 	    }
 		
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);
@@ -82,7 +82,7 @@ public class SignUpController {
 				 userDetailService.saveUserDetail(userDetail);
 			 }
 		} catch (Exception exception) {
-			message = logErrorService.save(new LogError(exception, "N/A", REGISTRATION));
+			message = logErrorService.save(new LogError(exception, "NA", REGISTRATION));
 		}
 		
 		model.addAttribute("UserDetail", userDetail);

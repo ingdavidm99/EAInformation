@@ -16,7 +16,6 @@ import com.eai.dto.TransactionPage;
 import com.eai.model.LogError;
 import com.eai.model.Rule;
 import com.eai.service.LogErrorService;
-import com.eai.service.RuleService;
 import com.eai.wizard.service.ExtractInformationService;
 
 @Controller
@@ -33,24 +32,19 @@ public class RuleTestController {
 	@Autowired
 	ExtractInformationService extractInformationService;
 	
-	@Autowired
-	RuleService ruleService;
-	
 	public static final String RULETEST = "/ruletest";
 		
 	@RequestMapping(path = RULETEST + "/{id}", method = RequestMethod.GET)
-    public String page(Model model, HttpServletRequest request, @PathVariable("id") int id) {
+    public String page(Model model, HttpServletRequest request, @PathVariable("id") int idRule) {
+		
+		Rule rule = new Rule();
 		try {
 			transactionPage = TransactionPage.getData(request, RULETEST + "/0");
+			
+			rule = extractInformationService.extractInformation(idRule);
 		} catch (Exception exception) {
 			message = logErrorService.save(new LogError(exception, transactionPage.getUserName(), RULETEST));
 	    }
-		
-		Rule rule = new Rule();
-		if(id > 0) rule = ruleService.findById(id);
-		
-		
-		extractInformationService.extractInformation(rule);
 				
 		model.addAttribute(Constants.TRANSACTIONPAGE.val(), transactionPage);
 		model.addAttribute(Constants.MESSAGESRESPONSE.val(), message);

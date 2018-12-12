@@ -6,5 +6,5 @@ public interface SubLinkService {
 
 	public void runnableSubLink(Rule rule);
 	
-	public void runnableDataSubLink(String rule);
+	public void runnableDataSubLink(Rule rule);
 }

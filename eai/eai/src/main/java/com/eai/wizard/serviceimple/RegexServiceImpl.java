@@ -16,8 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eai.model.Data;
-import com.eai.repository.DataRepository;
+import com.eai.service.RuleService;
 import com.eai.service.SystemParameterService;
+import com.eai.wizard.service.DataService;
 import com.eai.wizard.service.RegexService;
 import com.eai.wizard.utils.Page;
 import com.eai.wizard.utils.Xml;
@@ -29,7 +30,10 @@ public class RegexServiceImpl implements RegexService{
 	SystemParameterService systemParameterService;
 	
 	@Autowired
-	DataRepository dataRepository;
+	DataService dataService;
+	
+	@Autowired
+	RuleService ruleService;
 	
 	@Override
 	@Transactional
@@ -99,7 +103,7 @@ public class RegexServiceImpl implements RegexService{
 
 	@Override
 	@Transactional
-	public void data(String baseUrl, String rule ){
+	public void data(String baseUrl, String rule){
 		Page page = new Page();
 		List<Map<String, String>> match = tag(rule);
 		String userAgent = systemParameterService.findById(6).getValue();
@@ -132,7 +136,7 @@ public class RegexServiceImpl implements RegexService{
 				Data data = new Data();
 				
 				data.setXml(xml.generate(key, value));
-				dataRepository.save(data);
+				dataService.saveOrUpdate(data);
 			}
 		}
 	}

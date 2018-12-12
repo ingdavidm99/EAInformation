@@ -6,5 +6,5 @@ public interface LinkService {
 
 	public void runnableLink(Rule rule);
 	
-	public void runnableDataLink(String rule);
+	public void runnableDataLink(Rule rule);
 }

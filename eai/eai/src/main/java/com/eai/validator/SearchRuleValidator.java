@@ -10,7 +10,8 @@ public class SearchRuleValidator extends ParentValidator implements Validator{
 	
 	private enum Name {
 		IDRULE("data[0]"),
-		CODE("data[1]");
+		CODE("data[1]"),
+		DATE("data[4]");
 		
 		private String val;
 
@@ -42,6 +43,10 @@ public class SearchRuleValidator extends ParentValidator implements Validator{
 		
 		if(!Constants.EMPTY.val().equals(pagination.getData().get(1))) {
 			onlyContainLetters(Name.CODE.val(), pagination.getData().get(1), errors);
+		}
+		
+		if(!Constants.EMPTY.val().equals(pagination.getData().get(4))) {
+			incorrectDateFormat(Name.DATE.val(), pagination.getData().get(4), errors);
 		}
 	}
 }

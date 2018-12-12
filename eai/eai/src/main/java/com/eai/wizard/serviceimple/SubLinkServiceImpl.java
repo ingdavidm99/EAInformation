@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eai.model.Rule;
-import com.eai.repository.DataRepository;
+import com.eai.service.RuleService;
 import com.eai.service.SystemParameterService;
 import com.eai.wizard.service.RegexService;
 import com.eai.wizard.service.SubLinkService;
@@ -20,10 +20,10 @@ public class SubLinkServiceImpl  implements SubLinkService{
 	SystemParameterService systemParameterService;
 	
 	@Autowired
-	DataRepository dataRepository;
+	RegexService regexService;
 	
 	@Autowired
-	RegexService regexService;
+	RuleService ruleService;
 	
 	private DataLink dataLink = DataLink.getSingletonInstance();
 	private DataSubLink dataSubLink = DataSubLink.getSingletonInstance();
@@ -34,6 +34,8 @@ public class SubLinkServiceImpl  implements SubLinkService{
 		int numberOfThreads = Integer.parseInt(systemParameterService.findById(3).getValue());
 		
 		Runnable task = () -> {
+			try {Thread.sleep(5000);} catch (InterruptedException e) { Thread.currentThread().interrupt();}
+			
 			while(!dataLink.getLinkList().isEmpty() || dataLink.getThreadGroupLink().activeCount() != 0){
 				if(dataSubLink.poolSubLink() < numberOfThreads) {
 					String url = dataLink.getLinkList().poll();
@@ -48,7 +50,6 @@ public class SubLinkServiceImpl  implements SubLinkService{
 			dataLink.getLinkList().clear();
 		};
 		
-		try {Thread.sleep(5000);} catch (InterruptedException e) { Thread.currentThread().interrupt();}
 		Thread thread = new Thread(task);	
 		thread.start();
 	}
@@ -70,10 +71,12 @@ public class SubLinkServiceImpl  implements SubLinkService{
 		thread.start();
     }
 
-	public void runnableDataSubLink(String rule) {
+	public void runnableDataSubLink(Rule rule) {
 		int numberOfThreads = Integer.parseInt(systemParameterService.findById(3).getValue());
 		
 		Runnable task = () -> {
+			try {Thread.sleep(10000);} catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+			
 			while(!dataSubLink.getSubLinkList().isEmpty() || dataSubLink.getThreadGroupSubLink().activeCount() != 0){
 				if(dataSubLink.poolDataSubLink() < numberOfThreads) {
 					String url = dataSubLink.getSubLinkList().poll();
@@ -84,16 +87,18 @@ public class SubLinkServiceImpl  implements SubLinkService{
 					}
 				}
 			}
-		};
+			
+			rule.setStatus("P");
+			ruleService.saveOrUpdate(rule);
+		};		
 		
-		try {Thread.sleep(10000);} catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 		Thread thread = new Thread(task);	
 		thread.start();
 	}
 	
-	private void data(String url, String rule){
+	private void data(String url, Rule rule){
     	Runnable task = () -> {
-    		regexService.data(url, rule);
+    		regexService.data(url, rule.getDescriptionRegex());
 			dataSubLink.lessPoolDataSubLink();
 		};
 		

@@ -7,4 +7,6 @@ public interface RuleService{
 	public Rule findById(Integer idRule);
 	
 	public void findAll(Pagination pagination, Long pageSize);
+	
+	public void saveOrUpdate(Rule rule);
 }

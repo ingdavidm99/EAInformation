@@ -11,7 +11,7 @@ public class SearchLogErrorValidator extends ParentValidator implements Validato
 	private enum Name {
 		IDLOGERROR("data[0]"),
 		USERNAME("data[2]"),
-		DATE("data[3]");
+		DATE("data[4]");
 		
 		private String val;
 

@@ -43,7 +43,7 @@ public class LogError implements Serializable {
 	}
     
     public LogError(Exception exception,String userName, String path) {
-    	this.userName = (userName == null)? "N/A" : userName;
+    	this.userName = (userName == null)? "NA" : userName;
 		this.path = path;
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		this.date = dt.format(new Date());

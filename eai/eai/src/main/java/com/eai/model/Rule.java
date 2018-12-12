@@ -23,8 +23,14 @@ public class Rule implements Serializable{
 	@Column(name = "CODE")
     private String code;
 	
+	@Column(name = "STATUS")
+	private String status;
+	
 	@Column(name = "DESCRIPTION")
 	private String description;
+	
+	@Column(name = "DATE")
+    private String date;
 	
 	@Column(name = "BASE_URL")
 	private String baseUrl;
@@ -74,6 +80,14 @@ public class Rule implements Serializable{
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 	public String getDescription() {
 		return description;
@@ -81,6 +95,14 @@ public class Rule implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getBaseUrl() {

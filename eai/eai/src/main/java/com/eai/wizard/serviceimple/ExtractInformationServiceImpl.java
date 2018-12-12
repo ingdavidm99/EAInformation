@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eai.model.Rule;
+import com.eai.service.RuleService;
 import com.eai.service.SystemParameterService;
 import com.eai.wizard.service.ExtractInformationService;
 import com.eai.wizard.service.LinkService;
@@ -18,6 +19,9 @@ public class ExtractInformationServiceImpl  implements ExtractInformationService
 
 	@Autowired
 	SystemParameterService systemParameterService;
+	
+	@Autowired
+	RuleService ruleService;
 	
 	@Autowired
 	UrlService urlService;
@@ -38,8 +42,26 @@ public class ExtractInformationServiceImpl  implements ExtractInformationService
 	 */
 	@Override
 	@Transactional
-	public void extractInformation(Rule rule) {
-       if(rule.getUrlRegex() != null) {
+	public Rule extractInformation(Integer idRule) {
+		
+		Rule rule = ruleService.findById(idRule);
+		rule = (rule == null) ? new Rule() : rule;
+		
+		if(idRule > 0 && !"R".equals(rule.getStatus())) {
+			
+			rule.setStatus("R");
+			ruleService.saveOrUpdate(rule);
+			
+			extractUrl(rule);
+			
+			extractData(rule);
+		}
+		
+		return rule;
+	}
+	
+	private void extractUrl(Rule rule) {
+		if(rule.getUrlRegex() != null) {
 			urlService.runnableUrl(rule);
 		}
 		
@@ -50,29 +72,34 @@ public class ExtractInformationServiceImpl  implements ExtractInformationService
 		if(rule.getSubLinkRegex() != null) {
 			subLinkService.runnableSubLink(rule);
 		}
-		
+	}
+	
+	private void extractData(Rule rule) {
 		if(rule.getUrlRegex() == null 
 				&& rule.getLinkRegex() == null 
 				&& rule.getSubLinkRegex() == null) {
 			regexService.data(rule.getBaseUrl(), rule.getDescriptionRegex());
+			
+			rule.setStatus("P");
+			ruleService.saveOrUpdate(rule);
 		}
 		
 		if(rule.getUrlRegex() != null 
 				&& rule.getLinkRegex() == null 
 				&& rule.getSubLinkRegex() == null) {
-			urlService.runnableDataUrl(rule.getDescriptionRegex());
+			urlService.runnableDataUrl(rule);
 		}
 		
 		if(rule.getUrlRegex() != null 
 				&& rule.getLinkRegex() != null 
 				&& rule.getSubLinkRegex() == null) {
-			linkService.runnableDataLink(rule.getDescriptionRegex());
+			linkService.runnableDataLink(rule);
 		}
 		
 		if(rule.getUrlRegex() != null 
 				&& rule.getLinkRegex() != null 
 				&& rule.getSubLinkRegex() != null) {
-			subLinkService.runnableDataSubLink(rule.getDescriptionRegex());
+			subLinkService.runnableDataSubLink(rule);
 		}
 	}
 }

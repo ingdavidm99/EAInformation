@@ -46,10 +46,14 @@ public class RuleServiceImpl extends CriteriaSql implements RuleService {
     	sqlEqual(criteriaBuilder, criteriaQuery, root.get("idRule"), pagination.getData().get(0));
     	
     	sqlLike(criteriaBuilder, criteriaQuery, root.get("code"), pagination.getData().get(1));
-
-    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("description"), pagination.getData().get(2));
     	
-    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("baseUrl"), pagination.getData().get(3));
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("status"), pagination.getData().get(2));
+
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("description"), pagination.getData().get(3));
+    	
+    	sqlEqual(criteriaBuilder, criteriaQuery, root.get("date"), pagination.getData().get(4));
+    	
+    	sqlLike(criteriaBuilder, criteriaQuery, root.get("baseUrl"), pagination.getData().get(5));
     	
     	Query query = manager.createQuery(criteriaQuery);
     	List<Rule> ruleList = query.getResultList();
@@ -71,5 +75,11 @@ public class RuleServiceImpl extends CriteriaSql implements RuleService {
     		pagination.setPage(0);
     		pagination.setSize(0);
     	}
+	}
+
+	@Override
+	@Transactional
+	public void saveOrUpdate(Rule rule) {
+		ruleRepository.save(rule);
 	}
 }

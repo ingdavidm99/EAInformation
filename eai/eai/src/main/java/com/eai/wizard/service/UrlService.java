@@ -6,5 +6,5 @@ public interface UrlService {
 
 	public void runnableUrl(Rule rule);
 	
-	public void runnableDataUrl(String rule);
+	public void runnableDataUrl(Rule rule);
 }

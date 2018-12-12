@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         try {
 			auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 		} catch (Exception exception) {
-			logErrorService.save(new LogError(exception, "N/A", "/SecurityConfig"));
+			logErrorService.save(new LogError(exception, "NA", "/SecurityConfig"));
 		}
     }
 

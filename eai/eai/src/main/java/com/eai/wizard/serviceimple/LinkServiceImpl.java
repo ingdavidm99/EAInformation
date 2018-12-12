@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eai.model.Rule;
-import com.eai.repository.DataRepository;
+import com.eai.service.RuleService;
 import com.eai.service.SystemParameterService;
 import com.eai.wizard.service.LinkService;
 import com.eai.wizard.service.RegexService;
@@ -20,10 +20,10 @@ public class LinkServiceImpl  implements LinkService{
 	SystemParameterService systemParameterService;
 	
 	@Autowired
-	DataRepository dataRepository;
+	RegexService regexService;
 	
 	@Autowired
-	RegexService regexService;
+	RuleService ruleService;
 	
 	private DataUrl dataUrl = DataUrl.getSingletonInstance();
 	private DataLink dataLink = DataLink.getSingletonInstance();
@@ -34,6 +34,8 @@ public class LinkServiceImpl  implements LinkService{
 		int numberOfThreads = Integer.parseInt(systemParameterService.findById(3).getValue());
 		
 		Runnable task = () -> {
+			try {Thread.sleep(5000);} catch (InterruptedException e) { Thread.currentThread().interrupt();}
+			
 			while(!dataUrl.getUrlList().isEmpty() || dataUrl.getThreadGroupUrl().activeCount() != 0){
 				if(dataLink.poolLink() < numberOfThreads) {
 					String url = dataUrl.getUrlList().poll();
@@ -48,7 +50,6 @@ public class LinkServiceImpl  implements LinkService{
 			dataUrl.getUrlList().clear();
 		};
 		
-		try {Thread.sleep(5000);} catch (InterruptedException e) { Thread.currentThread().interrupt();}
 		Thread thread = new Thread(task);	
 		thread.start();
 	}
@@ -70,10 +71,12 @@ public class LinkServiceImpl  implements LinkService{
 		thread.start();
     }
 
-	public void runnableDataLink(String rule) {
+	public void runnableDataLink(Rule rule) {
 		int numberOfThreads = Integer.parseInt(systemParameterService.findById(3).getValue());
 		
 		Runnable task = () -> {
+			try {Thread.sleep(10000);} catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+			
 			while(!dataLink.getLinkList().isEmpty() || dataLink.getThreadGroupLink().activeCount() != 0){
 				if(dataLink.poolDataLink() < numberOfThreads) {
 					String url = dataLink.getLinkList().poll();
@@ -84,16 +87,18 @@ public class LinkServiceImpl  implements LinkService{
 					}
 				}
 			}
-		};
+			
+			rule.setStatus("P");
+			ruleService.saveOrUpdate(rule);
+		};		
 		
-		try {Thread.sleep(10000);} catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 		Thread thread = new Thread(task);	
 		thread.start();
 	}
 	
-	private void data(String url, String rule){
+	private void data(String url, Rule rule){
     	Runnable task = () -> {
-			regexService.data(url, rule);
+			regexService.data(url, rule.getDescriptionRegex());
 			dataLink.lessPoolDataLink();
 		};
 		

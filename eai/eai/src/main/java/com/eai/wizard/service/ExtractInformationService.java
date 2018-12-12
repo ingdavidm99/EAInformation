@@ -4,5 +4,5 @@ import com.eai.model.Rule;
 
 public interface ExtractInformationService {
 
-	public void extractInformation(Rule rule);
+	public Rule extractInformation(Integer idRul);
 }
