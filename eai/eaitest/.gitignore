@@ -1,5 +1,4 @@
 /target/
-/eai/eaitest/.settings/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
