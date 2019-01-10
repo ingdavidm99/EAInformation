@@ -27,7 +27,6 @@ public class Xml {
 	        Document document = domImplementation.createDocument(null, "data", null);
 	        document.setXmlVersion("1.0");
 
-	        //Main Node
 	        Element raiz = document.getDocumentElement();
 	       
 	        for (int i = 0; i < nodo.size(); i++) {
