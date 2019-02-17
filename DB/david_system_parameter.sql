@@ -1,0 +1,56 @@
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: david
+-- ------------------------------------------------------
+-- Server version	5.7.14-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `system_parameter`
+--
+
+DROP TABLE IF EXISTS `system_parameter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `system_parameter` (
+  `ID_SYSTEM_PARAMETER` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(100) DEFAULT NULL,
+  `VALUE` text NOT NULL,
+  `DESCRIPTION` text NOT NULL,
+  `TYPE` int(11) NOT NULL,
+  `USER_NAME` varchar(20) NOT NULL,
+  `DATE` date NOT NULL,
+  PRIMARY KEY (`ID_SYSTEM_PARAMETER`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `system_parameter`
+--
+
+LOCK TABLES `system_parameter` WRITE;
+/*!40000 ALTER TABLE `system_parameter` DISABLE KEYS */;
+INSERT INTO `system_parameter` VALUES (1,'ITEMS_PER_PAGES','20','ITEMS_PER_PAGES',2,'dmarsiglia','2018-06-14'),(2,'NUMBER_OF_RETRIES','50','NUMBER_OF_RETRIES',2,'dmarsiglia','2018-06-14'),(3,'NUMBER_OF_THREADS','100','NUMBER_OF_THREADSNUMBER_OF_THREADS',2,'dmarsiglia','2018-06-14'),(4,'SHIPPING_USD','12000','SHIPPING_USD',2,'dmarsiglia','2018-06-14'),(5,'SHIPPING_COP','10000','SHIPPING_COP',2,'dmarsiglia','2018-06-14'),(6,'USERAGENT','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36','USERAGENT',3,'dmarsiglia','2018-06-14'),(7,'LOCAL','EN','LOCAL',1,'dmarsiglia','2018-06-14');
+/*!40000 ALTER TABLE `system_parameter` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-02-17 18:36:48
